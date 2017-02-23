@@ -4,7 +4,7 @@ cover: 'assets/images/cover3.jpg'
 title: About
 class: 'post'
 navigation: True
-logo: 'assets/images/ghost.png'
+logo: 'assets/images/logo.png'
 current: about
 ---
 

@@ -7,7 +7,7 @@ tags: technologies
 subclass: 'post tag-content tag-technologies'
 categories: 'jt'
 navigation: True
-logo: 'assets/images/ghost.png'
+logo: 'assets/images/logo.png'
 ---
 
 ## What is Caddy?

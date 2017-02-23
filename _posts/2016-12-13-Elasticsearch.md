@@ -7,7 +7,7 @@ tags: technologies
 subclass: 'post tag-content tag-technologies'
 categories: 'jt'
 navigation: True
-logo: 'assets/images/ghost.png'
+logo: 'assets/images/logo.png'
 ---
 
 Elasticsearch is a "NRT" (Near Real Time) search platform which means the data that is being ingested is nearly searchable within < 1 second.
