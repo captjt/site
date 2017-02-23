@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>Elasticsearch At A Glance</title>
-	  <link>/Elasticsearch-At-A-Glance</link>
+	  <link>//Elasticsearch-At-A-Glance</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-02-14T05:00:00+00:00</pubDate>
-	  <guid>/Elasticsearch-At-A-Glance</guid>
+	  <guid>//Elasticsearch-At-A-Glance</guid>
 	  <description><![CDATA[
 	     <h2 id="why-elasticsearch">Why Elasticsearch?</h2>
 
@@ -57,10 +57,10 @@ It allows you to scale out your search volume/throughput since searches can be e
 
 	<item>
 	  <title>Jenkins 2.0 - Pipelines with NodeJS</title>
-	  <link>/Jenkins-2.0-Pipeline-NodeJS</link>
+	  <link>//Jenkins-2.0-Pipeline-NodeJS</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-02-03T05:00:00+00:00</pubDate>
-	  <guid>/Jenkins-2.0-Pipeline-NodeJS</guid>
+	  <guid>//Jenkins-2.0-Pipeline-NodeJS</guid>
 	  <description><![CDATA[
 	     <h2 id="future-of-jenkins-the-jenkinsfile">Future of Jenkins: The Jenkinsfile</h2>
 
@@ -225,10 +225,10 @@ const envTwo = process.env.VARIABLE_2;
 
 	<item>
 	  <title>Serving Jenkins with TLS-Encryption Using Caddy</title>
-	  <link>/Serving-Jenkins-with-TLS-and-Caddy</link>
+	  <link>//Serving-Jenkins-with-TLS-and-Caddy</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-01-27T05:00:00+00:00</pubDate>
-	  <guid>/Serving-Jenkins-with-TLS-and-Caddy</guid>
+	  <guid>//Serving-Jenkins-with-TLS-and-Caddy</guid>
 	  <description><![CDATA[
 	     <h2 id="what-is-caddy">What is Caddy?</h2>
 
@@ -419,10 +419,10 @@ sudo systemctl start caddy.service
 
 	<item>
 	  <title>Python & VS Code</title>
-	  <link>/Settings-Up-Python-Environment-VS-Code</link>
+	  <link>//Settings-Up-Python-Environment-VS-Code</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-01-18T05:00:00+00:00</pubDate>
-	  <guid>/Settings-Up-Python-Environment-VS-Code</guid>
+	  <guid>//Settings-Up-Python-Environment-VS-Code</guid>
 	  <description><![CDATA[
 	     <h3 id="working-with-vs-code">Working With VS Code</h3>
 
@@ -510,10 +510,10 @@ simplejson
 
 	<item>
 	  <title>Twenty-Sixteen</title>
-	  <link>/Twenty-Sixteen</link>
+	  <link>//Twenty-Sixteen</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-01-03T05:00:00+00:00</pubDate>
-	  <guid>/Twenty-Sixteen</guid>
+	  <guid>//Twenty-Sixteen</guid>
 	  <description><![CDATA[
 	     <h3 id="in-review">2016 in Review</h3>
 
@@ -549,10 +549,10 @@ simplejson
 
 	<item>
 	  <title>Creating A RESTful API w/ Elasticsearch</title>
-	  <link>/Creating-A-RESTful-API-w-Elasticsearch</link>
+	  <link>//Creating-A-RESTful-API-w-Elasticsearch</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2016-12-20T05:00:00+00:00</pubDate>
-	  <guid>/Creating-A-RESTful-API-w-Elasticsearch</guid>
+	  <guid>//Creating-A-RESTful-API-w-Elasticsearch</guid>
 	  <description><![CDATA[
 	     <h4 id="in-progress">(In Progress)</h4>
 
@@ -618,10 +618,10 @@ simplejson
 
 	<item>
 	  <title>Elasticsearch Info/Resources</title>
-	  <link>/Elasticsearch</link>
+	  <link>//Elasticsearch</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2016-12-13T05:00:00+00:00</pubDate>
-	  <guid>/Elasticsearch</guid>
+	  <guid>//Elasticsearch</guid>
 	  <description><![CDATA[
 	     <p>Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is being ingested is nearly searchable within &lt; 1 second.</p>
 
@@ -708,10 +708,10 @@ One way to think about it is you have a higher level index of “User Data” an
 
 	<item>
 	  <title>Creating Master Slave Replication in MySQL on CentOS 7</title>
-	  <link>/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</link>
+	  <link>//Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2016-09-30T05:00:00+00:00</pubDate>
-	  <guid>/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</guid>
+	  <guid>//Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</guid>
 	  <description><![CDATA[
 	     <h3 id="master-server">Master Server</h3>
 
@@ -830,10 +830,10 @@ mysql&gt; SHOW SLAVE STATUS;
 
 	<item>
 	  <title>Installing MySQL 5.6 on CentOS 7</title>
-	  <link>/Installing-MySQL-56-on-CentOS-7</link>
+	  <link>//Installing-MySQL-56-on-CentOS-7</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2016-09-29T05:00:00+00:00</pubDate>
-	  <guid>/Installing-MySQL-56-on-CentOS-7</guid>
+	  <guid>//Installing-MySQL-56-on-CentOS-7</guid>
 	  <description><![CDATA[
 	     <h3 id="download-the-mysql-yum-repository">Download the MySQL Yum Repository</h3>
 
@@ -1303,10 +1303,10 @@ Complete!
 
 	<item>
 	  <title>Setting Up Python 3 and Django REST Framework</title>
-	  <link>/Setting-Up-Python-3-and-Django-REST-Framework</link>
+	  <link>//Setting-Up-Python-3-and-Django-REST-Framework</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2016-08-19T05:00:00+00:00</pubDate>
-	  <guid>/Setting-Up-Python-3-and-Django-REST-Framework</guid>
+	  <guid>//Setting-Up-Python-3-and-Django-REST-Framework</guid>
 	  <description><![CDATA[
 	     <h2 id="objective">Objective:</h2>
 <p>We want to setup an Python 3 environment on our machine to start developing in Python 3! Once we set up Python and all the packages necessary for Django development – we want to set up our first Django Framework REST Application.</p>
