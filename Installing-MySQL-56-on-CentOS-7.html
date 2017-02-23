@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- [[! Document Settings ]] -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- [[! Page Meta ]] -->
+    <title>Installing MySQL 5.6 on CentOS 7</title>
+    <meta name="description" content="Ushering In Growth - My development story begins here." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" >
+
+    <!-- [[! Styles'n'Scripts ]] -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+
+    <!-- [[! highlight.js ]] -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- [[! Ghost outputs important style and meta data with this tag ]] -->
+        <link rel="canonical" href="/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Ushering In Growth" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ushering In Growth" />
+    <meta property="og:description" content="My development story begins here." />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ushering In Growth" />
+    <meta name="twitter:description" content="My development story begins here." />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Ushering In Growth",
+    "url": "/",
+    "image": "/assets/images/cover1.jpg",
+    "description": "My development story begins here."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Ushering In Growth" href="/feed.xml" />
+
+
+</head>
+<body class="home-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        <li class="nav-home " role="presentation"><a href="/">Home</a></li>
+        <li class="nav-about " role="presentation"><a href="/about">About</a></li>
+        <li class="nav-technologies " role="presentation"><a href="/tag/technologies">Technlogoies</a></li>
+        <!--<li class="nav-speeches " role="presentation"><a href="/tag/speeches">Speeches</a></li>
+        <li class="nav-fiction " role="presentation"><a href="/tag/fiction">Fiction</a></li>-->
+        <li class="nav-author " role="presentation"><a href="/author/jt">Author</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        <!-- [[! Everything else gets inserted here ]] -->
+        <!-- < default -->
+
+<!-- The comment above "< default" means - insert everything in this file into -->
+    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="blog-logo" href="/"><img src="/assets/images/ghost.png" alt="Blog Logo" /></a>
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post tag-content tag-technologies">
+
+        <header class="post-header">
+            <h1 class="post-title">Installing MySQL 5.6 on CentOS 7</h1>
+            <section class="post-meta">
+            <!-- <a href='/'>Jordan Taylor</a> -->
+            <time class="post-date" datetime="2016-09-29">29 Sep 2016</time>
+                <!-- [[tags prefix=" on "]] -->
+                 
+                on 
+                
+                    
+                       <a href='/tag/technologies'>Technologies</a>
+                       
+                
+                
+            </section>
+        </header>
+
+        <section class="post-content">
+            
+            <h3 id="download-the-mysql-yum-repository">Download the MySQL Yum Repository</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo yum install http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm
+</code></pre>
+</div>
+
+<p>We don’t want MySQL version <em>5.7</em> enabled, we want <em>5.6</em>, so we must go alter the configuration file. You should only enable subrepository for one release series at any time. When subrepositories for more than one release series are enabled, the latest series will be used by Yum.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo vi /etc/yum.repos.d/mysql-community.repo
+</code></pre>
+</div>
+
+<p>Then alter the file to say :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  <span class="c"># Enable to use MySQL 5.6</span>
+  <span class="o">[</span>mysql56-community]
+  <span class="nv">name</span><span class="o">=</span>MySQL 5.6 Community Server
+  <span class="nv">baseurl</span><span class="o">=</span>http://repo.mysql.com/yum/mysql-5.6-community/el/7/<span class="nv">$basearch</span>/
+  <span class="nv">enabled</span><span class="o">=</span>1
+  <span class="nv">gpgcheck</span><span class="o">=</span>1
+  <span class="nv">gpgkey</span><span class="o">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+
+  <span class="o">[</span>mysql57-community]
+  <span class="nv">name</span><span class="o">=</span>MySQL 5.7 Community Server
+  <span class="nv">baseurl</span><span class="o">=</span>http://repo.mysql.com/yum/mysql-5.7-community/el/7/<span class="nv">$basearch</span>/
+  <span class="nv">enabled</span><span class="o">=</span>0
+  <span class="nv">gpgcheck</span><span class="o">=</span>1
+  <span class="nv">gpgkey</span><span class="o">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+</code></pre>
+</div>
+
+<p>Enable and show the running repository with :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo yum repolist enabled | grep <span class="s2">"mysql.*-community.*"</span>
+</code></pre>
+</div>
+
+<p>This should show…</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql-connectors-community/x86_64       MySQL Connectors Community           21
+mysql-tools-community/x86_64            MySQL Tools Community                36
+mysql57-community/x86_64                MySQL 5.6 Community Server          128
+</code></pre>
+</div>
+
+<p>After you alter the configuration file and enable the repolist you can show the full list :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>yum repolist all | grep mysql
+</code></pre>
+</div>
+
+<h3 id="install-mysql">Install MySQL</h3>
+
+<p>Install MySQL with the following command :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo yum install mysql-community-server
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Loaded plugins: fastestmirror
+mysql-connectors-community                                                            | 2.5 kB  00:00:00
+mysql-tools-community                                                                 | 2.5 kB  00:00:00
+mysql56-community                                                                     | 2.5 kB  00:00:00
+mysql56-community/x86_64/primary_db                                                   | 146 kB  00:00:00
+Loading mirror speeds from cached hostfile
+* base: mirror.cogentco.com
+* extras: mirror.atlanticmetro.net
+* updates: mirrors.greenmountainaccess.net
+Resolving Dependencies
+--&gt; Running transaction check
+---&gt; Package mysql-community-server.x86_64 0:5.6.33-2.el7 will be installed
+--&gt; Processing Dependency: mysql-community-common(x86-64) = 5.6.33-2.el7 for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: mysql-community-client(x86-64) &gt;= 5.6.10 for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(warnings) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(strict) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(if) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(Sys::Hostname) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(POSIX) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(Getopt::Long) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(File::Temp) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(File::Spec) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(File::Path) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(File::Copy) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(File::Basename) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(Fcntl) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(Data::Dumper) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(DBI) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: libaio.so.1(LIBAIO_0.4)(64bit) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: libaio.so.1(LIBAIO_0.1)(64bit) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: /usr/bin/perl for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: libaio.so.1()(64bit) for package: mysql-community-server-5.6.33-2.el7.x86_64
+--&gt; Running transaction check
+---&gt; Package libaio.x86_64 0:0.3.109-13.el7 will be installed
+---&gt; Package mysql-community-client.x86_64 0:5.6.33-2.el7 will be installed
+--&gt; Processing Dependency: mysql-community-libs(x86-64) &gt;= 5.6.10 for package: mysql-community-client-5.6.33-2.el7.x86_64
+--&gt; Processing Dependency: perl(Exporter) for package: mysql-community-client-5.6.33-2.el7.x86_64
+---&gt; Package mysql-community-common.x86_64 0:5.6.33-2.el7 will be installed
+---&gt; Package perl.x86_64 4:5.16.3-286.el7 will be installed
+--&gt; Processing Dependency: perl-libs = 4:5.16.3-286.el7 for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Socket) &gt;= 1.3 for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Scalar::Util) &gt;= 1.10 for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl-macros for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl-libs for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(threads::shared) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(threads) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(constant) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Time::Local) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Time::HiRes) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Storable) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Socket) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Scalar::Util) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Pod::Simple::XHTML) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Pod::Simple::Search) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Filter::Util::Call) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: perl(Carp) for package: 4:perl-5.16.3-286.el7.x86_64
+--&gt; Processing Dependency: libperl.so()(64bit) for package: 4:perl-5.16.3-286.el7.x86_64
+---&gt; Package perl-DBI.x86_64 0:1.627-4.el7 will be installed
+--&gt; Processing Dependency: perl(RPC::PlServer) &gt;= 0.2001 for package: perl-DBI-1.627-4.el7.x86_64
+--&gt; Processing Dependency: perl(RPC::PlClient) &gt;= 0.2000 for package: perl-DBI-1.627-4.el7.x86_64
+---&gt; Package perl-Data-Dumper.x86_64 0:2.145-3.el7 will be installed
+---&gt; Package perl-File-Path.noarch 0:2.09-2.el7 will be installed
+---&gt; Package perl-File-Temp.noarch 0:0.23.01-3.el7 will be installed
+---&gt; Package perl-Getopt-Long.noarch 0:2.40-2.el7 will be installed
+--&gt; Processing Dependency: perl(Pod::Usage) &gt;= 1.14 for package: perl-Getopt-Long-2.40-2.el7.noarch
+--&gt; Processing Dependency: perl(Text::ParseWords) for package: perl-Getopt-Long-2.40-2.el7.noarch
+---&gt; Package perl-PathTools.x86_64 0:3.40-5.el7 will be installed
+--&gt; Running transaction check
+---&gt; Package mariadb-libs.x86_64 1:5.5.50-1.el7_2 will be obsoleted
+---&gt; Package mysql-community-libs.x86_64 0:5.6.33-2.el7 will be obsoleting
+---&gt; Package perl-Carp.noarch 0:1.26-244.el7 will be installed
+---&gt; Package perl-Exporter.noarch 0:5.68-3.el7 will be installed
+---&gt; Package perl-Filter.x86_64 0:1.49-3.el7 will be installed
+---&gt; Package perl-PlRPC.noarch 0:0.2020-14.el7 will be installed
+--&gt; Processing Dependency: perl(Net::Daemon) &gt;= 0.13 for package: perl-PlRPC-0.2020-14.el7.noarch
+--&gt; Processing Dependency: perl(Net::Daemon::Test) for package: perl-PlRPC-0.2020-14.el7.noarch
+--&gt; Processing Dependency: perl(Net::Daemon::Log) for package: perl-PlRPC-0.2020-14.el7.noarch
+--&gt; Processing Dependency: perl(Compress::Zlib) for package: perl-PlRPC-0.2020-14.el7.noarch
+---&gt; Package perl-Pod-Simple.noarch 1:3.28-4.el7 will be installed
+--&gt; Processing Dependency: perl(Pod::Escapes) &gt;= 1.04 for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+--&gt; Processing Dependency: perl(Encode) for package: 1:perl-Pod-Simple-3.28-4.el7.noarch
+---&gt; Package perl-Pod-Usage.noarch 0:1.63-3.el7 will be installed
+--&gt; Processing Dependency: perl(Pod::Text) &gt;= 3.15 for package: perl-Pod-Usage-1.63-3.el7.noarch
+--&gt; Processing Dependency: perl-Pod-Perldoc for package: perl-Pod-Usage-1.63-3.el7.noarch
+---&gt; Package perl-Scalar-List-Utils.x86_64 0:1.27-248.el7 will be installed
+---&gt; Package perl-Socket.x86_64 0:2.010-3.el7 will be installed
+---&gt; Package perl-Storable.x86_64 0:2.45-3.el7 will be installed
+---&gt; Package perl-Text-ParseWords.noarch 0:3.29-4.el7 will be installed
+---&gt; Package perl-Time-HiRes.x86_64 4:1.9725-3.el7 will be installed
+---&gt; Package perl-Time-Local.noarch 0:1.2300-2.el7 will be installed
+---&gt; Package perl-constant.noarch 0:1.27-2.el7 will be installed
+---&gt; Package perl-libs.x86_64 4:5.16.3-286.el7 will be installed
+---&gt; Package perl-macros.x86_64 4:5.16.3-286.el7 will be installed
+---&gt; Package perl-threads.x86_64 0:1.87-4.el7 will be installed
+---&gt; Package perl-threads-shared.x86_64 0:1.43-6.el7 will be installed
+--&gt; Running transaction check
+---&gt; Package perl-Encode.x86_64 0:2.51-7.el7 will be installed
+---&gt; Package perl-IO-Compress.noarch 0:2.061-2.el7 will be installed
+--&gt; Processing Dependency: perl(Compress::Raw::Zlib) &gt;= 2.061 for package: perl-IO-Compress-2.061-2.el7.noarch
+--&gt; Processing Dependency: perl(Compress::Raw::Bzip2) &gt;= 2.061 for package: perl-IO-Compress-2.061-2.el7.noarch
+---&gt; Package perl-Net-Daemon.noarch 0:0.48-5.el7 will be installed
+---&gt; Package perl-Pod-Escapes.noarch 1:1.04-286.el7 will be installed
+---&gt; Package perl-Pod-Perldoc.noarch 0:3.20-4.el7 will be installed
+--&gt; Processing Dependency: perl(parent) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+--&gt; Processing Dependency: perl(HTTP::Tiny) for package: perl-Pod-Perldoc-3.20-4.el7.noarch
+---&gt; Package perl-podlators.noarch 0:2.5.1-3.el7 will be installed
+--&gt; Running transaction check
+---&gt; Package perl-Compress-Raw-Bzip2.x86_64 0:2.061-3.el7 will be installed
+---&gt; Package perl-Compress-Raw-Zlib.x86_64 1:2.061-4.el7 will be installed
+---&gt; Package perl-HTTP-Tiny.noarch 0:0.033-3.el7 will be installed
+---&gt; Package perl-parent.noarch 1:0.225-244.el7 will be installed
+--&gt; Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================
+Package                          Arch            Version                   Repository                  Size
+=============================================================================================================
+Installing:
+mysql-community-libs             x86_64          5.6.33-2.el7              mysql56-community          2.0 M
+    replacing  mariadb-libs.x86_64 1:5.5.50-1.el7_2
+mysql-community-server           x86_64          5.6.33-2.el7              mysql56-community           59 M
+Installing for dependencies:
+libaio                           x86_64          0.3.109-13.el7            base                        24 k
+mysql-community-client           x86_64          5.6.33-2.el7              mysql56-community           19 M
+mysql-community-common           x86_64          5.6.33-2.el7              mysql56-community          256 k
+perl                             x86_64          4:5.16.3-286.el7          base                       8.0 M
+perl-Carp                        noarch          1.26-244.el7              base                        19 k
+perl-Compress-Raw-Bzip2          x86_64          2.061-3.el7               base                        32 k
+perl-Compress-Raw-Zlib           x86_64          1:2.061-4.el7             base                        57 k
+perl-DBI                         x86_64          1.627-4.el7               base                       802 k
+perl-Data-Dumper                 x86_64          2.145-3.el7               base                        47 k
+perl-Encode                      x86_64          2.51-7.el7                base                       1.5 M
+perl-Exporter                    noarch          5.68-3.el7                base                        28 k
+perl-File-Path                   noarch          2.09-2.el7                base                        26 k
+perl-File-Temp                   noarch          0.23.01-3.el7             base                        56 k
+perl-Filter                      x86_64          1.49-3.el7                base                        76 k
+perl-Getopt-Long                 noarch          2.40-2.el7                base                        56 k
+perl-HTTP-Tiny                   noarch          0.033-3.el7               base                        38 k
+perl-IO-Compress                 noarch          2.061-2.el7               base                       260 k
+perl-Net-Daemon                  noarch          0.48-5.el7                base                        51 k
+perl-PathTools                   x86_64          3.40-5.el7                base                        82 k
+perl-PlRPC                       noarch          0.2020-14.el7             base                        36 k
+perl-Pod-Escapes                 noarch          1:1.04-286.el7            base                        50 k
+perl-Pod-Perldoc                 noarch          3.20-4.el7                base                        87 k
+perl-Pod-Simple                  noarch          1:3.28-4.el7              base                       216 k
+perl-Pod-Usage                   noarch          1.63-3.el7                base                        27 k
+perl-Scalar-List-Utils           x86_64          1.27-248.el7              base                        36 k
+perl-Socket                      x86_64          2.010-3.el7               base                        49 k
+perl-Storable                    x86_64          2.45-3.el7                base                        77 k
+perl-Text-ParseWords             noarch          3.29-4.el7                base                        14 k
+perl-Time-HiRes                  x86_64          4:1.9725-3.el7            base                        45 k
+perl-Time-Local                  noarch          1.2300-2.el7              base                        24 k
+perl-constant                    noarch          1.27-2.el7                base                        19 k
+perl-libs                        x86_64          4:5.16.3-286.el7          base                       687 k
+perl-macros                      x86_64          4:5.16.3-286.el7          base                        43 k
+perl-parent                      noarch          1:0.225-244.el7           base                        12 k
+perl-podlators                   noarch          2.5.1-3.el7               base                       112 k
+perl-threads                     x86_64          1.87-4.el7                base                        49 k
+perl-threads-shared              x86_64          1.43-6.el7                base                        39 k
+
+Transaction Summary
+=============================================================================================================
+Install  2 Packages (+37 Dependent packages)
+
+Total download size: 93 M
+Is this ok [y/d/N]: y
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/mysql56-community/packages/mysql-community-common-5.6.33-2.el7.x86_64.rpm: Header V3 DSA/SHA1 Signature, key ID 5072e1f5: NOKEY
+Public key for mysql-community-common-5.6.33-2.el7.x86_64.rpm is not installed
+(1/39): mysql-community-common-5.6.33-2.el7.x86_64.rpm                                | 256 kB  00:00:00
+(2/39): mysql-community-libs-5.6.33-2.el7.x86_64.rpm                                  | 2.0 MB  00:00:00
+(3/39): libaio-0.3.109-13.el7.x86_64.rpm                                              |  24 kB  00:00:00
+(4/39): perl-Carp-1.26-244.el7.noarch.rpm                                             |  19 kB  00:00:00
+(5/39): perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64.rpm                                |  32 kB  00:00:00
+(6/39): perl-Compress-Raw-Zlib-2.061-4.el7.x86_64.rpm                                 |  57 kB  00:00:00
+(7/39): mysql-community-client-5.6.33-2.el7.x86_64.rpm                                |  19 MB  00:00:02
+(8/39): perl-DBI-1.627-4.el7.x86_64.rpm                                               | 802 kB  00:00:01
+(9/39): perl-Data-Dumper-2.145-3.el7.x86_64.rpm                                       |  47 kB  00:00:00
+(10/39): perl-Encode-2.51-7.el7.x86_64.rpm                                            | 1.5 MB  00:00:01
+(11/39): perl-Exporter-5.68-3.el7.noarch.rpm                                          |  28 kB  00:00:00
+(12/39): perl-File-Path-2.09-2.el7.noarch.rpm                                         |  26 kB  00:00:00
+(13/39): mysql-community-server-5.6.33-2.el7.x86_64.rpm                               |  59 MB  00:00:04
+(14/39): perl-File-Temp-0.23.01-3.el7.noarch.rpm                                      |  56 kB  00:00:00
+(15/39): perl-5.16.3-286.el7.x86_64.rpm                                               | 8.0 MB  00:00:04
+(16/39): perl-Filter-1.49-3.el7.x86_64.rpm                                            |  76 kB  00:00:00
+(17/39): perl-HTTP-Tiny-0.033-3.el7.noarch.rpm                                        |  38 kB  00:00:00
+(18/39): perl-Getopt-Long-2.40-2.el7.noarch.rpm                                       |  56 kB  00:00:00
+(19/39): perl-IO-Compress-2.061-2.el7.noarch.rpm                                      | 260 kB  00:00:00
+(20/39): perl-Net-Daemon-0.48-5.el7.noarch.rpm                                        |  51 kB  00:00:00
+(21/39): perl-PathTools-3.40-5.el7.x86_64.rpm                                         |  82 kB  00:00:00
+(22/39): perl-PlRPC-0.2020-14.el7.noarch.rpm                                          |  36 kB  00:00:00
+(23/39): perl-Pod-Escapes-1.04-286.el7.noarch.rpm                                     |  50 kB  00:00:00
+(24/39): perl-Pod-Perldoc-3.20-4.el7.noarch.rpm                                       |  87 kB  00:00:00
+(25/39): perl-Pod-Simple-3.28-4.el7.noarch.rpm                                        | 216 kB  00:00:00
+(26/39): perl-Pod-Usage-1.63-3.el7.noarch.rpm                                         |  27 kB  00:00:00
+(27/39): perl-Scalar-List-Utils-1.27-248.el7.x86_64.rpm                               |  36 kB  00:00:00
+(28/39): perl-Socket-2.010-3.el7.x86_64.rpm                                           |  49 kB  00:00:00
+(29/39): perl-Text-ParseWords-3.29-4.el7.noarch.rpm                                   |  14 kB  00:00:00
+(30/39): perl-Storable-2.45-3.el7.x86_64.rpm                                          |  77 kB  00:00:00
+(31/39): perl-Time-Local-1.2300-2.el7.noarch.rpm                                      |  24 kB  00:00:00
+(32/39): perl-Time-HiRes-1.9725-3.el7.x86_64.rpm                                      |  45 kB  00:00:00
+(33/39): perl-constant-1.27-2.el7.noarch.rpm                                          |  19 kB  00:00:00
+(34/39): perl-macros-5.16.3-286.el7.x86_64.rpm                                        |  43 kB  00:00:00
+(35/39): perl-parent-0.225-244.el7.noarch.rpm                                         |  12 kB  00:00:00
+(36/39): perl-libs-5.16.3-286.el7.x86_64.rpm                                          | 687 kB  00:00:00
+(37/39): perl-podlators-2.5.1-3.el7.noarch.rpm                                        | 112 kB  00:00:00
+(38/39): perl-threads-1.87-4.el7.x86_64.rpm                                           |  49 kB  00:00:00
+(39/39): perl-threads-shared-1.43-6.el7.x86_64.rpm                                    |  39 kB  00:00:00
+-------------------------------------------------------------------------------------------------------------
+Total                                                                         14 MB/s |  93 MB  00:00:06
+Retrieving key from file:///etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+Importing GPG key 0x5072E1F5:
+Userid     : "MySQL Release Engineering &lt;mysql-build@oss.oracle.com&gt;"
+Fingerprint: a4a9 4068 76fc bd3c 4567 70c8 8c71 8d3b 5072 e1f5
+Package    : mysql57-community-release-el7-9.noarch (@/mysql57-community-release-el7-9.noarch)
+From       : /etc/pki/rpm-gpg/RPM-GPG-KEY-mysql
+Is this ok [y/N]: y
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : mysql-community-common-5.6.33-2.el7.x86_64                                               1/40
+  Installing : mysql-community-libs-5.6.33-2.el7.x86_64                                                 2/40
+  Installing : 1:perl-parent-0.225-244.el7.noarch                                                       3/40
+  Installing : perl-HTTP-Tiny-0.033-3.el7.noarch                                                        4/40
+  Installing : perl-podlators-2.5.1-3.el7.noarch                                                        5/40
+  Installing : perl-Pod-Perldoc-3.20-4.el7.noarch                                                       6/40
+  Installing : 1:perl-Pod-Escapes-1.04-286.el7.noarch                                                   7/40
+  Installing : perl-Text-ParseWords-3.29-4.el7.noarch                                                   8/40
+  Installing : perl-Encode-2.51-7.el7.x86_64                                                            9/40
+  Installing : perl-Pod-Usage-1.63-3.el7.noarch                                                        10/40
+  Installing : 4:perl-libs-5.16.3-286.el7.x86_64                                                       11/40
+  Installing : 4:perl-macros-5.16.3-286.el7.x86_64                                                     12/40
+  Installing : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                   13/40
+  Installing : perl-Exporter-5.68-3.el7.noarch                                                         14/40
+  Installing : perl-constant-1.27-2.el7.noarch                                                         15/40
+  Installing : perl-Time-Local-1.2300-2.el7.noarch                                                     16/40
+  Installing : perl-Socket-2.010-3.el7.x86_64                                                          17/40
+  Installing : perl-Carp-1.26-244.el7.noarch                                                           18/40
+  Installing : perl-PathTools-3.40-5.el7.x86_64                                                        19/40
+  Installing : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                              20/40
+  Installing : perl-Storable-2.45-3.el7.x86_64                                                         21/40
+  Installing : perl-File-Temp-0.23.01-3.el7.noarch                                                     22/40
+  Installing : perl-File-Path-2.09-2.el7.noarch                                                        23/40
+  Installing : perl-threads-shared-1.43-6.el7.x86_64                                                   24/40
+  Installing : perl-threads-1.87-4.el7.x86_64                                                          25/40
+  Installing : perl-Filter-1.49-3.el7.x86_64                                                           26/40
+  Installing : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                     27/40
+  Installing : perl-Getopt-Long-2.40-2.el7.noarch                                                      28/40
+  Installing : 4:perl-5.16.3-286.el7.x86_64                                                            29/40
+  Installing : perl-Data-Dumper-2.145-3.el7.x86_64                                                     30/40
+  Installing : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                              31/40
+  Installing : perl-Net-Daemon-0.48-5.el7.noarch                                                       32/40
+  Installing : mysql-community-client-5.6.33-2.el7.x86_64                                              33/40
+  Installing : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                             34/40
+  Installing : perl-IO-Compress-2.061-2.el7.noarch                                                     35/40
+  Installing : perl-PlRPC-0.2020-14.el7.noarch                                                         36/40
+  Installing : perl-DBI-1.627-4.el7.x86_64                                                             37/40
+  Installing : libaio-0.3.109-13.el7.x86_64                                                            38/40
+  Installing : mysql-community-server-5.6.33-2.el7.x86_64                                              39/40
+  Erasing    : 1:mariadb-libs-5.5.50-1.el7_2.x86_64                                                    40/40
+  Verifying  : perl-HTTP-Tiny-0.033-3.el7.noarch                                                        1/40
+  Verifying  : mysql-community-common-5.6.33-2.el7.x86_64                                               2/40
+  Verifying  : perl-threads-shared-1.43-6.el7.x86_64                                                    3/40
+  Verifying  : 4:perl-Time-HiRes-1.9725-3.el7.x86_64                                                    4/40
+  Verifying  : perl-IO-Compress-2.061-2.el7.noarch                                                      5/40
+  Verifying  : perl-Exporter-5.68-3.el7.noarch                                                          6/40
+  Verifying  : perl-constant-1.27-2.el7.noarch                                                          7/40
+  Verifying  : perl-PathTools-3.40-5.el7.x86_64                                                         8/40
+  Verifying  : 4:perl-libs-5.16.3-286.el7.x86_64                                                        9/40
+  Verifying  : 4:perl-macros-5.16.3-286.el7.x86_64                                                     10/40
+  Verifying  : perl-Compress-Raw-Bzip2-2.061-3.el7.x86_64                                              11/40
+  Verifying  : 1:perl-parent-0.225-244.el7.noarch                                                      12/40
+  Verifying  : mysql-community-server-5.6.33-2.el7.x86_64                                              13/40
+  Verifying  : perl-Net-Daemon-0.48-5.el7.noarch                                                       14/40
+  Verifying  : 4:perl-5.16.3-286.el7.x86_64                                                            15/40
+  Verifying  : perl-File-Temp-0.23.01-3.el7.noarch                                                     16/40
+  Verifying  : 1:perl-Pod-Simple-3.28-4.el7.noarch                                                     17/40
+  Verifying  : perl-Time-Local-1.2300-2.el7.noarch                                                     18/40
+  Verifying  : perl-Pod-Perldoc-3.20-4.el7.noarch                                                      19/40
+  Verifying  : perl-DBI-1.627-4.el7.x86_64                                                             20/40
+  Verifying  : libaio-0.3.109-13.el7.x86_64                                                            21/40
+  Verifying  : perl-Socket-2.010-3.el7.x86_64                                                          22/40
+  Verifying  : perl-Carp-1.26-244.el7.noarch                                                           23/40
+  Verifying  : perl-Data-Dumper-2.145-3.el7.x86_64                                                     24/40
+  Verifying  : mysql-community-client-5.6.33-2.el7.x86_64                                              25/40
+  Verifying  : perl-Scalar-List-Utils-1.27-248.el7.x86_64                                              26/40
+  Verifying  : 1:perl-Compress-Raw-Zlib-2.061-4.el7.x86_64                                             27/40
+  Verifying  : 1:perl-Pod-Escapes-1.04-286.el7.noarch                                                  28/40
+  Verifying  : perl-Pod-Usage-1.63-3.el7.noarch                                                        29/40
+  Verifying  : perl-PlRPC-0.2020-14.el7.noarch                                                         30/40
+  Verifying  : perl-Encode-2.51-7.el7.x86_64                                                           31/40
+  Verifying  : perl-Storable-2.45-3.el7.x86_64                                                         32/40
+  Verifying  : perl-podlators-2.5.1-3.el7.noarch                                                       33/40
+  Verifying  : perl-Getopt-Long-2.40-2.el7.noarch                                                      34/40
+  Verifying  : perl-File-Path-2.09-2.el7.noarch                                                        35/40
+  Verifying  : perl-threads-1.87-4.el7.x86_64                                                          36/40
+  Verifying  : perl-Filter-1.49-3.el7.x86_64                                                           37/40
+  Verifying  : perl-Text-ParseWords-3.29-4.el7.noarch                                                  38/40
+  Verifying  : mysql-community-libs-5.6.33-2.el7.x86_64                                                39/40
+  Verifying  : 1:mariadb-libs-5.5.50-1.el7_2.x86_64                                                    40/40
+
+Installed:
+  mysql-community-libs.x86_64 0:5.6.33-2.el7           mysql-community-server.x86_64 0:5.6.33-2.el7
+
+Dependency Installed:
+  libaio.x86_64 0:0.3.109-13.el7                        mysql-community-client.x86_64 0:5.6.33-2.el7
+  mysql-community-common.x86_64 0:5.6.33-2.el7          perl.x86_64 4:5.16.3-286.el7
+  perl-Carp.noarch 0:1.26-244.el7                       perl-Compress-Raw-Bzip2.x86_64 0:2.061-3.el7
+  perl-Compress-Raw-Zlib.x86_64 1:2.061-4.el7           perl-DBI.x86_64 0:1.627-4.el7
+  perl-Data-Dumper.x86_64 0:2.145-3.el7                 perl-Encode.x86_64 0:2.51-7.el7
+  perl-Exporter.noarch 0:5.68-3.el7                     perl-File-Path.noarch 0:2.09-2.el7
+  perl-File-Temp.noarch 0:0.23.01-3.el7                 perl-Filter.x86_64 0:1.49-3.el7
+  perl-Getopt-Long.noarch 0:2.40-2.el7                  perl-HTTP-Tiny.noarch 0:0.033-3.el7
+  perl-IO-Compress.noarch 0:2.061-2.el7                 perl-Net-Daemon.noarch 0:0.48-5.el7
+  perl-PathTools.x86_64 0:3.40-5.el7                    perl-PlRPC.noarch 0:0.2020-14.el7
+  perl-Pod-Escapes.noarch 1:1.04-286.el7                perl-Pod-Perldoc.noarch 0:3.20-4.el7
+  perl-Pod-Simple.noarch 1:3.28-4.el7                   perl-Pod-Usage.noarch 0:1.63-3.el7
+  perl-Scalar-List-Utils.x86_64 0:1.27-248.el7          perl-Socket.x86_64 0:2.010-3.el7
+  perl-Storable.x86_64 0:2.45-3.el7                     perl-Text-ParseWords.noarch 0:3.29-4.el7
+  perl-Time-HiRes.x86_64 4:1.9725-3.el7                 perl-Time-Local.noarch 0:1.2300-2.el7
+  perl-constant.noarch 0:1.27-2.el7                     perl-libs.x86_64 4:5.16.3-286.el7
+  perl-macros.x86_64 4:5.16.3-286.el7                   perl-parent.noarch 1:0.225-244.el7
+  perl-podlators.noarch 0:2.5.1-3.el7                   perl-threads.x86_64 0:1.87-4.el7
+  perl-threads-shared.x86_64 0:1.43-6.el7
+
+Replaced:
+  mariadb-libs.x86_64 1:5.5.50-1.el7_2
+
+Complete!
+</code></pre>
+</div>
+
+<p>Start the MySQL server : (correct way is not using services)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl start mysqld
+</code></pre>
+</div>
+
+<p>Check the status of the server :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl status mysqld
+</code></pre>
+</div>
+
+<p>Output:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  ● mysqld.service - MySQL Community Server
+    Loaded: loaded <span class="o">(</span>/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled<span class="o">)</span>
+    Active: active <span class="o">(</span>running<span class="o">)</span> since Thu 2016-09-29 18:39:55 UTC; 29s ago
+    Process: 12821 <span class="nv">ExecStartPost</span><span class="o">=</span>/usr/bin/mysql-systemd-start post <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+    Process: 12809 <span class="nv">ExecStartPre</span><span class="o">=</span>/usr/bin/mysql-systemd-start pre <span class="o">(</span><span class="nv">code</span><span class="o">=</span>exited, <span class="nv">status</span><span class="o">=</span>0/SUCCESS<span class="o">)</span>
+  Main PID: 12820 <span class="o">(</span>mysqld_safe<span class="o">)</span>
+    CGroup: /system.slice/mysqld.service
+            ├─12820 /bin/sh /usr/bin/mysqld_safe
+            └─12975 /usr/sbin/mysqld --basedir<span class="o">=</span>/usr --datadir<span class="o">=</span>/var/lib/mysql --plugin-dir<span class="o">=</span>/usr/lib64/mysql/plugin --log-error<span class="o">=</span>/var/log/mysqld.log --pid-file<span class="o">=</span>/var/run/mysqld/mysqld...
+
+  Sep 29 18:39:54 ip-10-0-138-51 systemd[1]: Starting MySQL Community Server...
+  Sep 29 18:39:54 ip-10-0-138-51 mysqld_safe[12820]: 160929 18:39:54 mysqld_safe Logging to <span class="s1">'/var/log/mysqld.log'</span>.
+  Sep 29 18:39:54 ip-10-0-138-51 mysqld_safe[12820]: 160929 18:39:54 mysqld_safe Starting mysqld daemon with databases from /var/lib/mysql
+  Sep 29 18:39:55 ip-10-0-138-51 systemd[1]: Started MySQL Community Server.
+</code></pre>
+</div>
+
+<p>Connect to MySQL using root :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mysql -u root
+</code></pre>
+</div>
+
+<p>Output:
+~~~
+  Welcome to the MySQL monitor.  Commands end with ; or \g.
+  Your MySQL connection id is 2
+  Server version: 5.6.33 MySQL Community Server (GPL)</p>
+
+<p>Copyright (c) 2000, 2016, Oracle and/or its affiliates. All rights reserved.</p>
+
+<p>Oracle is a registered trademark of Oracle Corporation and/or its
+  affiliates. Other names may be trademarks of their respective
+  owners.</p>
+
+<p>Type ‘help;’ or ‘\h’ for help. Type ‘\c’ to clear the current input statement.</p>
+
+<p>mysql&gt;
+~~~</p>
+
+<p>Type : ‘exit’ to leave the MySQL shell.</p>
+
+<p>To enable autostart on server boot :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl <span class="nb">enable </span>mysqld.service
+</code></pre>
+</div>
+
+<p>Check the status again with :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl status mysqld
+</code></pre>
+</div>
+
+
+        </section>
+
+        <footer class="post-footer">
+
+            <!-- Everything inside the #author tags pulls data from the author -->
+            <!-- #author-->
+
+            
+            <figure class="author-image">
+                <a class="img" href="/author/jt" style="background-image: url(/assets/images/gopher-me.png)"><span class="hidden">'s Picture</span></a>
+            </figure>
+            
+
+            <section class="author">
+                <h4><a href="/author/jt">Jordan Taylor</a></h4>
+                
+                
+                    <p> Software Engineer. DC. Radford Baseball Alum.</p>
+                
+                <div class="author-meta">
+                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-link icon-link"><a href="https://github.com/jtaylor32"> github</a></span> 
+                </div>
+            </section>
+
+            <!-- /author  -->
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Installing MySQL 5.6 on CentOS 7&amp;url=https://github.com/jtaylor32Installing-MySQL-56-on-CentOS-7"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Installing-MySQL-56-on-CentOS-7"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Installing-MySQL-56-on-CentOS-7"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+            
+            <!-- Add Disqus Comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+
+    <!-- [[! next_post ]] -->
+    
+        <a class="read-next-story no-cover" href="/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7">
+            <section class="post">
+                <h2>Creating Master Slave Replication in MySQL on CentOS 7</h2>
+                <p>### Master Server Edit the my.cnf ~~~ $ sudo vi /etc/my.cnf ~~~ {: .language-bash} ~~~...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /next_post ]] -->
+    <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev no-cover" href="/Setting-Up-Python-3-and-Django-REST-Framework">
+            <section class="post">
+                <h2>Setting Up Python 3 and Django REST Framework</h2>
+                <p>Objective: We want to setup an Python 3 environment on our machine to start developing...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /prev_post ]] -->
+</aside>
+
+<!-- /post -->
+
+
+        <footer class="site-footer clearfix">
+          <section class="copyright"><a href="/">Ushering In Growth</a> &copy; 2017</section>
+          <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/biomadeira/jasper">Jasper</a></section>
+        </footer>
+    </div>
+    <!-- [[! Ghost outputs important scripts and data with this tag ]] -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- [[! The main JavaScript file for Casper ]] -->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Add Google Analytics  -->
+        <!-- Google Analytics Tracking code -->
+     <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-81287416-1', 'auto');
+	    ga('send', 'pageview');
+
+     </script>   
+</body>
+</html>

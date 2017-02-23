@@ -1,28 +1,210 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.name | xml_escape }} - Articles</title>
-    <description>{% if site.description %}{{ site.description | xml_escape }}{% endif %}</description>
+    <title>Ushering In Growth - Articles</title>
+    <description>My development story begins here.</description>
     <link>
-    {{ site.url }}</link>
-    {% for post in site.posts %}
-      {% unless post.link %}
+    https://github.com/jtaylor32</link>
+    
+      
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        {% if post.excerpt %}
-          <description>{{ post.excerpt | xml_escape }}</description>
-        {% else %}
-          <description>{{ post.content | xml_escape }}</description>
-        {% endif %}
-        <pubDate>{{ post.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
+        <title>Elasticsearch At A Glance</title>
+        
+          <description>&lt;h2 id=&quot;why-elasticsearch&quot;&gt;Why Elasticsearch?&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Tue, 14 Feb 2017 05:00:00 +0000</pubDate>
         <link>
-        {{ site.url }}{{ post.url }}</link>
-        <guid isPermaLink="true">{{ site.url }}{{ post.url }}</guid>
+        https://github.com/jtaylor32/Elasticsearch-At-A-Glance</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Elasticsearch-At-A-Glance</guid>
       </item>
-      {% endunless %}
-    {% endfor %}
+      
+    
+      
+      <item>
+        <title>Jenkins 2.0 - Pipelines with NodeJS</title>
+        
+          <description>&lt;h2 id=&quot;future-of-jenkins-the-jenkinsfile&quot;&gt;Future of Jenkins: The Jenkinsfile&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Fri, 03 Feb 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Jenkins-2.0-Pipeline-NodeJS</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Jenkins-2.0-Pipeline-NodeJS</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Serving Jenkins with TLS-Encryption Using Caddy</title>
+        
+          <description>&lt;h2 id=&quot;what-is-caddy&quot;&gt;What is Caddy?&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Fri, 27 Jan 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Serving-Jenkins-with-TLS-and-Caddy</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Serving-Jenkins-with-TLS-and-Caddy</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Python &amp; VS Code</title>
+        
+          <description>&lt;h3 id=&quot;working-with-vs-code&quot;&gt;Working With VS Code&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Wed, 18 Jan 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Settings-Up-Python-Environment-VS-Code</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Settings-Up-Python-Environment-VS-Code</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Twenty-Sixteen</title>
+        
+          <description>&lt;h3 id=&quot;in-review&quot;&gt;2016 in Review&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Tue, 03 Jan 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Twenty-Sixteen</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Twenty-Sixteen</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Creating A RESTful API w/ Elasticsearch</title>
+        
+          <description>&lt;h4 id=&quot;in-progress&quot;&gt;(In Progress)&lt;/h4&gt;
+
+</description>
+        
+        <pubDate>Tue, 20 Dec 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Creating-A-RESTful-API-w-Elasticsearch</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Creating-A-RESTful-API-w-Elasticsearch</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Elasticsearch Info/Resources</title>
+        
+          <description>&lt;p&gt;Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is being ingested is nearly searchable within &amp;lt; 1 second.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Tue, 13 Dec 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Elasticsearch</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Elasticsearch</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Creating Master Slave Replication in MySQL on CentOS 7</title>
+        
+          <description>&lt;h3 id=&quot;master-server&quot;&gt;Master Server&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Fri, 30 Sep 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Installing MySQL 5.6 on CentOS 7</title>
+        
+          <description>&lt;h3 id=&quot;download-the-mysql-yum-repository&quot;&gt;Download the MySQL Yum Repository&lt;/h3&gt;
+
+</description>
+        
+        <pubDate>Thu, 29 Sep 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Installing-MySQL-56-on-CentOS-7</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Installing-MySQL-56-on-CentOS-7</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Setting Up Python 3 and Django REST Framework</title>
+        
+          <description>&lt;h2 id=&quot;objective&quot;&gt;Objective:&lt;/h2&gt;
+&lt;p&gt;We want to setup an Python 3 environment on our machine to start developing in Python 3! Once we set up Python and all the packages necessary for Django development – we want to set up our first Django Framework REST Application.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Fri, 19 Aug 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Setting-Up-Python-3-and-Django-REST-Framework</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Setting-Up-Python-3-and-Django-REST-Framework</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Recursively Combine .csv files in PHP</title>
+        
+          <description>&lt;h2 id=&quot;overview-of-the-problem&quot;&gt;Overview of the Problem&lt;/h2&gt;
+&lt;p&gt;Recently I have been trying to figure out a way to run a &lt;em&gt;PHP&lt;/em&gt; script that will take two .csv files full of data and determine where they are the same and combine the two into a new .csv to then import my data as one file.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 25 Jul 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Recursively-Combine-csv-files-in-PHP</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Recursively-Combine-csv-files-in-PHP</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Retrieving HTML from parsed XML in PHP</title>
+        
+          <description>&lt;h2 id=&quot;objective&quot;&gt;Objective:&lt;/h2&gt;
+&lt;p&gt;We want to take in nested HTML within an XML file and parse out tags and content within the tags to do “something” with.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Mon, 25 Jul 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Retrieving-HTML-from-parsed-XML-in-PHP</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Retrieving-HTML-from-parsed-XML-in-PHP</guid>
+      </item>
+      
+    
+      
+      <item>
+        <title>Introduction</title>
+        
+          <description>&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;?php&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;echo&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;?&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+</description>
+        
+        <pubDate>Sat, 23 Jul 2016 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Introduction</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Introduction</guid>
+      </item>
+      
+    
   </channel>
 </rss>

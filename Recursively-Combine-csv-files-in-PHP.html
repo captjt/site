@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- [[! Document Settings ]] -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- [[! Page Meta ]] -->
+    <title>Recursively Combine .csv files in PHP</title>
+    <meta name="description" content="Ushering In Growth - My development story begins here." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" >
+
+    <!-- [[! Styles'n'Scripts ]] -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+
+    <!-- [[! highlight.js ]] -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- [[! Ghost outputs important style and meta data with this tag ]] -->
+        <link rel="canonical" href="/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Ushering In Growth" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ushering In Growth" />
+    <meta property="og:description" content="My development story begins here." />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ushering In Growth" />
+    <meta name="twitter:description" content="My development story begins here." />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Ushering In Growth",
+    "url": "/",
+    "image": "/assets/images/cover1.jpg",
+    "description": "My development story begins here."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Ushering In Growth" href="/feed.xml" />
+
+
+</head>
+<body class="home-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        <li class="nav-home " role="presentation"><a href="/">Home</a></li>
+        <li class="nav-about " role="presentation"><a href="/about">About</a></li>
+        <li class="nav-technologies " role="presentation"><a href="/tag/technologies">Technlogoies</a></li>
+        <!--<li class="nav-speeches " role="presentation"><a href="/tag/speeches">Speeches</a></li>
+        <li class="nav-fiction " role="presentation"><a href="/tag/fiction">Fiction</a></li>-->
+        <li class="nav-author " role="presentation"><a href="/author/jt">Author</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        <!-- [[! Everything else gets inserted here ]] -->
+        <!-- < default -->
+
+<!-- The comment above "< default" means - insert everything in this file into -->
+    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="blog-logo" href="/"><img src="/assets/images/ghost.png" alt="Blog Logo" /></a>
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post tag-content tag-technologies">
+
+        <header class="post-header">
+            <h1 class="post-title">Recursively Combine .csv files in PHP</h1>
+            <section class="post-meta">
+            <!-- <a href='/'>Jordan Taylor</a> -->
+            <time class="post-date" datetime="2016-07-25">25 Jul 2016</time>
+                <!-- [[tags prefix=" on "]] -->
+                 
+                on 
+                
+                    
+                       <a href='/tag/technologies'>Technologies</a>
+                       
+                
+                
+            </section>
+        </header>
+
+        <section class="post-content">
+            
+            <h2 id="overview-of-the-problem">Overview of the Problem</h2>
+<p>Recently I have been trying to figure out a way to run a <em>PHP</em> script that will take two .csv files full of data and determine where they are the same and combine the two into a new .csv to then import my data as one file.</p>
+
+<p>The main reasoning behind the overall problem is that I have two sources of data that I am ingesting. Each source of data has one similar data field throughout so it can be thought of as a ‘foreign key’ type of deal. With all of that being said I wanted to start with a small tutorial of how I broken the problem down and the code implementing the process!</p>
+
+<h3 id="implementing-the-recursive-merge">Implementing the recursive merge</h3>
+<p>First we need to decide how to attack our two arrays. I thought about it and being the person that loves to try and recursively do things to keep my code cleaner. I decided to implement this small function that took another rendition of the <a href="http://php.net/manual/en/function.array-merge-recursive.php">array_merge_recursive</a> function that PHP implements that I believe is more than I think this application needs.</p>
+
+<p>If you look at the comments I made in the code it helps explain the actions much better.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+ * merge_array function to take two array and recursively check in there are keys in two arrays that are the same
+ *    this will output an array that will only contain the combined array data
+ * @param  array $array1 first array of data
+ * @param  array $array2 second array of data
+ * @return array         returns array of data combined from the two inputted arrays
+ */
+function combine_arrays(array <span class="err">&amp;</span> $array1, array <span class="err">&amp;</span> $array2) {
+    $temp = $array1; # set our temporary array
+
+    # loop through the second array
+    foreach ($array2 as $key =&gt; <span class="err">&amp;</span> $value) {
+        # check if the value in position $key of the second array is an array type
+        #   and if the temporary array we set $temp at the same $key is not null
+        #   and if the value of $temp is an array
+        if (is_array($value) <span class="err">&amp;&amp;</span> isset($temp[$key]) <span class="err">&amp;&amp;</span> is_array($temp[$key])) {
+            # set the temporary array at $key to be a recursive call to combine_arrays
+            $temp[$key] = combine_arrays($temp[$key], $value);
+        }
+        # check if the $key is a number
+        elseif (is_numeric($key)) {
+            # check if value in $array2[$key] is not in the temporary array ($temp)
+            if (!in_array($value, $temp))
+                # if the value is not in the array then set the value in $temp
+                $temp[] = $value;
+        }
+        else
+            # else set $temp[$key] to the $value from $array2[$key]
+            $temp[$key] = $value;
+    }
+
+    # return our temporary array
+    return $temp;
+}
+</code></pre>
+</div>
+
+<p>After looking at the code the function will return a combined array that checked for same values from one array to another. This is a way to accomplish the final outcome because sometimes you would want to create a script just to create a prepared statement to insert and then another to update the data on that alike column between the csv files.</p>
+
+<p>Anyways onto the next step we need to retrieve our data!</p>
+
+<h3 id="retrieving-csv-data-for-our-arrays">Retrieving .csv data for our arrays</h3>
+
+<p>Here a simple template function for retrieving .csv data from files you have locally.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
+ * get_csv function to take in a filename (String) and a delimiter (String) and output an array value for the file location
+ * @param  string $filename file location to fetch the data from
+ * @param  string $delim    changes the delimiter that the csv is formatted in
+ * @return array            this will return an array of string data that the read csv contains
+ */
+function get_csv($filename, $delim = ","){
+
+    $row = 0;
+    $dump = array();
+
+    $f = fopen ($filename,"r");
+    $size = filesize($filename)+1;
+    while ($data = fgetcsv($f, $size, $delim)) {
+        $data = str_replace(array("\n", "\t", "\r"), '', $data);
+        $data = str_replace("'", "''", $data);
+        $dump[$row] = $data;
+        $row++;
+    }
+    fclose ($f);
+
+    return $dump;
+}
+</code></pre>
+</div>
+
+<p>This function will get a specific file that you have passed in and you can manipulate the <em>delimiter</em> depending on how your .csv is formatted. This will fetch each ‘row’ in the file and create a new node in the array that will be returned after it has gotten all the data.</p>
+
+<p>This is all great - sure - but now what’s the big thing that we should do to handle different types and make sure it’s formatted correctly for our database importing.</p>
+
+<p>I am using <em>PostgreSQL</em> for this application and I know from experience that you must use double single quotes to escape single quotes and other small things that are needed for my data set that I am importing. You can use a simple <em>PHP</em> function called <code class="highlighter-rouge">str_replace()</code> to replace characters with other specific characters you want.</p>
+
+<p><strong>BUT…</strong></p>
+
+<p>We need to get our data still.. Two simple calls - here we go</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># get the two csvs into arrays
+$array1 = get_csv("/your/file/location");
+$array2 = get_csv("/your/file/location");
+</code></pre>
+</div>
+
+<p>Now all we have to do is some small function calls with our two arrays we fetched. After we get back our combined array we will then write to a new file where we want our output to go.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code># merge the two array's fetched from the csv's and outputs merged array to a new csv
+$file = fopen('/write/to/this/location', 'w');
+$finalArray = combine_arrays($array1, $array2);
+foreach ($finalArray as $key =&gt; $value) {
+    fputcsv($file, $finalArray[$key], ",", '"');
+}
+fclose($file);
+</code></pre>
+</div>
+
+<p>With all that being said this is a very small and simple way to handle the problem that arises when we are trying to ‘combine’ or ‘merge’ .csv files that we are pulling into our applications. I know there are other ways to do it and I must say there probably is a better way to do this – but here is a working explaination of my functionality.</p>
+
+
+        </section>
+
+        <footer class="post-footer">
+
+            <!-- Everything inside the #author tags pulls data from the author -->
+            <!-- #author-->
+
+            
+            <figure class="author-image">
+                <a class="img" href="/author/jt" style="background-image: url(/assets/images/gopher-me.png)"><span class="hidden">'s Picture</span></a>
+            </figure>
+            
+
+            <section class="author">
+                <h4><a href="/author/jt">Jordan Taylor</a></h4>
+                
+                
+                    <p> Software Engineer. DC. Radford Baseball Alum.</p>
+                
+                <div class="author-meta">
+                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-link icon-link"><a href="https://github.com/jtaylor32"> github</a></span> 
+                </div>
+            </section>
+
+            <!-- /author  -->
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Recursively Combine .csv files in PHP&amp;url=https://github.com/jtaylor32Recursively-Combine-csv-files-in-PHP"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Recursively-Combine-csv-files-in-PHP"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Recursively-Combine-csv-files-in-PHP"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+            
+            <!-- Add Disqus Comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+
+    <!-- [[! next_post ]] -->
+    
+        <a class="read-next-story no-cover" href="/Setting-Up-Python-3-and-Django-REST-Framework">
+            <section class="post">
+                <h2>Setting Up Python 3 and Django REST Framework</h2>
+                <p>## Objective: We want to setup an Python 3 environment on our machine to start...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /next_post ]] -->
+    <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev no-cover" href="/Retrieving-HTML-from-parsed-XML-in-PHP">
+            <section class="post">
+                <h2>Retrieving HTML from parsed XML in PHP</h2>
+                <p>Objective: We want to take in nested HTML within an XML file and parse out...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /prev_post ]] -->
+</aside>
+
+<!-- /post -->
+
+
+        <footer class="site-footer clearfix">
+          <section class="copyright"><a href="/">Ushering In Growth</a> &copy; 2017</section>
+          <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/biomadeira/jasper">Jasper</a></section>
+        </footer>
+    </div>
+    <!-- [[! Ghost outputs important scripts and data with this tag ]] -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- [[! The main JavaScript file for Casper ]] -->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Add Google Analytics  -->
+        <!-- Google Analytics Tracking code -->
+     <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-81287416-1', 'auto');
+	    ga('send', 'pageview');
+
+     </script>   
+</body>
+</html>

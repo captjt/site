@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- [[! Document Settings ]] -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- [[! Page Meta ]] -->
+    <title>Jenkins 2.0 - Pipelines with NodeJS</title>
+    <meta name="description" content="Ushering In Growth - My development story begins here." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" >
+
+    <!-- [[! Styles'n'Scripts ]] -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+
+    <!-- [[! highlight.js ]] -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- [[! Ghost outputs important style and meta data with this tag ]] -->
+        <link rel="canonical" href="/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Ushering In Growth" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ushering In Growth" />
+    <meta property="og:description" content="My development story begins here." />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ushering In Growth" />
+    <meta name="twitter:description" content="My development story begins here." />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Ushering In Growth",
+    "url": "/",
+    "image": "/assets/images/cover1.jpg",
+    "description": "My development story begins here."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Ushering In Growth" href="/feed.xml" />
+
+
+</head>
+<body class="home-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        <li class="nav-home " role="presentation"><a href="/">Home</a></li>
+        <li class="nav-about " role="presentation"><a href="/about">About</a></li>
+        <li class="nav-technologies " role="presentation"><a href="/tag/technologies">Technlogoies</a></li>
+        <!--<li class="nav-speeches " role="presentation"><a href="/tag/speeches">Speeches</a></li>
+        <li class="nav-fiction " role="presentation"><a href="/tag/fiction">Fiction</a></li>-->
+        <li class="nav-author " role="presentation"><a href="/author/jt">Author</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        <!-- [[! Everything else gets inserted here ]] -->
+        <!-- < default -->
+
+<!-- The comment above "< default" means - insert everything in this file into -->
+    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<header class="main-header post-head " style="background-image: url(/assets/images/pipelines.jpg) ">
+    <nav class="main-nav  overlay  clearfix">
+        <a class="blog-logo" href="/"><img src="/assets/images/ghost.png" alt="Blog Logo" /></a>
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post tag-content tag-technologies">
+
+        <header class="post-header">
+            <h1 class="post-title">Jenkins 2.0 - Pipelines with NodeJS</h1>
+            <section class="post-meta">
+            <!-- <a href='/'>Jordan Taylor</a> -->
+            <time class="post-date" datetime="2017-02-03">03 Feb 2017</time>
+                <!-- [[tags prefix=" on "]] -->
+                 
+                on 
+                
+                    
+                       <a href='/tag/technologies'>Technologies</a>
+                       
+                
+                
+            </section>
+        </header>
+
+        <section class="post-content">
+            
+            <h2 id="future-of-jenkins-the-jenkinsfile">Future of Jenkins: The Jenkinsfile</h2>
+
+<p>The future of Jenkins and CI/CD is having “Pipelines” as code. Delivery pipelines are thought of as a first-class entity in Jenkins 2.0. Just like your typical <code class="highlighter-rouge">.yml</code> configuration file from Travis, Circle or other popular CI tools - Jenkins 2.0 has been released with a similar concept. Jenkins has the capability with a Pipeline plugin to use Pipelines as code in <code class="highlighter-rouge">Jenkinsfile</code>s. Users can now model their software delivery pipelines much easier. Another key feature is that the <code class="highlighter-rouge">Jenkinsfile</code> can be checked into version control.</p>
+
+<h2 id="creating-a-pipeline-for-nodejs-application">Creating A Pipeline For NodeJS Application</h2>
+
+<h3 id="prerequisites">Prerequisites**</h3>
+
+<ul>
+  <li>Setup Jenkins with AWS plugin for build agents</li>
+  <li>Configure Github plugin to receive PUSH webhooks from git hosted repository</li>
+  <li>Configure NodeJS plugin to install selected NodeJS versions for each Jenkins build</li>
+</ul>
+
+<p>** future tutorial for configurations</p>
+
+<h3 id="nodejs-application">NodeJS Application</h3>
+
+<p>When building a modern web application many people are moving towards NodeJS and the community around NodeJS to power the future of technologies. One practice I definitely advocate especially in JavaScript, because of it’s dynamic typing system, is TDD so you have clarity on how your application “should” run and perform. I am a big advocate for testing with <a href="https://github.com/facebook/jest">Jest</a> but there are also test libraries like Mocha, Chai, PhantomJS, and others to accomplish TDD.</p>
+
+<h3 id="sample-application">Sample Application</h3>
+
+<p>I have a small <a href="https://github.com/expressjs/express">express.js</a> server application that we will use to walk through this pipeline tutorial.**</p>
+
+<p>Note: this application really is only to proof tests and run a “Hello World” express application.</p>
+
+<p>** Github repository: <a href="https://github.com/jtaylor32/jenkins-pipeline-express">here</a></p>
+
+<h3 id="application-is-ready">Application Is Ready</h3>
+
+<p>After our application is ready to push to Testing, Staging, Production, etc. we need to have a simple way for Jenkins to orchestrate our workflow. Jenkinsfiles can easily get us up and running with pipelines. We start with a specific <strong>node</strong>, or server, in our pipeline to fire off our build process on that machine. Because we are using AWS EC2s – we can make our node’s labels specific to a build agent inside of our Manage Jenkins &gt; Configure System.</p>
+
+<p>Here we have a build agent up called ‘testing’ that will run the first process in our pipeline.</p>
+
+<h4 id="testing-node">Testing Node</h4>
+<ol>
+  <li>use our NodeJS plugin to install version 7.4.0</li>
+  <li>checkout code from version control</li>
+  <li>install dependencies for running tests</li>
+  <li>run tests on testing environment</li>
+  <li>publish our results inside of our Jenkins job’s build page</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">node</span><span class="o">(</span><span class="s1">'testing'</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Initialize'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Initializing...'</span>
+        <span class="kt">def</span> <span class="n">node</span> <span class="o">=</span> <span class="n">tool</span> <span class="nl">name:</span> <span class="s1">'Node-7.4.0'</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">'jenkins.plugins.nodejs.tools.NodeJSInstallation'</span>
+        <span class="n">env</span><span class="o">.</span><span class="na">PATH</span> <span class="o">=</span> <span class="s2">"${node}/bin:${env.PATH}"</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Checkout'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Getting source code...'</span>
+        <span class="n">checkout</span> <span class="n">scm</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Build'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Building dependencies...'</span>
+        <span class="n">sh</span> <span class="s1">'npm i'</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Test'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Testing...'</span>
+        <span class="n">sh</span> <span class="s1">'npm test'</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Publish'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Publishing Test Coverage...'</span>
+		<span class="n">publishHTML</span> <span class="o">(</span><span class="nl">target:</span> <span class="o">[</span>
+			<span class="nl">allowMissing:</span> <span class="kc">false</span><span class="o">,</span>
+			<span class="nl">alwaysLinkToLastBuild:</span> <span class="kc">false</span><span class="o">,</span>
+			<span class="nl">keepAll:</span> <span class="kc">true</span><span class="o">,</span>
+			<span class="nl">reportDir:</span> <span class="s1">'coverage/lcov-report'</span><span class="o">,</span>
+			<span class="nl">reportFiles:</span> <span class="s1">'index.html'</span><span class="o">,</span>
+			<span class="nl">reportName:</span> <span class="s2">"Application Test Coverage"</span>
+		<span class="o">])</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<p>If anything inside of our ‘testing’ node fails it will not move on to the next ‘staging’ node. So if our <code class="highlighter-rouge">npm test</code> fails it will publish that and Jenkins will see that tests failed do not move this application to staging.</p>
+
+<p>We can also add in manual approvals inside of our pipelines with the <code class="highlighter-rouge">input</code> function.</p>
+
+<p><code class="highlighter-rouge">input 'Is the application ready for Staging?'</code></p>
+
+<p>We won’t add that inside of here but there are really awesome things that pipelines can do for us you can check out later on… Onto Staging!</p>
+
+<h4 id="staging-node">Staging Node</h4>
+<ol>
+  <li>use our NodeJS plugin to install version 7.4.0</li>
+  <li>checkout code from version control</li>
+  <li>install PM2 globally</li>
+  <li>install dependencies</li>
+  <li>run tests on staging environment</li>
+  <li>stop and start our application with PM2</li>
+</ol>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="n">node</span><span class="o">(</span><span class="s1">'staging'</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Initialize'</span><span class="o">){</span>
+        <span class="n">echo</span> <span class="s1">'Initializing...'</span>
+        <span class="kt">def</span> <span class="n">node</span> <span class="o">=</span> <span class="n">tool</span> <span class="nl">name:</span> <span class="s1">'Node-7.4.0'</span><span class="o">,</span> <span class="nl">type:</span> <span class="s1">'jenkins.plugins.nodejs.tools.NodeJSInstallation'</span>
+        <span class="n">env</span><span class="o">.</span><span class="na">PATH</span> <span class="o">=</span> <span class="s2">"${node}/bin:${env.PATH}"</span>
+
+        <span class="n">sh</span> <span class="s2">"node -v"</span>
+
+        <span class="c1">// set environment variables</span>
+        <span class="n">env</span><span class="o">.</span><span class="na">VARIABLE_1</span><span class="o">=</span><span class="s2">"10"</span>
+        <span class="n">env</span><span class="o">.</span><span class="na">VARIABLE_2</span><span class="o">=</span><span class="s2">"7"</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Checkout'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Getting source code...'</span>
+        <span class="n">checkout</span> <span class="n">scm</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'PM2 Install'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Installing PM2 to run application as daemon...'</span>
+        <span class="n">sh</span> <span class="s2">"npm install pm2 -g"</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Build'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Building dependencies...'</span>
+        <span class="n">sh</span> <span class="s1">'npm i'</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Test'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Testing...'</span>
+        <span class="n">sh</span> <span class="s1">'npm test'</span>
+    <span class="o">}</span>
+
+    <span class="n">stage</span><span class="o">(</span><span class="s1">'Run Application'</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">echo</span> <span class="s1">'Stopping old process to run new process...'</span>
+        <span class="n">sh</span> <span class="s1">'''
+        # show our env variables
+        env
+
+        npm run pm2-stop
+        npm run pm2-start
+        '''</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre>
+</div>
+
+<h4 id="environment-variables">Environment Variables</h4>
+<p>If you noticed inside of the staging node I set <code class="highlighter-rouge">env</code> variables specific to that node so that I can run my Express application with those configurations and not have to worry about hard coding that into my code.</p>
+
+<p>Here is a snippet from my express application that we can reference those environment variables. This is key when dealing with multiple environments and application settings for production applications – write our code once kind of thing.</p>
+
+<pre><code class="language-JavaScript">const envOne = process.env.VARIABLE_1;
+const envTwo = process.env.VARIABLE_2;
+</code></pre>
+
+<h3 id="wrapping-up">Wrapping Up</h3>
+
+<p>You can do advanced features in pipeline builds to stash, archive, spin up or tear down servers, and many more – but this should be a simple way to show how we can do it with a basic starter application. I will put out another article on how to integrate AWS, NodeJS, Github and other useful plugins so that we can production ready for CI/CD with Jenkins.</p>
+
+
+        </section>
+
+        <footer class="post-footer">
+
+            <!-- Everything inside the #author tags pulls data from the author -->
+            <!-- #author-->
+
+            
+            <figure class="author-image">
+                <a class="img" href="/author/jt" style="background-image: url(/assets/images/gopher-me.png)"><span class="hidden">'s Picture</span></a>
+            </figure>
+            
+
+            <section class="author">
+                <h4><a href="/author/jt">Jordan Taylor</a></h4>
+                
+                
+                    <p> Software Engineer. DC. Radford Baseball Alum.</p>
+                
+                <div class="author-meta">
+                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-link icon-link"><a href="https://github.com/jtaylor32"> github</a></span> 
+                </div>
+            </section>
+
+            <!-- /author  -->
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Jenkins 2.0 - Pipelines with NodeJS&amp;url=https://github.com/jtaylor32Jenkins-2.0-Pipeline-NodeJS"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Jenkins-2.0-Pipeline-NodeJS"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Jenkins-2.0-Pipeline-NodeJS"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+            
+            <!-- Add Disqus Comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+
+    <!-- [[! next_post ]] -->
+    
+        <a class="read-next-story no-cover" href="/Elasticsearch-At-A-Glance">
+            <section class="post">
+                <h2>Elasticsearch At A Glance</h2>
+                <p>## Why Elasticsearch? Elasticsearch has some major upsides to it when using it on as...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /next_post ]] -->
+    <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev " style="background-image: url(/assets/images/encryption.jpg)" href="/Serving-Jenkins-with-TLS-and-Caddy">
+            <section class="post">
+                <h2>Serving Jenkins with TLS-Encryption Using Caddy</h2>
+                <p>What is Caddy? Caddy, or as others may know Caddyserver, is a web server similar...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /prev_post ]] -->
+</aside>
+
+<!-- /post -->
+
+
+        <footer class="site-footer clearfix">
+          <section class="copyright"><a href="/">Ushering In Growth</a> &copy; 2017</section>
+          <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/biomadeira/jasper">Jasper</a></section>
+        </footer>
+    </div>
+    <!-- [[! Ghost outputs important scripts and data with this tag ]] -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- [[! The main JavaScript file for Casper ]] -->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Add Google Analytics  -->
+        <!-- Google Analytics Tracking code -->
+     <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-81287416-1', 'auto');
+	    ga('send', 'pageview');
+
+     </script>   
+</body>
+</html>

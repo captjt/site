@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- [[! Document Settings ]] -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- [[! Page Meta ]] -->
+    <title>Creating Master Slave Replication in MySQL on CentOS 7</title>
+    <meta name="description" content="Ushering In Growth - My development story begins here." />
+
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" >
+
+    <!-- [[! Styles'n'Scripts ]] -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+    <link rel="stylesheet" type="text/css"
+          href="//fonts.googleapis.com/css?family=Merriweather:300,700,700italic,300italic|Open+Sans:700,400" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/syntax.css" />
+
+    <!-- [[! highlight.js ]] -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- [[! Ghost outputs important style and meta data with this tag ]] -->
+        <link rel="canonical" href="/" />
+    <meta name="referrer" content="origin" />
+    <link rel="next" href="/page2/" />
+
+    <meta property="og:site_name" content="Ushering In Growth" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ushering In Growth" />
+    <meta property="og:description" content="My development story begins here." />
+    <meta property="og:url" content="/" />
+    <meta property="og:image" content="/assets/images/cover1.jpg" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ushering In Growth" />
+    <meta name="twitter:description" content="My development story begins here." />
+    <meta name="twitter:url" content="/" />
+    <meta name="twitter:image:src" content="/assets/images/cover1.jpg" />
+
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Website",
+    "publisher": "Ushering In Growth",
+    "url": "/",
+    "image": "/assets/images/cover1.jpg",
+    "description": "My development story begins here."
+}
+    </script>
+
+    <meta name="generator" content="Jekyll 3.0.0" />
+    <link rel="alternate" type="application/rss+xml" title="Ushering In Growth" href="/feed.xml" />
+
+
+</head>
+<body class="home-template nav-closed">
+
+    <div class="nav">
+    <h3 class="nav-title">Menu</h3>
+    <a href="#" class="nav-close">
+        <span class="hidden">Close</span>
+    </a>
+    <ul>
+        <li class="nav-home " role="presentation"><a href="/">Home</a></li>
+        <li class="nav-about " role="presentation"><a href="/about">About</a></li>
+        <li class="nav-technologies " role="presentation"><a href="/tag/technologies">Technlogoies</a></li>
+        <!--<li class="nav-speeches " role="presentation"><a href="/tag/speeches">Speeches</a></li>
+        <li class="nav-fiction " role="presentation"><a href="/tag/fiction">Fiction</a></li>-->
+        <li class="nav-author " role="presentation"><a href="/author/jt">Author</a></li>
+    </ul>
+    <a class="subscribe-button icon-feed" href="/feed.xml">Subscribe</a>
+</div>
+<span class="nav-cover"></span>
+
+
+    <div class="site-wrapper">
+
+        <!-- [[! Everything else gets inserted here ]] -->
+        <!-- < default -->
+
+<!-- The comment above "< default" means - insert everything in this file into -->
+    <!-- the [body] of the default.hbs template, which contains our header/footer. -->
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        <a class="blog-logo" href="/"><img src="/assets/images/ghost.png" alt="Blog Logo" /></a>
+        
+            <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+
+    <article class="post tag-content tag-technologies">
+
+        <header class="post-header">
+            <h1 class="post-title">Creating Master Slave Replication in MySQL on CentOS 7</h1>
+            <section class="post-meta">
+            <!-- <a href='/'>Jordan Taylor</a> -->
+            <time class="post-date" datetime="2016-09-30">30 Sep 2016</time>
+                <!-- [[tags prefix=" on "]] -->
+                 
+                on 
+                
+                    
+                       <a href='/tag/technologies'>Technologies</a>
+                       
+                
+                
+            </section>
+        </header>
+
+        <section class="post-content">
+            
+            <h3 id="master-server">Master Server</h3>
+
+<p>Edit the my.cnf</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo vi /etc/my.cnf
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>server-id = 1
+binlog_do_db = testdatabase
+relay-log = mysql-relay-bin
+relay-log-index = mysql-relay-bin.index
+log_bin = mysql-bin.log
+</code></pre>
+</div>
+
+<p>Restart mysqld</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl restart mysqld
+</code></pre>
+</div>
+
+<p>In mysql</p>
+
+<p><code class="highlighter-rouge">mysql -u root -p</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>-- create a database to replicate
+&gt; CREATE DATABASE testdatabase;
+&gt; USE testdatabase;
+-- create a table in testdatabase
+&gt; CREATE TABLE Users (name varchar(30), age INT);
+-- insert data
+&gt; INSERT INTO testdatabase.Users Values ('Test Name', 1);
+&gt; INSERT INTO testdatabase.Users Values ('Test Name', 2);
+
+--
+&gt; GRANT REPLICATION SLAVE ON *.* TO 'slaveuser'@'%' IDENTIFIED BY 'PASSWORD'
+&gt; FLUSH PRIVILEGES;
+&gt; FLUSH TABLES WITH READ LOCK;
+&gt; SHOW MASTER STATUS;
+
++------------------+----------+--------------+------------------+-------------------+
+| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
++------------------+----------+--------------+------------------+-------------------+
+| mysql-bin.000001 |     101 | testdatabase |                  |                   |
++------------------+----------+--------------+------------------+-------------------+
+1 row in set (0.00 sec)
+</code></pre>
+</div>
+
+<p>Make sure the ‘PASSWORD’ is <strong>secure</strong></p>
+
+<p>Do a backup to transfer to the slave server</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mysqldump -u root -p --master-data testdatabase &gt; /home/centos/database.sql
+</code></pre>
+</div>
+
+<p>Move it to the slave server</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rsync -Waq -e ssh /home/centos/database.sql centos@IPADDRESS:/home/centos/
+</code></pre>
+</div>
+
+<p>IPADDRESS is the slave IP</p>
+
+<h3 id="on-slave-server">On Slave Server</h3>
+
+<p>Update the my.cnf file</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo vi /etc/my.cnf
+</code></pre>
+</div>
+
+<p>Add this to the file</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>server-id = 2
+</code></pre>
+</div>
+
+<p>Restart mysqld.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl restart mysqld
+</code></pre>
+</div>
+
+<p>Import the database</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mysql -u root -p testdatabase &lt; /home/centos/database.sql
+</code></pre>
+</div>
+
+<p>Note. you must have the database ‘testdatabase’ created.</p>
+
+<p>In mysql shell(<code class="highlighter-rouge">mysql -u root -p</code>)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mysql&gt; STOP SLAVE;
+mysql&gt; CHANGE MASTER TO
+  -&gt;  MASTER_HOST='host-name',
+  -&gt;  MASTER_USER='slaveuser',
+  -&gt;  MASTER_PASSWORD='PASSWORD',
+  -&gt;  MASTER_LOG_FILE='log file from the MASTER STATUS',
+  -&gt;  MASTER_LOG_POS=(postion from MASTER STATUS);
+mysql&gt; START SLAVE;
+mysql&gt; SHOW SLAVE STATUS;
+</code></pre>
+</div>
+
+<p>After this to test it insert some data in the master database and select * from both to check consistency.</p>
+
+<p>Cheers!</p>
+
+
+        </section>
+
+        <footer class="post-footer">
+
+            <!-- Everything inside the #author tags pulls data from the author -->
+            <!-- #author-->
+
+            
+            <figure class="author-image">
+                <a class="img" href="/author/jt" style="background-image: url(/assets/images/gopher-me.png)"><span class="hidden">'s Picture</span></a>
+            </figure>
+            
+
+            <section class="author">
+                <h4><a href="/author/jt">Jordan Taylor</a></h4>
+                
+                
+                    <p> Software Engineer. DC. Radford Baseball Alum.</p>
+                
+                <div class="author-meta">
+                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-link icon-link"><a href="https://github.com/jtaylor32"> github</a></span> 
+                </div>
+            </section>
+
+            <!-- /author  -->
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="http://twitter.com/share?text=Creating Master Slave Replication in MySQL on CentOS 7&amp;url=https://github.com/jtaylor32Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                    onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                    onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                   onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+            
+            <!-- Add Disqus Comments -->
+            
+            
+        </footer>
+
+    </article>
+
+</main>
+
+<aside class="read-next">
+
+    <!-- [[! next_post ]] -->
+    
+        <a class="read-next-story no-cover" href="/Elasticsearch">
+            <section class="post">
+                <h2>Elasticsearch Info/Resources</h2>
+                <p>Elasticsearch is a "NRT" (Near Real Time) search platform which means the data that is...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /next_post ]] -->
+    <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev no-cover" href="/Installing-MySQL-56-on-CentOS-7">
+            <section class="post">
+                <h2>Installing MySQL 5.6 on CentOS 7</h2>
+                <p>Download the MySQL Yum Repository $ sudo yum install http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm We don’t want MySQL version...</p>
+            </section>
+        </a>
+    
+    <!-- [[! /prev_post ]] -->
+</aside>
+
+<!-- /post -->
+
+
+        <footer class="site-footer clearfix">
+          <section class="copyright"><a href="/">Ushering In Growth</a> &copy; 2017</section>
+          <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> using <a href="https://github.com/biomadeira/jasper">Jasper</a></section>
+        </footer>
+    </div>
+    <!-- [[! Ghost outputs important scripts and data with this tag ]] -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- [[! The main JavaScript file for Casper ]] -->
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+
+    <!-- Add Google Analytics  -->
+        <!-- Google Analytics Tracking code -->
+     <script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	    ga('create', 'UA-81287416-1', 'auto');
+	    ga('send', 'pageview');
+
+     </script>   
+</body>
+</html>
