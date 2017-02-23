@@ -23,7 +23,7 @@ short_url: 'github'
 google_analytics: UA-81287416-1
 disqus:
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl:
+baseurl: /
 
 # Permalinks
 permalink: /:title
