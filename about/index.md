@@ -11,22 +11,24 @@ current: about
 ### Interests
 
 - Full Stack Development
-- Everything Go
-- Python and Node
+- Go.. Go.. Go..
+- Python & NodeJS
 - Gorilla Toolkit/Echo/Flask/Express
-- React/Redux
+- ReactJS + Redux
+- NoSQL & Graph Databases (Neo4j)
 - Elasticsearch/Kibana
 - PostgreSQL
 - MongoDB
-- NoSQL & Graph Databases (Neo4j)
 - Microservice Design
+- Kubernetes
+- Containers
 - Scaling Architectures
 - Design Patterns
 - Open Source Community
 - DevOps with Containers and Orchestration tools (Docker + Kubernetes)
 - CI/CD & Agile Development
 
-My strengths include backend architecting/implementations along with designing and implementing front end client application. I develop in modern stack methodologies with a mind for advancing in my learning for new languages and open source frameworks. I love solving unique problem with efficient designs and solutions is what drives me. I love every part of the development stack and come from a Computer Science background with double concentrations of Software Engineering and Databases.
+My strengths include architecting & implementing backend + front-end applications. I develop in modern stack methodologies with a mind in advancement in learning new languages and open source frameworks. I strive for solving unique problems with efficient and effective solutions. I love every part of the development stack and come from a Computer Science background with double concentrations of Software Engineering and Databases.
 
 If there is one language that I would advocate for people to learn and understand well it's Go. I am an avid believer in the future of Go and everything that comes with it.
 
