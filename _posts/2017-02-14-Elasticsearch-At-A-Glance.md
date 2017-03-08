@@ -1,6 +1,6 @@
 ---
 layout: post
-cover: false
+cover: 'assets/images/lighthouse.jpg'
 title: Elasticsearch At A Glance
 date:   2017-02-14 05:00:00
 tags: technologies
