@@ -16,11 +16,11 @@ This is an obvious question raised when applications or companies move to a micr
 
 #### Technologies to Migrate With?
 
-You might be wondering where to start and what approach to take - if you have the luxury to migrate and refactor everything without a time constraint you're lucky! Majority of us don't have that luxury and really don't have the full buy in from our management or superiors to even "fix" our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with Docker or Rkt ("Rocket" - a CoreOS product) it's understandable but **invest** in modern technologies. Invest in yourselves and your application's future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point! 
+You might be wondering where to start and what approach to take -- if you have the luxury to migrate and refactor everything without a time constraint you're lucky! Majority of us don't have that luxury and really don't have the full buy in from our management or superiors to even "fix" our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with Docker or Rkt ("Rocket" -- a CoreOS product) it's understandable but **invest** in modern technologies. Invest in yourselves and your application's future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point! 
 
 #### After Approval
 
-Uh-oh... Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren't always the easiest things to come by - but a team focused on the future of the application and in turn the company's future success. 
+Uh-oh... Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren't always the easiest things to come by -- but a team focused on the future of the application and in turn the company's future success. 
 
 ![team](./../assets/images/small-team.jpg){:class="img-responsive"}
 
@@ -28,12 +28,12 @@ If you are a small team pick a uniformed language to start with that everyone is
 
 #### Container Orchestration
 
-The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services. Invest in some time in researching which tool or tools fit your application's use cases. Here are a list of some of the major self-hosted orchestration tools - if you want something like an already hosted service of these things Google, Mesosphere, Rancher and others support enterprise platforms for these kinds of things already.
+The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services. Invest in some time in researching which tool or tools fit your application's use cases. Here are a list of some of the major self-hosted orchestration tools -- if you want something like an already hosted service of these things Google, Mesosphere, Rancher and others support enterprise platforms for these kinds of things already.
 
 Self-Hosted
 
 - [Kubernetes](https://kubernetes.io/)
-    - Came out of Google - built based on Google's "Borg" project
+    - Came out of Google -- built based on Google's "Borg" project
     - Backed and supported by majority of the leading tech companies like 
 - [DC/OS](https://dcos.io/)
     - Product built around Apache Mesos
@@ -46,6 +46,6 @@ There might be other options out there but a big thing to note when migrating to
 
 #### Service Interactions
 
-More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on - but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing service discovery, tracing, monitoring, transporting, circuit breakers (retries) and other things. 
+More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on -- but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing service discovery, tracing, monitoring, transporting, circuit breakers (retries) and other things. 
 
 Don't feel overwhelmed when making the leap of migrating architectures it's an **investment**.
