@@ -1,7 +1,7 @@
 ---
 layout: post
 cover: 'assets/images/future-technologies.jpg'
-title: Intro on Migrating to Microservices
+title: Introduction on Migrating to Microservices
 date:   2017-02-14 05:00:00
 tags: technologies
 subclass: 'post tag-content tag-technologies'
