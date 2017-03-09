@@ -24,7 +24,7 @@ Uh-oh... Now what right? You need a team to fully focus and sell out on these te
 
 ![team](./../assets/images/small-team.jpg){:class="img-responsive"}
 
-If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux -- I am looking at you C#. I am an advocate for Go but also love NodeJS and Python. Do what's best for you team and make sure you know that microservices don't lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.  
+If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux. I am an advocate for Go but also love NodeJS and Python. Do what's best for you team and make sure you know that microservices don't lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.  
 
 #### Container Orchestration
 
