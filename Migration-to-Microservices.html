@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Elasticsearch At A Glance</title>
+    <title>Intro on Migrating to Microservices</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -91,7 +91,7 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/lighthouse.jpg) ">
+<header class="main-header post-head " style="background-image: url(/assets/images/future-technologies.jpg) ">
     <nav class="main-nav  overlay  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
@@ -105,7 +105,7 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Elasticsearch At A Glance</h1>
+            <h1 class="post-title">Intro on Migrating to Microservices</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
             <time class="post-date" datetime="2017-02-14">14 Feb 2017</time>
@@ -123,39 +123,56 @@
 
         <section class="post-content">
             
-            <h2 id="why-elasticsearch">Why Elasticsearch?</h2>
+            <h2 id="why-microservices">Why Microservices?</h2>
 
-<p>Elasticsearch has some major upsides to it when using it on as a developer.  It takes almost four minutes to stand up on a CentOS server and even quicker on my development machine (Mac OSX with Homebrew). Regardless whether or not you are using it in those environments it is still very quick and easy to do an install with configurations. Configurations are made EASY. Elasticsearch will, based on your settings, do automatic cluster replication on indexes you create. You can tell it that you want five, ten, three, whatever of how many replication shards you want it to make. This will increase the productivity you have along with performance and fault tolerance of the storage layer. You will not need to worry about diving in and setting up major in-depth configurations when it really is meant to be abstracted out for you - that helps developers work on other aspects of the applications running on Elasticsearch. Having the fault tolerance of having many shards replicated to however many nodes you have inside of your cluster per index is huge. This might seem scary at first when it does this for you out of the box, but when you dive into the real stuff and see what it’s doing - it’s quite nice.</p>
+<p>This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices when you are at a scale or a place in your application’s life cycle where you cannot iterate fast enough on top of your monolithic approach to add new value. There are so many more resources out there on when or why to switch to this architecture it’s not really worth “beating a dead horse” on the subject.</p>
 
-<p>JSON everything. Web development and applications have been revolutionized by RESTful and JSON type of manipulation of data. Majority of people either know REST of have used it one way or another. Elasticsearch is catering to the modern technologies. Because JSON is such a huge and easy way to store data many developers love interacting with it. All of the queries, responses, mappings, anything is done with Elasticsearch is through JSON! (HUGE simplicity for people to hit the ground running)</p>
+<h4 id="technologies-to-migrate-with">Technologies to Migrate With?</h4>
 
-<p>I cannot think of anything that has been difficult learning how to interact or use Elasticsearch. The community is massive around it and honestly cannot see anything wrong with moving towards it.</p>
+<p>You might be wondering where to start and what approach to take - if you have the luxury to migrate and refactor everything without a time constraint you’re lucky! Majority of us don’t have that luxury and really don’t have the full buy in from our management or superiors to even “fix” our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with Docker or Rkt (“Rocket” - a CoreOS product) it’s understandable but <strong>invest</strong> in modern technologies. Invest in yourselves and your application’s future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point!</p>
 
-<p>Here are some excerpts from elastic.co (official company behind ES) and others regarding the technology…</p>
+<h4 id="after-approval">After Approval</h4>
 
-<p>“Elasticsearch provides the ability to subdivide your index into multiple pieces called shards. When you create an index, you can simply define the number of shards that you want. Each shard is in itself a fully-functional and independent “index” that can be hosted on any node in the cluster.”  – Elasticsearch official docs</p>
+<p>Uh-oh… Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren’t always the easiest things to come by - but a team focused on the future of the application and in turn the company’s future success.</p>
 
-<h3 id="sharding-concepts-">Sharding concepts …</h3>
+<p><img src="./../assets/images/small-team.jpg" alt="team" class="img-responsive" /></p>
 
-<p>It allows you to horizontally split/scale your content volume
-It allows you to distribute and parallelize operations across shards (potentially on multiple nodes) thus increasing performance/throughput</p>
+<p>If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux – I am looking at you C#. I am an advocate for Go but also love NodeJS and Python. Do what’s best for you team and make sure you know that microservices don’t lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.</p>
 
-<h3 id="replication-concepts-">Replication concepts …</h3>
+<h4 id="container-orchestration">Container Orchestration</h4>
 
-<p>It provides high availability in case a shard/node fails. For this reason, it is important to note that a replica shard is never allocated on the same node as the original/primary shard that it was copied from.
-It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel.</p>
+<p>The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services. Invest in some time in researching which tool or tools fit your application’s use cases. Here are a list of some of the major self-hosted orchestration tools - if you want something like an already hosted service of these things Google, Mesosphere, Rancher and others support enterprise platforms for these kinds of things already.</p>
 
-<h3 id="use-cases----real-companies-using-es">Use Cases – Real Companies Using ES!</h3>
+<p>Self-Hosted</p>
 
-<p>Ebay – <a href="https://www.elastic.co/videos/ebay-and-elasticsearch-this-is-not-small-data">this-is-not-small-data</a></p>
+<ul>
+  <li><a href="https://kubernetes.io/">Kubernetes</a>
+    <ul>
+      <li>Came out of Google - built based on Google’s “Borg” project</li>
+      <li>Backed and supported by majority of the leading tech companies like</li>
+    </ul>
+  </li>
+  <li><a href="https://dcos.io/">DC/OS</a>
+    <ul>
+      <li>Product built around Apache Mesos</li>
+      <li>Blog <a href="https://mesosphere.com/blog/2016/04/19/open-source-dcos/">post</a> on the release of DC/OS</li>
+      <li>Backed and supported by companies like Microsoft, Accenture, and others</li>
+    </ul>
+  </li>
+  <li><a href="https://docs.docker.com/engine/swarm/">Docker Swarm</a>
+    <ul>
+      <li>Not as widely used in the community</li>
+    </ul>
+  </li>
+</ul>
 
-<p>Goldman Sachs – <a href="https://www.elastic.co/elasticon/conf/2016/sf/how-the-elastic-stack-changed-goldman-sachs">stack-changed-goldman-sachs</a></p>
+<p>There might be other options out there but a big thing to note when migrating to a microservice architecture is the communities. Kubernetes has been the biggest player in this space and is backed by <strong>A LOT</strong> of companies using these technologies. Many companies using Kubernetes support the tool by giving back to the open sourced code as well.</p>
 
-<p>Netflix – <a href="https://www.elastic.co/elasticon/conf/2016/sf/dude-where-are-my-messages-message-analytics-at-netflix">message-analytics-at-netflix</a></p>
+<h4 id="service-interactions">Service Interactions</h4>
 
-<p>Facebook – <a href="https://www.elastic.co/elasticon/2015/sf/from-hackathon-to-production-elasticsearch-facebook">hackathon-to-production-facebook</a></p>
+<p>More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on - but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing service discovery, tracing, monitoring, transporting, circuit breakers (retries) and other things.</p>
 
-<p>Many more <a href="https://www.elastic.co/use-cases">here</a> and what has driven companies to Elasticsearch (many of which transitioned from Solr)</p>
+<p>Don’t feel overwhelmed when making the leap of migrating architectures it’s an <strong>investment</strong>.</p>
 
 
         </section>
@@ -187,15 +204,15 @@ It allows you to scale out your search volume/throughput since searches can be e
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Elasticsearch At A Glance&amp;url=https://github.com/jtaylor32Elasticsearch-At-A-Glance"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Intro on Migrating to Microservices&amp;url=https://github.com/jtaylor32Migration-to-Microservices"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Elasticsearch-At-A-Glance"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Migration-to-Microservices"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Elasticsearch-At-A-Glance"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Migration-to-Microservices"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -214,20 +231,13 @@ It allows you to scale out your search volume/throughput since searches can be e
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story " style="background-image: url(/assets/images/future-technologies.jpg)" href="/Migration-to-Microservices">
-            <section class="post">
-                <h2>Intro on Migrating to Microservices</h2>
-                <p>## Why Microservices? This is an obvious question raised when applications or companies move to...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
     
-        <a class="read-next-story prev " style="background-image: url(/assets/images/pipelines.jpg)" href="/Jenkins-2.0-Pipeline-NodeJS">
+        <a class="read-next-story prev " style="background-image: url(/assets/images/lighthouse.jpg)" href="/Elasticsearch-At-A-Glance">
             <section class="post">
-                <h2>Jenkins 2.0 - Pipelines with NodeJS</h2>
-                <p>Future of Jenkins: The Jenkinsfile The future of Jenkins and CI/CD is having “Pipelines” as...</p>
+                <h2>Elasticsearch At A Glance</h2>
+                <p>Why Elasticsearch? Elasticsearch has some major upsides to it when using it on as a...</p>
             </section>
         </a>
     

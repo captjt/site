@@ -12,6 +12,67 @@
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
+	  <title>Intro on Migrating to Microservices</title>
+	  <link>//Migration-to-Microservices</link>
+	  <author>Jordan Taylor</author>
+	  <pubDate>2017-02-14T05:00:00+00:00</pubDate>
+	  <guid>//Migration-to-Microservices</guid>
+	  <description><![CDATA[
+	     <h2 id="why-microservices">Why Microservices?</h2>
+
+<p>This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices when you are at a scale or a place in your application’s life cycle where you cannot iterate fast enough on top of your monolithic approach to add new value. There are so many more resources out there on when or why to switch to this architecture it’s not really worth “beating a dead horse” on the subject.</p>
+
+<h4 id="technologies-to-migrate-with">Technologies to Migrate With?</h4>
+
+<p>You might be wondering where to start and what approach to take - if you have the luxury to migrate and refactor everything without a time constraint you’re lucky! Majority of us don’t have that luxury and really don’t have the full buy in from our management or superiors to even “fix” our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with Docker or Rkt (“Rocket” - a CoreOS product) it’s understandable but <strong>invest</strong> in modern technologies. Invest in yourselves and your application’s future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point!</p>
+
+<h4 id="after-approval">After Approval</h4>
+
+<p>Uh-oh… Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren’t always the easiest things to come by - but a team focused on the future of the application and in turn the company’s future success.</p>
+
+<p><img src="./../assets/images/small-team.jpg" alt="team" class="img-responsive" /></p>
+
+<p>If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux – I am looking at you C#. I am an advocate for Go but also love NodeJS and Python. Do what’s best for you team and make sure you know that microservices don’t lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.</p>
+
+<h4 id="container-orchestration">Container Orchestration</h4>
+
+<p>The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services. Invest in some time in researching which tool or tools fit your application’s use cases. Here are a list of some of the major self-hosted orchestration tools - if you want something like an already hosted service of these things Google, Mesosphere, Rancher and others support enterprise platforms for these kinds of things already.</p>
+
+<p>Self-Hosted</p>
+
+<ul>
+  <li><a href="https://kubernetes.io/">Kubernetes</a>
+    <ul>
+      <li>Came out of Google - built based on Google’s “Borg” project</li>
+      <li>Backed and supported by majority of the leading tech companies like</li>
+    </ul>
+  </li>
+  <li><a href="https://dcos.io/">DC/OS</a>
+    <ul>
+      <li>Product built around Apache Mesos</li>
+      <li>Blog <a href="https://mesosphere.com/blog/2016/04/19/open-source-dcos/">post</a> on the release of DC/OS</li>
+      <li>Backed and supported by companies like Microsoft, Accenture, and others</li>
+    </ul>
+  </li>
+  <li><a href="https://docs.docker.com/engine/swarm/">Docker Swarm</a>
+    <ul>
+      <li>Not as widely used in the community</li>
+    </ul>
+  </li>
+</ul>
+
+<p>There might be other options out there but a big thing to note when migrating to a microservice architecture is the communities. Kubernetes has been the biggest player in this space and is backed by <strong>A LOT</strong> of companies using these technologies. Many companies using Kubernetes support the tool by giving back to the open sourced code as well.</p>
+
+<h4 id="service-interactions">Service Interactions</h4>
+
+<p>More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on - but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing service discovery, tracing, monitoring, transporting, circuit breakers (retries) and other things.</p>
+
+<p>Don’t feel overwhelmed when making the leap of migrating architectures it’s an <strong>investment</strong>.</p>
+
+	  ]]></description>
+	</item>
+
+	<item>
 	  <title>Elasticsearch At A Glance</title>
 	  <link>//Elasticsearch-At-A-Glance</link>
 	  <author>Jordan Taylor</author>
@@ -1297,96 +1358,6 @@ Complete!
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl status mysqld
 </code></pre>
 </div>
-
-	  ]]></description>
-	</item>
-
-	<item>
-	  <title>Setting Up Python 3 and Django REST Framework</title>
-	  <link>//Setting-Up-Python-3-and-Django-REST-Framework</link>
-	  <author>Jordan Taylor</author>
-	  <pubDate>2016-08-19T05:00:00+00:00</pubDate>
-	  <guid>//Setting-Up-Python-3-and-Django-REST-Framework</guid>
-	  <description><![CDATA[
-	     <h2 id="objective">Objective:</h2>
-<p>We want to setup an Python 3 environment on our machine to start developing in Python 3! Once we set up Python and all the packages necessary for Django development – we want to set up our first Django Framework REST Application.</p>
-
-<h3 id="install-xcode-and-homebrew-">Install Xcode and Homebrew :</h3>
-
-<h4 id="xcode">XCode</h4>
-
-<p>We first need to install XCode or using Homebrew to install Python3 will throw an error.</p>
-
-<p>First, we must go into whatever terminal application that we use and paste this line into the command:</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install
-</code></pre>
-</div>
-
-<h4 id="homebrew">Homebrew</h4>
-
-<p>Homebrew is a package manager for OS X – this is a very powerful tool to install, update, list and many more options for packages that we will use as developers. “Homebrew installs all the things Apple didn’t get.”</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
-</code></pre>
-</div>
-
-<p>To make sure our brew installations will be used over some of the OS X stock binaries we need as a line in our .bash_profile file. Open or create the file ~/.bash_profile and paste this line into it.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
-</code></pre>
-</div>
-
-<h3 id="install-python-3-">Install Python 3 :</h3>
-
-<p>Onto Python installation…</p>
-
-<p>Once you have Homebrew installed and ready to be used we can do a simple command line call like this to install Python3</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>brew install python3
-</code></pre>
-</div>
-
-<p>…and voilà! Do a simple</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>python3 --version
-</code></pre>
-</div>
-
-<p>and you should have the most recent version of Python3. This comes with a bunch of libraries – <em>pip3</em> (a package manager), <em>Setuptools</em> (a project packaging tool), and <em>pyvenv</em> (a virtual environment tool). These three tools are very powerful and there are others out there that can replace these. Although, with that being said – I would recommend starting with these three for starting out.</p>
-
-<p>Note: I personally use <em>virtualenv</em> which is another virtual environment tool like <em>pyvenv</em>.</p>
-
-<h3 id="creating-our-django-rest-framework-project-">Creating Our Django-Rest-Framework Project :</h3>
-
-<p>After we setup our Python3 and validate our verion is up to date - we will start our Django-Rest-Framework project. So to start out we must create a virtual environment to work out of so we must make a directory and inside of that empty directory we will do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>virtualenv env
-</code></pre>
-</div>
-
-<p>..this will install our environment to a specific version of Python we want to it to be in. You can checkout the docs for <em>virtualenv</em> to see more options. After we do the environment installs we will create out our project. So we need to install django, djangorestframework, pgycopg2 (for PostgreSQL). You can interchange any database packages based on whatever backend you want the ORM to be talking to. To do these installs we must use <em>pip</em>.</p>
-
-<p>First activate your ‘env’ by :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">source </span>env/bin/activate
-</code></pre>
-</div>
-
-<p>Then do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install django djangorestframework psycopg2
-</code></pre>
-</div>
-
-<p>After that we need to start out project so we do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>django-admin.py startproject project_name
-</code></pre>
-</div>
-
-<p>Based on these instructions you will have Xcode, Homebrew, Python3, and a python environment with the start of a fantastic RESTful framework. Stay tuned for more posts about Django-Rest-Framework tricks and tutorials.</p>
-
 
 	  ]]></description>
 	</item>

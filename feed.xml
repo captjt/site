@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>Intro on Migrating to Microservices</title>
+        
+          <description>&lt;h2 id=&quot;why-microservices&quot;&gt;Why Microservices?&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Tue, 14 Feb 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Migration-to-Microservices</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Migration-to-Microservices</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Elasticsearch At A Glance</title>
         
           <description>&lt;h2 id=&quot;why-elasticsearch&quot;&gt;Why Elasticsearch?&lt;/h2&gt;
