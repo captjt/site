@@ -12,7 +12,7 @@ logo: 'assets/images/logo.png'
 
 ## Why Microservices?
 
-This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices when you are at a scale or a place in your application's life cycle where you cannot iterate fast enough on top of your monolithic approach to add new value. There are so many more resources out there on when or why to switch to this architecture it's not really worth "beating a dead horse" on the subject.
+This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices. The perfect time is you are at a scale or a place in your application's life cycle where you cannot iterate fast enough on top of your monolithic application. There are so many more resources out there on when or why to switch to this architecture it's not really worth "beating a dead horse" on the subject.
 
 #### Technologies to Migrate With?
 
