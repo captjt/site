@@ -28,7 +28,7 @@ current: about
 - DevOps with Containers and Orchestration tools (Docker + Kubernetes)
 - CI/CD & Agile Development
 
-My strengths include architecting & implementing backend + front-end applications. I develop in modern stack methodologies with a mind in advancement in learning new languages and open source frameworks. I strive for solving unique problems with efficient and effective solutions. I love every part of the development stack and come from a Computer Science background with double concentrations of Software Engineering and Databases.
+My strengths include architecting & implementing backend + front-end applications. Passionate about microservices and all of the complexities that come with them! I develop in modern stack methodologies with a mind in advancement in learning new languages and open source frameworks. I strive for solving unique problems with efficient and effective solutions. I love every part of the development stack and come from a Computer Science background with double concentrations of Software Engineering and Databases.
 
 If there is one language that I would advocate for people to learn and understand well it's Go. I am an avid believer in the future of Go and everything that comes with it.
 
