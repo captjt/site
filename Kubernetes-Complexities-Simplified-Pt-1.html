@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Introduction on Migrating to Microservices</title>
+    <title>Kubernetes: Complexities Simplified Pt. 1</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -91,7 +91,7 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/future-technologies.jpg) ">
+<header class="main-header post-head " style="background-image: url(/assets/images/looking-up.jpg) ">
     <nav class="main-nav  overlay  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
@@ -105,10 +105,10 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Introduction on Migrating to Microservices</h1>
+            <h1 class="post-title">Kubernetes: Complexities Simplified Pt. 1</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2017-03-09">09 Mar 2017</time>
+            <time class="post-date" datetime="2017-03-22">22 Mar 2017</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
@@ -123,62 +123,115 @@
 
         <section class="post-content">
             
-            <h2 id="why-microservices">Why Microservices?</h2>
+            <h2 id="why-are-microservices-hard">Why Are Microservices Hard?</h2>
 
-<p>This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices. The perfect time is you are at a scale or a place in your application’s life cycle where you cannot iterate fast enough on top of your monolithic application. There are so many more resources out there on when or why to switch to this architecture it’s not really worth “beating a dead horse” on the subject.</p>
+<p>Conceptually when moving to microservices it will solve a lot of major problems we face with monolithic applications. The overhead that I mentioned in the later portion of <a href="http://jt.codes/Migration-to-Microservices">Introduction on Migrating to Microservices</a> can be hard to wrap our heads around. We need to establish tracing, monitoring, load balancing, service discovery, dynamic request routing, TLS, circuit breaking and more. <strong>What are these things and what do they even mean?!</strong></p>
 
-<h4 id="technologies-to-migrate-with">Technologies to Migrate With?</h4>
+<h3 id="complexities-say-what">Complexities… Say What??</h3>
 
-<p>You might be wondering where to start and what approach to take – if you have the luxury to migrate and refactor everything without a time constraint you’re lucky! Majority of us don’t have that luxury and really don’t have the full buy in from our management or superiors to even “fix” our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with <strong>Docker or Rkt</strong> (“Rocket” – a CoreOS product) it’s understandable but <strong>invest</strong> in modern technologies. Containers are a pivotal foundation for the future of applications. Containers decouple applications from operating systems, which means that users can have a clean and minimal Linux operating system and run everything else in one or more isolated container. Invest in yourselves and your application’s future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point!</p>
+<p>What is distributed tracing, service discovery, circuit breaking…? – The list goes on. One of these, distributed tracing, is one of the most underrated tools to help with monitoring our services. Distributed tracing is key to what is going on within a single call into our microservice architecture. We can follow the lifespan of a request, see what’s going on and where things are getting bottled up.</p>
 
-<h4 id="after-approval">After Approval</h4>
+<p><em>Distributed tracing provides a holistic view of requests transiting through multiple services, allowing for immediate identification of latency issues.</em></p>
 
-<p>Uh-oh… Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren’t always the easiest things to come by – but a team focused on the future of the application and in turn the company’s future success.</p>
-
-<p><img src="./../assets/images/small-team.jpg" alt="team" class="img-responsive" /></p>
-
-<p>If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux. I am an advocate for Go but also love NodeJS and Python. Do what’s best for you team and make sure you know that microservices don’t lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.</p>
-
-<h4 id="container-orchestration">Container Orchestration</h4>
-
-<p>The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services.</p>
+<h3 id="one-tool-to-rule-them-all">One Tool To Rule Them All</h3>
 
 <blockquote>
-  <p>You might think that containers will solve all problems. Managing containers manually is simply out of the question. When it comes to microservices, containers are roughly 5% of the problem. Container management or orchestration is the last 95%.</p>
+  <p>“Enter Linkerd”</p>
 </blockquote>
 
-<p>Invest in some time in researching which tool or tools fit your application’s use cases. Here are a list of some of the major self-hosted orchestration tools – if you want something like an already hosted service of these things <em>Google, Mesosphere, Rancher</em> and others support enterprise platforms for these kinds of things already.</p>
+<p><a href="https://linkerd.io/">Linkerd</a> is an open source project that is built off of Twitter’s <a href="https://twitter.github.io/finagle/">finagle</a>. It doesn’t lock developers into a single JVM, .NET, JS, etc. language. It’s core principle is catering to developers as they migrated to these complex system architectures.</p>
 
-<p>Self-Hosted</p>
+<p>Linkerd solves many of the fundamental problems we face with microservices. While distributed tracing is at the center of this article. I will, in the near future, go more in depth about other complexities Linkerd solves.</p>
+
+<h3 id="hands-on">Hands On</h3>
+
+<p>The Buoyant <a href="https://blog.buoyant.io/">blog</a> is a fantastic way to get started with Linkerd. They truly simpilfy how things are working under the covers and give real examples of how to incorporate Linkerd into your architecture.</p>
+
+<p>Since <a href="https://k8s.io/">Kubernetes</a> is the <a href="https://www.youtube.com/watch?v=3MyYhSnHGm0">“Linux of the Cloud”</a> I am going to walkthrough a quick example of using <a href="http://zipkin.io/">Zipkin</a> and Linkerd – running on Kubernetes as a DaemonSet. Zipkin simply is a distributed tracing tool. The source code for this walkthrough is <a href="https://github.com/jtaylor32/woogidi-woogidi-woogidi">here</a>.</p>
+
+<h3 id="kubernetes-creating-the-services-and-pods">Kubernetes: Creating the Services and Pods</h3>
+
+<p>You can set your <code class="highlighter-rouge">namespaces</code> separately, but this is a simple tutorial on how to stand up an app insides Kubernetes and have traffic routed and traced using Linkerd + Zipkin. Note: Commands will be based on a <a href="https://github.com/kubernetes/minikube">minikube</a> cluster – can be ported to actual Kubernetes seamlessly.</p>
+
+<h4 id="installconfigure-linkerd">Install/Configure Linkerd</h4>
+
+<p>This command will apply a ConfigMap for Linkerd as a DaemonSet to route traffic in and out of specific ports.</p>
+
+<p><code class="highlighter-rouge">bash
+kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/linkerd-zipkin.yml
+</code></p>
+
+<p>Once the service is running you can open the admin dashboard. This will be where you can monitor inbound/outbound traffic; as well as configure your routing within the “dtab” and other cool features.</p>
+
+<p><code class="highlighter-rouge">bash
+minikube service l5d
+</code></p>
+
+<p><img src="./../assets/images/linkerd-dashboard.jpg" alt="linkerd-dashboard" />
+<em>Linkerd Dashboard</em></p>
+
+<p>Run the service. This should create a replication set of 3 pods named “woogidi” (reminiscing on <a href="https://en.wikipedia.org/wiki/Rocket_Power">Rocket Power</a> days). This service will be listening on <em>port 8080</em>.</p>
+
+<p><code class="highlighter-rouge">bash
+kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/woogidi-woogidi-woogidi.yml
+</code></p>
+
+<p>To check if the service is working correctly we can do a simple curl commands.</p>
+
+<p>```bash
+# Set the L5D_INGRESS_LB so we can http_proxy to the service 
+L5D_INGRESS_LB=$(minikube service l5d –url | head -n1)</p>
+
+<p>http_proxy=$L5D_INGRESS_LB curl -XPOST -d ‘{“gnarly”: “Otto”}’ http://woogidi/</p>
+
+<p>{“response”:”let’s crank Otto”}
+```</p>
+
+<p>Sick. Us and Otto are going to go shred some gnar! This is all because the Linkerd service that is running is configured to route traffic to this service. It acts as a service discovery tool as well!</p>
+
+<p>But what if something is getting bottlenecked somewhere in the request chain or is failing and we can’t detect that? Here is where we need to configure Zipkin inside our cluster.</p>
+
+<p><code class="highlighter-rouge">bash
+kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/zipkin.yml
+</code></p>
+
+<p>Open the Zipkin dashboard once the service starts.</p>
+
+<p><code class="highlighter-rouge">bash
+minikube service zipkin
+</code></p>
+
+<p>The dashboard allows us to do some filtering on requests that are going through the Linkerd service. We can also dive into specific requests and calls within Zipkin.</p>
+
+<h4 id="snapshots-of-zipkin-interface">Snapshots of Zipkin Interface</h4>
+
+<p><img src="./../assets/images/zipkin-dashboard.jpg" alt="zipkin-dashboard" />
+<em>Zipkin Dashboard</em></p>
+
+<p><img src="./../assets/images/zipkin-single-call.jpg" alt="zipkin-single-call" />
+<em>Single Request</em></p>
+
+<p><img src="./../assets/images/zipkin-details.jpg" alt="zipkin-details" />
+<em>Single Trace Call</em></p>
+
+<h3 id="whats-next">What’s Next?</h3>
+
+<p>Now we can monitor, tracing and do some simple service discovery within Kubernetes we need to expand and have log monitoring, ingress (load balancing), and other features solved.</p>
 
 <ul>
-  <li><a href="https://kubernetes.io/">Kubernetes</a>
-    <ul>
-      <li>Came out of Google – built based on Google’s “Borg” project</li>
-      <li>Backed and supported by majority of the leading tech companies like</li>
-    </ul>
+  <li>
+    <p>Log monitoring will include – <a href="https://github.com/prometheus">Prometheus</a> + <a href="https://github.com/grafana/grafana">Grafana</a>.</p>
   </li>
-  <li><a href="https://dcos.io/">DC/OS</a>
-    <ul>
-      <li>Product built around Apache Mesos</li>
-      <li>Blog <a href="https://mesosphere.com/blog/2016/04/19/open-source-dcos/">post</a> on the release of DC/OS</li>
-      <li>Backed and supported by companies like Microsoft, Accenture, and others</li>
-    </ul>
-  </li>
-  <li><a href="https://docs.docker.com/engine/swarm/">Docker Swarm</a>
-    <ul>
-      <li>Not as widely used in the community</li>
-    </ul>
+  <li>
+    <p>Ingress will include a way to traffic our requests to Linkerd using <a href="https://github.com/nginx/nginx">nginx</a> as our proxy.</p>
   </li>
 </ul>
 
-<p>There might be other options out there but a big thing to note when migrating to a microservice architecture is the communities. Kubernetes has been the biggest player in this space and is backed by <strong>A LOT</strong> of companies using these technologies. Many companies using Kubernetes support the tool by giving back to the open sourced code as well.</p>
+<blockquote>
+  <p>Feel free to reach out to me and ask questions or bring up other topics you’d like me to write about!</p>
+</blockquote>
 
-<h4 id="service-interactions">Service Interactions</h4>
-
-<p>More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on – but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing <strong>service discovery, tracing, monitoring, transporting, circuit breakers</strong> and other things.</p>
-
-<p>Don’t feel overwhelmed when making the leap of migrating architectures it’s an <strong>investment</strong>.</p>
+<p><img src="./../assets/images/tito-later.jpg" alt="later-bro!" /></p>
 
 
         </section>
@@ -210,15 +263,15 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Introduction on Migrating to Microservices&amp;url=https://github.com/jtaylor32Migration-to-Microservices"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Kubernetes: Complexities Simplified Pt. 1&amp;url=https://github.com/jtaylor32Kubernetes-Complexities-Simplified-Pt-1"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Migration-to-Microservices"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://github.com/jtaylor32Kubernetes-Complexities-Simplified-Pt-1"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Migration-to-Microservices"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://github.com/jtaylor32Kubernetes-Complexities-Simplified-Pt-1"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -237,20 +290,13 @@
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story " style="background-image: url(/assets/images/looking-up.jpg)" href="/Kubernetes-Complexities-Simplified-Pt-1">
-            <section class="post">
-                <h2>Kubernetes: Complexities Simplified Pt. 1</h2>
-                <p>## Why Are Microservices Hard? Conceptually when moving to microservices it will solve a lot...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
     
-        <a class="read-next-story prev " style="background-image: url(/assets/images/lighthouse.jpg)" href="/Elasticsearch-At-A-Glance">
+        <a class="read-next-story prev " style="background-image: url(/assets/images/future-technologies.jpg)" href="/Migration-to-Microservices">
             <section class="post">
-                <h2>Elasticsearch At A Glance</h2>
-                <p>Why Elasticsearch? Elasticsearch has some major upsides to it when using it on as a...</p>
+                <h2>Introduction on Migrating to Microservices</h2>
+                <p>Why Microservices? This is an obvious question raised when applications or companies move to a...</p>
             </section>
         </a>
     
