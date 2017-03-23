@@ -1,6 +1,6 @@
 ---
 layout: post
-cover: 'assets/images/looking-up.jpg'
+cover: 'assets/images/chile-thunderstorm.jpg'
 title: 'Kubernetes: Complexities Simplified Pt. 1'
 date:   2017-03-22 05:00:00
 tags: technologies
