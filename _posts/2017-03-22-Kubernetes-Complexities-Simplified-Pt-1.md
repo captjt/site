@@ -42,49 +42,55 @@ You can set your `namespaces` separately, but this is a simple tutorial on how t
 
 This command will apply a ConfigMap for Linkerd as a DaemonSet to route traffic in and out of specific ports. 
 
-```bash
+~~~
 kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/linkerd-zipkin.yml
-```
+~~~
+{: .language-bash}
 
 Once the service is running you can open the admin dashboard. This will be where you can monitor inbound/outbound traffic; as well as configure your routing within the "dtab" and other cool features.
 
-```bash
+~~~
 minikube service l5d
-```
+~~~
+{: .language-bash}
 
 ![linkerd-dashboard](./../assets/images/linkerd-dashboard.jpg)
 *Linkerd Dashboard*
 
 Run the service. This should create a replication set of 3 pods named "woogidi" (reminiscing on [Rocket Power](https://en.wikipedia.org/wiki/Rocket_Power) days). This service will be listening on _port 8080_.
 
-```bash
+~~~
 kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/woogidi-woogidi-woogidi.yml
-```
+~~~
+{: .language-bash}
 
 To check if the service is working correctly we can do a simple curl commands. 
 
-```bash
+~~~
 # Set the L5D_INGRESS_LB so we can http_proxy to the service 
 L5D_INGRESS_LB=$(minikube service l5d --url | head -n1)
 
 http_proxy=$L5D_INGRESS_LB curl -XPOST -d '{"gnarly": "Otto"}' http://woogidi/
 
 {"response":"let's crank Otto"}
-```
+~~~
+{: .language-bash}
 
 Sick. Us and Otto are going to go shred some gnar! This is all because the Linkerd service that is running is configured to route traffic to this service. It acts as a service discovery tool as well!
 
 But what if something is getting bottlenecked somewhere in the request chain or is failing and we can't detect that? Here is where we need to configure Zipkin inside our cluster.
 
-```bash
+~~~
 kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/zipkin.yml
-```
+~~~
+{: .language-bash}
 
 Open the Zipkin dashboard once the service starts.
 
-```bash
+~~~
 minikube service zipkin
-```
+~~~
+{: .language-bash}
 
 The dashboard allows us to do some filtering on requests that are going through the Linkerd service. We can also dive into specific requests and calls within Zipkin.
 
