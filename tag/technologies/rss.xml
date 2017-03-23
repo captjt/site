@@ -52,49 +52,49 @@
 
 <p>This command will apply a ConfigMap for Linkerd as a DaemonSet to route traffic in and out of specific ports.</p>
 
-<p><code class="highlighter-rouge">bash
-kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/linkerd-zipkin.yml
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/linkerd-zipkin.yml
+</code></pre>
+</div>
 
 <p>Once the service is running you can open the admin dashboard. This will be where you can monitor inbound/outbound traffic; as well as configure your routing within the “dtab” and other cool features.</p>
 
-<p><code class="highlighter-rouge">bash
-minikube service l5d
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>minikube service l5d
+</code></pre>
+</div>
 
 <p><img src="./../assets/images/linkerd-dashboard.jpg" alt="linkerd-dashboard" />
 <em>Linkerd Dashboard</em></p>
 
 <p>Run the service. This should create a replication set of 3 pods named “woogidi” (reminiscing on <a href="https://en.wikipedia.org/wiki/Rocket_Power">Rocket Power</a> days). This service will be listening on <em>port 8080</em>.</p>
 
-<p><code class="highlighter-rouge">bash
-kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/woogidi-woogidi-woogidi.yml
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/woogidi-woogidi-woogidi.yml
+</code></pre>
+</div>
 
 <p>To check if the service is working correctly we can do a simple curl commands.</p>
 
-<p>```bash
-# Set the L5D_INGRESS_LB so we can http_proxy to the service 
-L5D_INGRESS_LB=$(minikube service l5d –url | head -n1)</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># Set the L5D_INGRESS_LB so we can http_proxy to the service </span>
+<span class="nv">L5D_INGRESS_LB</span><span class="o">=</span><span class="k">$(</span>minikube service l5d --url | head -n1<span class="k">)</span>
 
-<p>http_proxy=$L5D_INGRESS_LB curl -XPOST -d ‘{“gnarly”: “Otto”}’ http://woogidi/</p>
+<span class="nv">http_proxy</span><span class="o">=</span><span class="nv">$L5D_INGRESS_LB</span> curl -XPOST -d <span class="s1">'{"gnarly": "Otto"}'</span> http://woogidi/
 
-<p>{“response”:”let’s crank Otto”}
-```</p>
+<span class="o">{</span><span class="s2">"response"</span>:<span class="s2">"let's crank Otto"</span><span class="o">}</span>
+</code></pre>
+</div>
 
 <p>Sick. Us and Otto are going to go shred some gnar! This is all because the Linkerd service that is running is configured to route traffic to this service. It acts as a service discovery tool as well!</p>
 
 <p>But what if something is getting bottlenecked somewhere in the request chain or is failing and we can’t detect that? Here is where we need to configure Zipkin inside our cluster.</p>
 
-<p><code class="highlighter-rouge">bash
-kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/zipkin.yml
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>kubectl apply -f https://raw.githubusercontent.com/jtaylor32/woogidi-woogidi-woogidi/master/k8s-configs/zipkin.yml
+</code></pre>
+</div>
 
 <p>Open the Zipkin dashboard once the service starts.</p>
 
-<p><code class="highlighter-rouge">bash
-minikube service zipkin
-</code></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>minikube service zipkin
+</code></pre>
+</div>
 
 <p>The dashboard allows us to do some filtering on requests that are going through the Linkerd service. We can also dive into specific requests and calls within Zipkin.</p>
 
