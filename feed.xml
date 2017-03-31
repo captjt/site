@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>Go: Testing Approaches</title>
+        
+          <description>&lt;h2 id=&quot;software-testing-basics&quot;&gt;Software Testing Basics&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Fri, 31 Mar 2017 05:00:00 +0000</pubDate>
+        <link>
+        https://github.com/jtaylor32/Go-Testing-Approaches</link>
+        <guid isPermaLink="true">https://github.com/jtaylor32/Go-Testing-Approaches</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Kubernetes: Complexities Simplified Pt. 1</title>
         
           <description>&lt;h2 id=&quot;why-are-microservices-hard&quot;&gt;Why Are Microservices Hard?&lt;/h2&gt;
