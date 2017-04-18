@@ -882,7 +882,11 @@ body.nav-opened .nav {
     font-weight: 400;
     font-family: "Merriweather", serif;
     letter-spacing: 0.01rem;
-    color: rgba(255,255,255,0.8);
+    color: rgba(255,255,255,0.8) !important;
+}
+
+.description-links {
+    color: #fff !important;
 }
 
 .no-cover.main-header {
@@ -1607,7 +1611,7 @@ body:not(.post-template) .post-title {
    ========================================================================== */
 
 @media only screen and (max-width: 900px) {
-   
+
     .main-header {
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
