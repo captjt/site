@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>About</title>
+    <title>Projects</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -69,8 +69,8 @@
     </a>
     <ul>
         <li class="nav-home " role="presentation"><a href="/">Home</a></li>
-        <li class="nav-about  nav-current" role="presentation"><a href="/about">About</a></li>
-        <li class="nav-projects " role="presentation"><a href="/projects">Projects</a></li>
+        <li class="nav-about " role="presentation"><a href="/about">About</a></li>
+        <li class="nav-projects  nav-current" role="presentation"><a href="/projects">Projects</a></li>
         <li class="nav-technologies " role="presentation"><a href="/tag/technologies">Technlogoies</a></li>
         <!--<li class="nav-speeches " role="presentation"><a href="/tag/speeches">Speeches</a></li>
         <li class="nav-fiction " role="presentation"><a href="/tag/fiction">Fiction</a></li>-->
@@ -92,7 +92,7 @@
 <!-- Everything inside the #post tags pulls data from the page -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/cover3.jpg)">
+<header class="main-header post-head " style="background-image: url(/assets/images/astronaut-selfie.jpg)">
     <nav class="main-nav overlay clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
@@ -107,90 +107,82 @@
         <!-- Everything inside the #post tags pulls data from the post -->
 
         <header class="post-header">
-            <h1 class="post-title">About</h1>
+            <h1 class="post-title">Projects</h1>
         </header>
 
         <section class="post-content">
-            <h3 id="interests">Interests</h3>
+            <p>These are some of the projects I either work on, have worked on or follow regularly.</p>
+
+<h4 id="personal">Personal</h4>
 
 <ul>
-  <li><strong>Full Stack Development</strong>
+  <li><strong>Hermes</strong> – GitHub @ <a href="https://github.com/jtaylor32/hermes">jtaylor32/hermes</a>
     <ul>
-      <li>Languages:
-        <ul>
-          <li>Go (Golang)</li>
-          <li>Python &amp; NodeJS</li>
-        </ul>
-      </li>
-      <li>Service-layer APIs:
-        <ul>
-          <li>Go-kit</li>
-          <li>Gorilla Toolkit</li>
-          <li>Echo</li>
-          <li>Flask</li>
-          <li>Django</li>
-          <li>Express</li>
-        </ul>
-      </li>
-      <li>Web Clients:
-        <ul>
-          <li>ReactJS + Redux</li>
-        </ul>
-      </li>
-      <li>Design Patterns</li>
+      <li>This was mainly built as a Go package that was an extension to create a web crawling/scraping service. It also has an API to connect an Elasticsearch storage.</li>
+      <li>Completely fun proof-of-concept package (I get to work on this when I find the time)</li>
     </ul>
   </li>
-  <li><strong>Databases</strong>
+  <li><strong>Caddy State Kit</strong> – GitHub @ <a href="https://github.com/jtaylor32/caddy-starter-kit">jtaylor32/caddy-starter-kit</a>
     <ul>
-      <li>Graph Databases
-        <ul>
-          <li>Neo4j</li>
-        </ul>
-      </li>
-      <li>NoSQL
-        <ul>
-          <li>MongoDB</li>
-          <li>Elasticsearch/Kibana</li>
-        </ul>
-      </li>
-      <li>Relational
-        <ul>
-          <li>PostgreSQL, MySQL</li>
-        </ul>
-      </li>
+      <li>This is a fun little bash project to auto configure auto-SSL <a href="https://caddyserver.com/">Caddyserver</a> on a CentOS server.</li>
     </ul>
   </li>
-  <li><strong>DevOps</strong>
+  <li>Other Repositories – GitHub @ <a href="https://github.com/jtaylor32?tab=repositories">jtaylor32</a>
     <ul>
-      <li>Microservices Design</li>
-      <li>Scalable Architectures</li>
-      <li>12 Factor Applications</li>
+      <li>Checkout out my other repositories for other projects and small little POCs</li>
     </ul>
   </li>
-  <li><strong>DevOps Tooling</strong>
-    <ul>
-      <li>Kubernetes</li>
-      <li>Containers (Docker)</li>
-      <li>Linkerd (Service Mesh)</li>
-      <li>Prometheus (Metrics)</li>
-      <li>Zipkin (Tracing)</li>
-    </ul>
-  </li>
-  <li>Open Source Community</li>
-  <li>CI/CD &amp; Agile Development</li>
 </ul>
 
-<p>I love tinkering with software while learning new technologies. I am a polyglot engineer at heart. My strengths include architecting &amp; implementing backend + frontend applications. Passionate about microservices and all of the complexities that come with them! I develop in modern stack methodologies with a mind in advancement in learning new languages and open source frameworks. I strive for solving unique problems with efficient and effective solutions. I love every part of the development stack and come from a Computer Science background with double concentrations of Software Engineering and Databases.</p>
+<h4 id="us-state-department">US State Department</h4>
 
-<p>If there is one language that I would advocate for people to learn and understand well it’s Go. I am an avid believer in the future of Go!</p>
+<ul>
+  <li><strong>Data Atlas</strong> – GitHub @ <a href="https://github.com/USStateDept/data-atlas">USStateDept/data-atlas</a>
+    <ul>
+      <li>This application is focused on creating a modular abstraction to ingest .CSV files directly mapped to your database. This can be thought of as data mapping application.</li>
+    </ul>
+  </li>
+  <li><strong>FIND</strong> – Website @ <a href="http://find.state.gov">find.state.gov</a>
+    <ul>
+      <li>The F Interagency Network Databank (FIND) is an online tool that enables users to explore and analyze national level data, and then share what they discover. FIND was designed around the needs of U.S. government analysts and also benefits a broad-range of stakeholders, including the U.S. public, civil society organizations, universities, foreign aid donors, Congress and partner country governments.</li>
+    </ul>
+  </li>
+  <li><strong>BIDS</strong> – Website @ <a href="https://bids.state.gov">bids.state.gov</a>
+    <ul>
+      <li>This application’s focus is to provide U.S. businesses with real-time, on-the-ground leads on international commercial and investment opportunities. It gives businesses the ability to connect directly to U.S. government officials in the field.</li>
+    </ul>
+  </li>
+  <li><strong>VSFS</strong> – Website @ <a href="http://vsfs.state.gov">vsfs.state.gov</a>
+    <ul>
+      <li>VSFS is the largest virtual internship program in the world. U.S. students contribute about 10 hours a week to their government, doing real work and gaining real experience in the process. Federal colleagues from across government submitted projects with more than 900 openings for U.S. college students.</li>
+    </ul>
+  </li>
+</ul>
 
-<p>While it might seem I enjoy to code with all the time I have. I do love to workout, watch baseball (previously a Division I ballplayer @ <a href="http://www.radfordathletics.com/index.aspx?path=baseball">Radford University</a>), and spend time with my lovely girlfriend and our child with paws – Izzy.</p>
+<h4 id="open-source-projects">Open Source Projects</h4>
 
-<p>If you want to reach out to me about anything regard software development or how amazing the St. Louis Cardinals are please shoot me an email or you can find me on Twitter <a href="http://www.twitter.com/jt_0021">@jt_0021</a>.</p>
-
-<h3 id="contact-me">Contact Me</h3>
-
-<p><a href="&#109;&#097;&#105;&#108;&#116;&#111;:&#106;&#116;&#097;&#121;&#108;&#111;&#114;&#048;&#048;&#055;&#046;&#106;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;">&#106;&#116;&#097;&#121;&#108;&#111;&#114;&#048;&#048;&#055;&#046;&#106;&#116;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;</a></p>
+<ul>
+  <li><strong>linkerd</strong> – GitHub @ <a href="https://github.com/linkerd/linkerd">linkerd/linkerd</a>
+    <ul>
+      <li>linkerd is a transparent service mesh, designed to make modern applications safe and sane by transparently adding service discovery, load balancing, failure handling, instrumentation, and routing to all inter-service communication.</li>
+    </ul>
+  </li>
+  <li><strong>Incus</strong> – GitHub @ <a href="https://github.com/Imgur/incus">Imgur/incus</a>
+    <ul>
+      <li>A middleware for distributing messages via websockets, long polling, and push notifications</li>
+    </ul>
+  </li>
+  <li><strong>go-kit</strong> – GitHub @ <a href="https://github.com/go-kit/kit">go-kit/kit</a>
+    <ul>
+      <li>A toolkit specific to the Go programming language. Go kit is a distributed programming toolkit for building microservices in large organizations.</li>
+    </ul>
+  </li>
+  <li>My <strong>GitHub Stars</strong> <a href="https://github.com/jtaylor32?tab=stars">⭐️⭐️⭐️</a>
+    <ul>
+      <li>These are the <strong>MANY</strong> projects I have liked while either surfing around or projects I’ve used personally.</li>
+    </ul>
+  </li>
+</ul>
 
         </section>
 
