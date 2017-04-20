@@ -16,7 +16,7 @@ These are some of the projects I either work on, have worked on or follow regula
     - This was mainly built as a Go package that was an extension to create a web crawling/scraping service. It also has an API to connect an Elasticsearch storage.
     - Completely fun proof-of-concept package (I get to work on this when I find the time)
 
-- **Caddy State Kit** -- GitHub @ [jtaylor32/caddy-starter-kit](https://github.com/jtaylor32/caddy-starter-kit)
+- **Caddy Starter Kit** -- GitHub @ [jtaylor32/caddy-starter-kit](https://github.com/jtaylor32/caddy-starter-kit)
     - This is a fun little bash project to auto configure auto-SSL [Caddyserver](https://caddyserver.com/) on a CentOS server.
 
 - Other Repositories -- GitHub @ [jtaylor32](https://github.com/jtaylor32?tab=repositories)
