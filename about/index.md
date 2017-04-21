@@ -41,7 +41,7 @@ current: about
 
 - **DevOps Tooling**
     - Kubernetes
-    - Containers (Docker)
+    - Containers (Docker, OR "Moby" :p)
     - Linkerd (Service Mesh)
     - Prometheus (Metrics)
     - Zipkin (Tracing)
