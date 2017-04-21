@@ -58,7 +58,4 @@ While it might seem I enjoy to code with all the time I have. I do love to worko
 If you want to reach out to me about anything regard software development or how amazing the St. Louis Cardinals are please shoot me an email or you can find me on Twitter [@jt_0021](http://www.twitter.com/jt_0021).
 
 ### Contact Me
-[![GitHub](./../assets/images/github.png)](https://github.com/jtaylor32)
-[![Twitter](./../assets/images/twitter.png)](https://twitter.com/jt_0021)
-[![LinkedIn](./../assets/images/linkedin.png)](https://www.linkedin.com/in/jtaylor32/)
-[![Email](./../assets/images/email.png)](mailto:jtaylor007.jt@gmail.com)
+[![GitHub](./../assets/images/github.png)](https://github.com/jtaylor32)[![Twitter](./../assets/images/twitter.png)](https://twitter.com/jt_0021)[![LinkedIn](./../assets/images/linkedin.png)](https://www.linkedin.com/in/jtaylor32/)[![Email](./../assets/images/email.png)](mailto:jtaylor007.jt@gmail.com)
