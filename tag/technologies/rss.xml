@@ -50,7 +50,7 @@
 </span></code></pre>
 </div>
 
-<p>You can see we have three basic interfaces that are defines some behaviors we might want to satisfy when we are trying to manipulate bytes within our programs. They are well named and you can infer what sorts of things concrete types will do if they satisfy these interfaces.</p>
+<p>You can see we have three basic interfaces that define some behaviors we might want to satisfy when we are trying to manipulate bytes within our programs. They are well named and you can infer what sorts of things concrete types will do if they satisfy these interfaces.</p>
 
 <p>A concrete type that implements the Reader interface better have a method of <code class="highlighter-rouge">Read</code> and it must take in an array of bytes and return an int with an error.</p>
 
@@ -116,7 +116,7 @@
 </span></code></pre>
 </div>
 
-<p>If you notice there are some thing that we might be able to group with common behaviors within those few basic interfaces. The great thing about changing these behaviors to use this new <code class="highlighter-rouge">Streamer</code> type is that it will not break the underlying concrete types that are implementing these methods on top of the Video and Audio interface types.</p>
+<p>If you notice there are some things that we might be able to group with common behaviors within those few basic interfaces. The great thing about changing these behaviors to use this new <code class="highlighter-rouge">Streamer</code> type is that it will not break the underlying concrete types that are implementing these methods on top of the Video and Audio interface types.</p>
 
 <div class="highlighter-rouge"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Streamer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
     </span><span class="n">Stream</span><span class="p">()</span><span class="x"> </span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">ReadCloser</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
