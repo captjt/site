@@ -12,6 +12,133 @@
    <atom:link href="rss" rel="self" type="application/rss+xml" />
    
 	<item>
+	  <title>Deep Dive: Go Interfaces Part I</title>
+	  <link>//Deep-Dive-Go-Interfaces-Part-1</link>
+	  <author>Jordan Taylor</author>
+	  <pubDate>2017-05-07T05:00:00+00:00</pubDate>
+	  <guid>//Deep-Dive-Go-Interfaces-Part-1</guid>
+	  <description><![CDATA[
+	     <h2 id="interfaces-basics">Interfaces Basics</h2>
+
+<p>Go’s known for it’s concurrency model but I believe the biggest attraction to this language is it’s interfaces and the beautiful abstractions they can give us.</p>
+
+<p>Interfaces are, at their core, ways to describe behaviors and group functions within APIs. You can think of them as generalizations about the behavior of concrete types within your Go programs. The biggest difference maker in the way Go describes interfaces is that you can create new interfaces that are satisfied by already existing types without changes the existing types. They are <em>“satisfied implicitly”</em>.</p>
+
+<p>Interfaces are labeled as <em>abstract types</em>. The only things that we can conclude from interfaces are what they <em>can do</em> – we don’t know anything else about them other than their <em>behaviors</em> like we said earlier.</p>
+
+<hr />
+
+<h2 id="interface-types">Interface Types</h2>
+
+<p>An interface type declares a set of methods that a concrete type (struct or other type) must satisfy to implement that interface. This gives us the contractual rules that we can set for our interface behaviors.</p>
+
+<p>The best, and most widely used interface in the Go standard library is the <code class="highlighter-rouge">io.Writer</code> type. Here are some excerpts from the <strong>io</strong> package.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">io</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Reader</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Read</span><span class="p">(</span><span class="n">p</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="n">n</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Writer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Write</span><span class="p">(</span><span class="n">p</span><span class="x"> </span><span class="p">[]</span><span class="kt">byte</span><span class="p">)</span><span class="x"> </span><span class="p">(</span><span class="n">n</span><span class="x"> </span><span class="kt">int</span><span class="p">,</span><span class="x"> </span><span class="n">err</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Closer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Close</span><span class="p">()</span><span class="x"> </span><span class="kt">error</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>You can see we have three basic interfaces that are defines some behaviors we might want to satisfy when we are trying to manipulate bytes within our programs. They are well named and you can infer what sorts of things concrete types will do if they satisfy these interfaces.</p>
+
+<p>A concrete type that implements the Reader interface better have a method of <code class="highlighter-rouge">Read</code> and it must take in an array of bytes and return an int with an error.</p>
+
+<h3 id="embedding-interfaces">Embedding Interfaces</h3>
+
+<p>Interfaces also give us the ability to embed other interfaces within each other similar to how we can do embedding within structs.</p>
+
+<p>The <strong>io</strong> package is a great example of this as well.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">package</span><span class="x"> </span><span class="n">io</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">ReadWriter</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Reader</span><span class="x">
+    </span><span class="n">Writer</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">ReadCloser</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Reader</span><span class="x">
+    </span><span class="n">Closer</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">ReadWriteCloser</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Reader</span><span class="x">
+    </span><span class="n">Writer</span><span class="x">
+    </span><span class="n">Closer</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>Here we can do some more inferences that concrete types can satisfy – they are either going to be either reading and writing, reading and closing and so on. They <strong>must</strong> satisfy those underlying interfaces though. If something is an instance of the <code class="highlighter-rouge">ReadWriter</code> interface you better believe it satisfies the <code class="highlighter-rouge">Reader</code> <strong>and</strong> <code class="highlighter-rouge">Writer</code> interfaces.</p>
+
+<p>With these concrete types implementing these interfaces their methods are polymorphic in nature. This can create much more cleaning interfaces without having to redefine behaviors. This also still keep our behaviors as granular as possible. We are building much more readable and usable APIs!</p>
+
+<p>Another implication we see is that anything that satisfies the <code class="highlighter-rouge">ReadWriteCloser</code> interface also satisfies the <code class="highlighter-rouge">ReadWriter</code> and the <code class="highlighter-rouge">ReadCloser</code>. Because types that implement <code class="highlighter-rouge">ReadWriteCloser</code> satisfy all three interfaces they also satisfy the other two composite interfaces. In turn the other two do not satisfy the third <code class="highlighter-rouge">ReadWriteCloser</code> interface – every method must be satisfied to be defined as an instance of that interface (remember that!).</p>
+
+<h2 id="re-grouping-our-behaviors">Re-Grouping Our Behaviors</h2>
+
+<p>When designing and implementing our Go programs we have to think about minimal ways to describe things though. Interface pollution IS a thing – this is when we don’t need them and can just use concrete types instead. There are trade offs to using interfaces and I will go more into depth later on in this Deep Dive series.</p>
+
+<p>In the full circle of it everyone has written bad code in their lifetime – it’s not about that though. We have to understand that we are writing code that is easy to use and simple to understand. This goes for our interfaces as well.</p>
+
+<p><img src="./../assets/images/simplify.jpg" alt="simplify" /></p>
+
+<p>We are going to have some interfaces describing some streaming service we are developing. We are going to have all kinds of media types and we decided on implementing some interfaces to describe their behaviors.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Text</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Pages</span><span class="p">()</span><span class="x"> </span><span class="kt">int</span><span class="x">
+    </span><span class="n">Words</span><span class="p">()</span><span class="x"> </span><span class="kt">int</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Audio</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Stream</span><span class="p">()</span><span class="x"> </span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">ReadCloser</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+    </span><span class="n">DurationTime</span><span class="p">()</span><span class="x"> </span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="x">
+    </span><span class="n">FormatType</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span><span class="k">type</span><span class="x"> </span><span class="n">Video</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Stream</span><span class="p">()</span><span class="x"> </span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">ReadCloser</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+    </span><span class="n">DurationTime</span><span class="p">()</span><span class="x"> </span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="x">
+    </span><span class="n">FormatType</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x">
+    </span><span class="n">Resolution</span><span class="p">()</span><span class="x"> </span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="x"> </span><span class="n">y</span><span class="x"> </span><span class="kt">int</span><span class="p">)</span><span class="x">
+</span><span class="p">}</span><span class="x">
+</span></code></pre>
+</div>
+
+<p>If you notice there are some thing that we might be able to group with common behaviors within those few basic interfaces. The great thing about changing these behaviors to use this new <code class="highlighter-rouge">Streamer</code> type is that it will not break the underlying concrete types that are implementing these methods on top of the Video and Audio interface types.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">type</span><span class="x"> </span><span class="n">Streamer</span><span class="x"> </span><span class="k">interface</span><span class="x"> </span><span class="p">{</span><span class="x">
+    </span><span class="n">Stream</span><span class="p">()</span><span class="x"> </span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">ReadCloser</span><span class="p">,</span><span class="x"> </span><span class="kt">error</span><span class="p">)</span><span class="x">
+    </span><span class="n">DurationTime</span><span class="p">()</span><span class="x"> </span><span class="n">time</span><span class="o">.</span><span class="n">Duration</span><span class="x">
+    </span><span class="n">FormatType</span><span class="p">()</span><span class="x"> </span><span class="kt">string</span><span class="x">
+</span><span class="p">}</span><span class="x">
+
+</span></code></pre>
+</div>
+
+<p><img src="./../assets/images/mind-blown.jpg" alt="mind-blown" /></p>
+
+<hr />
+
+<p>Like we said earlier there are trade-offs to learning and implementing interfaces. I would suggest to absolutely try and incorporate them into your programs but understand that there are times and places for them. Think simple and minimal with designs. Interfaces can create solid abstractions for our concrete types throughout our programs without breaking things underneath.</p>
+
+<p>Later in this series I will breakdown the trade-offs of why interfaces could be beneficial to us or not. There are some factors to take into account that we need to understand about interfaces. What allocations are happening and what sort of things can hinder our programs down the line with too many or exported vs. non-exported interfaces.</p>
+
+	  ]]></description>
+	</item>
+
+	<item>
 	  <title>Go: Testing Approaches</title>
 	  <link>//Go-Testing-Approaches</link>
 	  <author>Jordan Taylor</author>
