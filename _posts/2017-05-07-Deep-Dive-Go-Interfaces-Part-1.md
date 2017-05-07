@@ -43,7 +43,7 @@ type Closer interface {
 ~~~
 {: .language-go}
 
-You can see we have three basic interfaces that are defines some behaviors we might want to satisfy when we are trying to manipulate bytes within our programs. They are well named and you can infer what sorts of things concrete types will do if they satisfy these interfaces.
+You can see we have three basic interfaces that define some behaviors we might want to satisfy when we are trying to manipulate bytes within our programs. They are well named and you can infer what sorts of things concrete types will do if they satisfy these interfaces.
 
 A concrete type that implements the Reader interface better have a method of `Read` and it must take in an array of bytes and return an int with an error.
 
@@ -111,7 +111,7 @@ type Video interface {
 ~~~
 {: .language-go}
 
-If you notice there are some thing that we might be able to group with common behaviors within those few basic interfaces. The great thing about changing these behaviors to use this new `Streamer` type is that it will not break the underlying concrete types that are implementing these methods on top of the Video and Audio interface types.
+If you notice there are some things that we might be able to group with common behaviors within those few basic interfaces. The great thing about changing these behaviors to use this new `Streamer` type is that it will not break the underlying concrete types that are implementing these methods on top of the Video and Audio interface types.
 
 ~~~
 type Streamer interface {
