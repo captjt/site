@@ -16,10 +16,10 @@ author: 'Jordan Taylor'
 nickname: jt
 bio: 'Software Engineer. DC. Radford Baseball Alum.'
 location: 'Viringia, USA'
-url: 'https://github.com/jtaylor32'
+url: 'http://jt.codes/'
 image: 'assets/images/gopher-me.png'
 
-short_url: 'github'
+short_url: 'jt.codes'
 google_analytics: UA-81287416-1
 disqus:
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
