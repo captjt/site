@@ -55,6 +55,6 @@ I love tinkering with software while learning new technologies. I am a polyglot 
 
 If there is one language that I would advocate for people to learn and understand well it's Go. I am an avid believer that the future of Go is great!
 
-While it might seem I enjoy to code with all the time I have. I do love to workout, watch baseball -- I used to play Division I @ [Radford University](http://www.radfordathletics.com/index.aspx?path=baseball)) -- and always enjoy spending time with my lovely girlfriend and our child with paws, Izzy.
+While it might seem I enjoy to code with all the time I have. I do love to workout, watch baseball -- I used to play Division I @ [Radford University](http://www.radfordathletics.com/index.aspx?path=baseball)) -- and I always enjoy spending time with my lovely girlfriend and our child with paws, Izzy.
 
-If you want to reach out to me about anything regard software development or how amazing the St. Louis Cardinals are please shoot me an email or you can find me on Twitter [@jt_0021](http://www.twitter.com/jt_0021).
+If you want to reach out to me about anything regarding software development or how amazing the St. Louis Cardinals are please shoot me an email or you can find me on Twitter [@jt_0021](http://www.twitter.com/jt_0021).
