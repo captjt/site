@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>Hacking Kubernetes</title>
+        
+          <description>&lt;h2 id=&quot;what-is-kubernetes&quot;&gt;What is Kubernetes?&lt;/h2&gt;
+
+</description>
+        
+        <pubDate>Sat, 12 Aug 2017 05:00:00 +0000</pubDate>
+        <link>
+        http://jt.codes//Hacking-Kubernetes</link>
+        <guid isPermaLink="true">http://jt.codes//Hacking-Kubernetes</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>Deep Dive: Go Interfaces Part I</title>
         
           <description>&lt;h2 id=&quot;interfaces-basics&quot;&gt;Interfaces Basics&lt;/h2&gt;
