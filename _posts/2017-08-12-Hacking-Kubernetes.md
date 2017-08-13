@@ -82,7 +82,7 @@ func (m *Manager) Deploy(image, name string, port int) error {
   op := &deployOperation{
     image: image,
     name:  name,
-	  port:  port,
+    port:  port,
     replicas: 2,
   }
 
@@ -185,10 +185,10 @@ func (m *Manager) doDeployment(op *deployOperation) error {
 // but will be using the target port of what was specified.
 func (m *Manager) doService(op *deployOperation) error {
 
-    appName := op.name
+  appName := op.name
 
-	// Define service spec.
-	serviceSpec := &v1.Service{
+  // Define service spec.
+  serviceSpec := &v1.Service{
     TypeMeta: unversioned.TypeMeta{
       Kind:       "Service",
       APIVersion: "v1",
