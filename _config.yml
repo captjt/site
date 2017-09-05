@@ -56,13 +56,13 @@ exclude: [vendor]
 # or "master" otherwise
 safe: false
 lsi: false
-username: jtaylor32
+username: captjt
 repo: site
 branch: master
 relative_source: ./
 destination: ./site-pages/
 production_url:  http://jt.codes
-source_url:      https://github.com/jtaylor32/site/
+source_url:      https://github.com/captjt/site/
 
 exclude:
   - README.md

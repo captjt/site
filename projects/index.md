@@ -12,14 +12,14 @@ These are some of the projects I either work on, have worked on or follow regula
 
 #### Personal
 
-- **Hermes** -- GitHub @ [jtaylor32/hermes](https://github.com/jtaylor32/hermes)
+- **Hermes** -- GitHub @ [captjt/hermes](https://github.com/captjt/hermes)
     - This was mainly built as a Go package that was an extension to create a web crawling/scraping service. It also has an API to connect an Elasticsearch storage.
     - Completely fun proof-of-concept package (I get to work on this when I find the time)
 
-- **Caddy Starter Kit** -- GitHub @ [jtaylor32/caddy-starter-kit](https://github.com/jtaylor32/caddy-starter-kit)
+- **Caddy Starter Kit** -- GitHub @ [captjt/caddy-starter-kit](https://github.com/captjt/caddy-starter-kit)
     - This is a fun little bash project to auto configure auto-SSL [Caddyserver](https://caddyserver.com/) on a CentOS server.
 
-- Other Repositories -- GitHub @ [jtaylor32](https://github.com/jtaylor32?tab=repositories)
+- Other Repositories -- GitHub @ [captjt](https://github.com/captjt?tab=repositories)
     - Checkout out my other repositories for other projects and small little POCs
 
 #### US State Department
@@ -47,5 +47,5 @@ These are some of the projects I either work on, have worked on or follow regula
 - **go-kit** -- GitHub @ [go-kit/kit](https://github.com/go-kit/kit)
     - A toolkit specific to the Go programming language. Go kit is a distributed programming toolkit for building microservices in large organizations.
 
-- My **GitHub Stars** [⭐️⭐️⭐️](https://github.com/jtaylor32?tab=stars)
+- My **GitHub Stars** [⭐️⭐️⭐️](https://github.com/captjt?tab=stars)
     - These are the **MANY** projects I have liked while either surfing around or projects I've used personally.
