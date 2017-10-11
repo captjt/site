@@ -38,6 +38,9 @@ These are some of the projects I either work on, have worked on or follow regula
 
 #### Open Source Projects
 
+- **spilo** -- GitHub @ [zalando/spilo](https://github.com/zalando/spilo)
+    - Spilo is a Docker image that provides PostgreSQL and Patroni bundled together. Patroni is a template for PostgreSQL HA. Multiple Spilos can create a resilient High Available PostgreSQL cluster.
+
 - **linkerd** -- GitHub @ [linkerd/linkerd](https://github.com/linkerd/linkerd)
     - linkerd is a transparent service mesh, designed to make modern applications safe and sane by transparently adding service discovery, load balancing, failure handling, instrumentation, and routing to all inter-service communication.
 
