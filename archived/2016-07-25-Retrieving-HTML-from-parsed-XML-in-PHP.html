@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Introduction</title>
+    <title>Retrieving HTML from parsed XML in PHP</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -92,8 +92,8 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/cover2.jpg) ">
-    <nav class="main-nav  overlay  clearfix">
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
             <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Introduction</h1>
+            <h1 class="post-title">Retrieving HTML from parsed XML in PHP</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-07-23">23 Jul 2016</time>
+            <time class="post-date" datetime="2016-07-25">25 Jul 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,24 +124,68 @@
 
         <section class="post-content">
             
-            <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">"Hello World"</span><span class="p">;</span> <span class="cp">?&gt;</span>
+            <h2 id="objective">Objective:</h2>
+<p>We want to take in nested HTML within an XML file and parse out tags and content within the tags to do “something” with.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>require "../vendor/autoload.php";
+use PHPHtmlParser\Dom;
+
+    function recurseXML($xml,$parent="") {
+       $child_count = 0;
+       foreach($xml as $key=&gt;$value) {
+          $child_count++;
+          if($this-&gt;recurseXML($value,$parent.".".$key) == 0) {
+             print($parent . "." . (string)$key . " = " . (string)$value . "<span class="nt">&lt;BR&gt;</span>\n");
+          }
+       }
+       return $child_count;
+    }
+
+    function getNode($xml) {
+        $output = array();
+        $i = 0;
+        $result = $xml-&gt;xpath('/go/to/a/path');
+        while(list( , $node) = each($result)) {
+            $output[$i] = (string)$node;
+            $i++;
+        }
+        return $output;
+    }
+
+    function parseXml() {
+        $xmlFilename = '/your/filename.xml';
+        $xml = simplexml_load_file($xmlFilename);
+		$node = getNode($xml);
+
+    	$num = 0; # this is the selector of the nested html tag
+
+        foreach ($node as $key =&gt; $n) {
+            $dom = new Dom;
+            $n = html_entity_decode($node[$key], ENT_COMPAT);
+            $dom-&gt;loadStr($n, []);
+            $test = $dom-&gt;outerHtml;
+            $contents = $dom-&gt;find('html_tag_name')[$num]; # html_tag_name can be anything like 'table'
+
+            foreach ($contents as $content) {
+                # do something with the html
+                $html = $content-&gt;innerHtml;
+                $output[$key]['name_this_whatever'] = $html; # the name can be anything you want as your key
+            }
+        }
+
+        $file = fopen('../where/you/want/to/write.csv', 'w');
+        fputcsv($file, array('name_this_whatever'));
+
+        foreach ($output as $out) {
+            fputcsv($file, $out);
+        }
+
+        fclose($file);
+    }
+
+    parseXml();
 </code></pre>
 </div>
-
-<h3 id="becoming-of-a-software-engineer">Becoming of a software engineer…</h3>
-
-<p>PHP (PHP: Hypertext Preprocessor) – has been a major part of my coding life for the past two years. I was a double major in college focusing on software engineering at first but then also got more into and decided to pick up another major in databases. I helped lead a major site redesign at my alma mater, Radford University, for a major financial investment organization known as SMIPO. The club has been all over the nation’s college business radar for the past few years and this past year their president came to me with the excitement and opportunity to redesign and modernize their website.</p>
-
-<p>We decided to incorporate a personal profile system for the site’s users. This was to allow the members a more personal experience interacting with the others when they are posting and replying to forums boards on subjects they create throughout the system. This ‘forum’ was a big key point for the club to interact with and to post things for their members and potential future members to get information on. I couldn’t have been happier to dive more into web development in my last year of college.</p>
-
-<p>Throughout the last semester of college other than web development I was learning all sorts of things in big data and data warehousing with one of my courses - but also in an independent study with one of my professors. This independent study was a small dive into <em>Apache Spark</em> and setting up VMs with Spark sitting on top of <em>Hadoop</em>. Of course we didn’t just set these servers up; we developed a ‘boilerplate’ of such to set these technologies up and I will link a github repository in the notes. A big thing we did after configuring how we wanted to make it all work together and dive into the best part… handling analytics with Spark written in the language <em>Scala</em>, a mixture of functional and object-oriented programming. It runs on top of a JVM and is an absolute blast to learn and develop in. The biggest thing we got out of the independent study was learning about how fast and efficient we can run our analysis of loads of data through memory with Spark.</p>
-
-<p>About half way through my senior year I had decided on accepting a job with a government contracting company to be a software engineer. A major key point of interest other than the big data stuff I was diving into all the time was my web development stuff for the SMIPO team and another class I took solely learning server side development with PHP. The team was planning on developing a web application using <em>CakePHP</em> and wanted to know everything I knew about the language and how I have used it in my every day coding life. I’ve been in industry for about two months now working with Cake and I must say it is great having a framework’s “perks” and efficiencies but also just like the language itself CakePHP’s rendition of PHP is a bit quirky at times.</p>
-
-<p>This is only the beginning of many things to come on this blog. I know this is just a small glimpse of many stories I have about my development career so far. I have huge ideas for the future and stay tuned to read more about more in depth code examples and tutorials I have done and will be doing in the coming future.</p>
-
-<h4 id="references-">References :</h4>
-<p><a href="http://www.scala-lang.org/">Scala</a>, <a href="http://spark.apache.org/">Apache Spark</a>, <a href="http://hadoop.apache.org/">Hadoop</a>, <a href="http://cakephp.org/">CakePHP</a>, <a href="https://php.radford.edu/~smipo/">SMIPO</a> @ <a href="http://www.radford.edu">Radford University</a></p>
 
 
         </section>
@@ -173,15 +217,15 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Introduction&amp;url=https://jt.codes/Introduction"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Retrieving HTML from parsed XML in PHP&amp;url=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Introduction"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Introduction"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -199,13 +243,6 @@
 <aside class="read-next">
 
     <!-- [[! next_post ]] -->
-    
-        <a class="read-next-story no-cover" href="/Retrieving-HTML-from-parsed-XML-in-PHP">
-            <section class="post">
-                <h2>Retrieving HTML from parsed XML in PHP</h2>
-                <p>## Objective: We want to take in nested HTML within an XML file and parse...</p>
-            </section>
-        </a>
     
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->

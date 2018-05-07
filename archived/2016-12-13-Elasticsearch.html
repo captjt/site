@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Retrieving HTML from parsed XML in PHP</title>
+    <title>Elasticsearch Info/Resources</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Retrieving HTML from parsed XML in PHP</h1>
+            <h1 class="post-title">Elasticsearch Info/Resources</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-07-25">25 Jul 2016</time>
+            <time class="post-date" datetime="2016-12-13">13 Dec 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,68 +124,85 @@
 
         <section class="post-content">
             
-            <h2 id="objective">Objective:</h2>
-<p>We want to take in nested HTML within an XML file and parse out tags and content within the tags to do “something” with.</p>
+            <p>Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is being ingested is nearly searchable within &lt; 1 second.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>require "../vendor/autoload.php";
-use PHPHtmlParser\Dom;
+<h2 id="basic-concepts">Basic Concepts</h2>
 
-    function recurseXML($xml,$parent="") {
-       $child_count = 0;
-       foreach($xml as $key=&gt;$value) {
-          $child_count++;
-          if($this-&gt;recurseXML($value,$parent.".".$key) == 0) {
-             print($parent . "." . (string)$key . " = " . (string)$value . "<span class="nt">&lt;BR&gt;</span>\n");
-          }
-       }
-       return $child_count;
-    }
+<p>You can learn more about Elasticsearch and it’s basic concepts at their <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html">docs</a></p>
 
-    function getNode($xml) {
-        $output = array();
-        $i = 0;
-        $result = $xml-&gt;xpath('/go/to/a/path');
-        while(list( , $node) = each($result)) {
-            $output[$i] = (string)$node;
-            $i++;
-        }
-        return $output;
-    }
+<h5 id="cluster">Cluster</h5>
+<p>The cluster concept in ES is that you can have a bunch of nodes (or servers) that hold all your data together.</p>
 
-    function parseXml() {
-        $xmlFilename = '/your/filename.xml';
-        $xml = simplexml_load_file($xmlFilename);
-		$node = getNode($xml);
+<h5 id="node">Node</h5>
+<p>A node is a single elasticsearch server (or service) that is running holding a collection of indexes and data regarding each index.</p>
 
-    	$num = 0; # this is the selector of the nested html tag
+<h5 id="index">Index</h5>
+<p>An index is thought of as a “database” in relational terms. It is a higher level concept that can be thought of as similar characteristics for the document data.</p>
 
-        foreach ($node as $key =&gt; $n) {
-            $dom = new Dom;
-            $n = html_entity_decode($node[$key], ENT_COMPAT);
-            $dom-&gt;loadStr($n, []);
-            $test = $dom-&gt;outerHtml;
-            $contents = $dom-&gt;find('html_tag_name')[$num]; # html_tag_name can be anything like 'table'
+<h5 id="type">Type</h5>
+<p>Types can be thought of as “tables” in relational terms. It is a more definied catagorization of data for each document stored in ES.
+One way to think about it is you have a higher level index of “User Data” and you can have “Order Data”, “Comment Data”, etc.</p>
 
-            foreach ($contents as $content) {
-                # do something with the html
-                $html = $content-&gt;innerHtml;
-                $output[$key]['name_this_whatever'] = $html; # the name can be anything you want as your key
-            }
-        }
+<h5 id="document">Document</h5>
+<p>These are the lowest level catagorization of document data in ES. Think of these as “rows” in a relational mindset.  You can have attributes in each document that describe the data’s features.</p>
 
-        $file = fopen('../where/you/want/to/write.csv', 'w');
-        fputcsv($file, array('name_this_whatever'));
+<h5 id="shardingreplication">Sharding/Replication</h5>
+<p>We can do multiple sharding instances on indexes if we are storing huge amount of document data in them. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_shards_amp_replicas">Sharding</a></p>
 
-        foreach ($output as $out) {
-            fputcsv($file, $out);
-        }
+<h2 id="resources">Resources</h2>
 
-        fclose($file);
-    }
+<h3 id="elasticsearch">Elasticsearch</h3>
+<ul>
+  <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Quick Reference</a></li>
+</ul>
 
-    parseXml();
-</code></pre>
-</div>
+<h3 id="elasticseach-language-specific">Elasticseach (language specific)</h3>
+<ul>
+  <li><a href="http://elasticsearch-dsl.readthedocs.io/en/latest/">elasticsearch-dsl</a></li>
+  <li><a href="http://elasticsearch-py.readthedocs.io/en/master/">elasticsearch-py</a></li>
+  <li><a href="https://www.elastic.co/products/elasticsearch">elasticsearch</a></li>
+  <li><a href="https://olivere.github.io/elastic/">elastic</a></li>
+  <li><a href="https://godoc.org/gopkg.in/olivere/elastic.v3">more elastic</a></li>
+</ul>
+
+<h3 id="external-backend-frameworks">External Backend Frameworks</h3>
+<ul>
+  <li><a href="http://flask.pocoo.org/">flask</a></li>
+  <li><a href="http://flask-restful-cn.readthedocs.io/en/0.3.5/">flask-restful</a></li>
+  <li><a href="https://gin-gonic.github.io/gin/">gin</a></li>
+</ul>
+
+<h3 id="small-examples">Small Examples</h3>
+<ul>
+  <li><a href="https://github.com/jtaylor32/elasticsearch-restful-api">rest-api</a></li>
+  <li><a href="https://github.com/jtaylor32/elasticsearch-bulk-ingestion">bulk-ingestion</a></li>
+</ul>
+
+<h3 id="web-scrapers">Web Scrapers</h3>
+<ul>
+  <li><a href="http://nutch.apache.org/">nutch</a></li>
+  <li><a href="https://scrapy.org/">scrapy</a></li>
+  <li><a href="https://github.com/yhat/scrape">scrape</a></li>
+</ul>
+
+<h3 id="blogsbooks">Blogs/Books</h3>
+<ul>
+  <li><a href="http://docs.python-guide.org/en/latest/scenarios/scrape/">python-scraping</a></li>
+  <li><a href="http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/">more-python-scraping</a></li>
+  <li><a href="https://schier.co/blog/2015/04/26/a-simple-web-scraper-in-go.html">go-scraping</a></li>
+  <li><a href="http://shop.oreilly.com/product/0636920034391.do">Web Scraping with Python</a></li>
+  <li><a href="https://qbox.io/blog/scraping-the-web-with-nutch-for-elasticsearch">Scraping with Nutch</a></li>
+</ul>
+
+<h3 id="other-es-articles">Other ES Articles</h3>
+<ul>
+  <li><a href="http://goinbigdata.com/working-with-elasticsearch-in-go/">es-in-go</a></li>
+  <li><a href="http://126kr.com/article/5c4jgpiwtwp">testing-go-es</a></li>
+  <li><a href="https://msftstack.wordpress.com/2016/02/18/making-a-book-search-engine-in-python-and-elasticsearch/">python-with-es</a></li>
+  <li>more to come…</li>
+</ul>
+
+<p>continued…</p>
 
 
         </section>
@@ -217,15 +234,15 @@ use PHPHtmlParser\Dom;
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Retrieving HTML from parsed XML in PHP&amp;url=https://jt.codes/Retrieving-HTML-from-parsed-XML-in-PHP"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Elasticsearch Info/Resources&amp;url=https://jt.codes/archived2016-12-13-Elasticsearch"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Retrieving-HTML-from-parsed-XML-in-PHP"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-12-13-Elasticsearch"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Retrieving-HTML-from-parsed-XML-in-PHP"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-12-13-Elasticsearch"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -244,22 +261,8 @@ use PHPHtmlParser\Dom;
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story no-cover" href="/Recursively-Combine-csv-files-in-PHP">
-            <section class="post">
-                <h2>Recursively Combine .csv files in PHP</h2>
-                <p>## Overview of the Problem Recently I have been trying to figure out a way...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev " style="background-image: url(/assets/images/cover2.jpg)" href="/Introduction">
-            <section class="post">
-                <h2>Introduction</h2>
-                <p>&lt;?php echo "Hello World"; ?&gt; Becoming of a software engineer… PHP (PHP: Hypertext Preprocessor) –...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>

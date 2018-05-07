@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Creating A RESTful API w/ Elasticsearch</title>
+    <title>Introduction</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -92,8 +92,8 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head no-cover">
-    <nav class="main-nav  clearfix">
+<header class="main-header post-head " style="background-image: url(/assets/images/cover2.jpg) ">
+    <nav class="main-nav  overlay  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
             <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Creating A RESTful API w/ Elasticsearch</h1>
+            <h1 class="post-title">Introduction</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-12-20">20 Dec 2016</time>
+            <time class="post-date" datetime="2016-07-23">23 Jul 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,64 +124,24 @@
 
         <section class="post-content">
             
-            <h4 id="in-progress">(In Progress)</h4>
-
-<h3 id="objective">Objective:</h3>
-<p>We want to establish a way to query <em><strong>Elasticsearch</strong></em> through a RESTful API’s endpoints.</p>
-
-<h3 id="pre-requirements">Pre-Requirements</h3>
-
-<ul>
-  <li>Python 3+
-    <ul>
-      <li>Knowledge of virtual environments, dependency management with <strong>PIP</strong></li>
-    </ul>
-  </li>
-  <li>Elasticsearch 2.X
-    <ul>
-      <li>Install Elasticseach on Centos 7 –&gt; <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-centos-7">es-on-centos-7</a></li>
-      <li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="wsgi-application-flask">WSGI Application (Flask)</h3>
-
-<p>We are going to be using the micro-framework, <em>flask</em>, in this tutorial.  We will use the <em>elasticsearch-dsl-py</em> package that elastic created to interact with elasticsearch at a more high level abstraction.</p>
-
-<h4 id="project-structure">Project Structure</h4>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>.
-├── app/
-│   ├── index.md
-│   ├── api/
-│   │   ├── __init__.py
-│   │   ├── resources/
-│   │   │   ├── __init__.py
-│   │   │   ├── search.py
-│   │   ├── search_config/
-│   │   │   ├── __init__.py
-│   ├── __init__.py
-│   ├── config.py
-│   ├── extensions.py
-│   ├── helpers.py
-├── env/
-├── requirements/
-│   ├── development.txt
-│   ├── production.txt
-├── tests/
-│   ├── unit/
-│   │   ├── test_*.py
-│   ├── __init__.py
-│   ├── conftest.py
-├── manage.py
-├── requirements.txt
-├── runtime.txt
-├── setup.cfg
+            <div class="highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;?php</span> <span class="k">echo</span> <span class="s2">"Hello World"</span><span class="p">;</span> <span class="cp">?&gt;</span>
 </code></pre>
 </div>
 
-<p>To be continued…</p>
+<h3 id="becoming-of-a-software-engineer">Becoming of a software engineer…</h3>
+
+<p>PHP (PHP: Hypertext Preprocessor) – has been a major part of my coding life for the past two years. I was a double major in college focusing on software engineering at first but then also got more into and decided to pick up another major in databases. I helped lead a major site redesign at my alma mater, Radford University, for a major financial investment organization known as SMIPO. The club has been all over the nation’s college business radar for the past few years and this past year their president came to me with the excitement and opportunity to redesign and modernize their website.</p>
+
+<p>We decided to incorporate a personal profile system for the site’s users. This was to allow the members a more personal experience interacting with the others when they are posting and replying to forums boards on subjects they create throughout the system. This ‘forum’ was a big key point for the club to interact with and to post things for their members and potential future members to get information on. I couldn’t have been happier to dive more into web development in my last year of college.</p>
+
+<p>Throughout the last semester of college other than web development I was learning all sorts of things in big data and data warehousing with one of my courses - but also in an independent study with one of my professors. This independent study was a small dive into <em>Apache Spark</em> and setting up VMs with Spark sitting on top of <em>Hadoop</em>. Of course we didn’t just set these servers up; we developed a ‘boilerplate’ of such to set these technologies up and I will link a github repository in the notes. A big thing we did after configuring how we wanted to make it all work together and dive into the best part… handling analytics with Spark written in the language <em>Scala</em>, a mixture of functional and object-oriented programming. It runs on top of a JVM and is an absolute blast to learn and develop in. The biggest thing we got out of the independent study was learning about how fast and efficient we can run our analysis of loads of data through memory with Spark.</p>
+
+<p>About half way through my senior year I had decided on accepting a job with a government contracting company to be a software engineer. A major key point of interest other than the big data stuff I was diving into all the time was my web development stuff for the SMIPO team and another class I took solely learning server side development with PHP. The team was planning on developing a web application using <em>CakePHP</em> and wanted to know everything I knew about the language and how I have used it in my every day coding life. I’ve been in industry for about two months now working with Cake and I must say it is great having a framework’s “perks” and efficiencies but also just like the language itself CakePHP’s rendition of PHP is a bit quirky at times.</p>
+
+<p>This is only the beginning of many things to come on this blog. I know this is just a small glimpse of many stories I have about my development career so far. I have huge ideas for the future and stay tuned to read more about more in depth code examples and tutorials I have done and will be doing in the coming future.</p>
+
+<h4 id="references-">References :</h4>
+<p><a href="http://www.scala-lang.org/">Scala</a>, <a href="http://spark.apache.org/">Apache Spark</a>, <a href="http://hadoop.apache.org/">Hadoop</a>, <a href="http://cakephp.org/">CakePHP</a>, <a href="https://php.radford.edu/~smipo/">SMIPO</a> @ <a href="http://www.radford.edu">Radford University</a></p>
 
 
         </section>
@@ -213,15 +173,15 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Creating A RESTful API w/ Elasticsearch&amp;url=https://jt.codes/Creating-A-RESTful-API-w-Elasticsearch"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Introduction&amp;url=https://jt.codes/archived2016-7-23-Introduction"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Creating-A-RESTful-API-w-Elasticsearch"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-7-23-Introduction"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Creating-A-RESTful-API-w-Elasticsearch"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-7-23-Introduction"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -240,22 +200,8 @@
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story " style="background-image: url(/assets/images/galaxy.jpg)" href="/Twenty-Sixteen">
-            <section class="post">
-                <h2>Twenty-Sixteen</h2>
-                <p>### 2016 in Review Twenty-sixteen was definitely a year to remember. I constantly look back...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev no-cover" href="/Elasticsearch">
-            <section class="post">
-                <h2>Elasticsearch Info/Resources</h2>
-                <p>Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Elasticsearch Info/Resources</title>
+    <title>Setting Up Python 3 and Django REST Framework</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Elasticsearch Info/Resources</h1>
+            <h1 class="post-title">Setting Up Python 3 and Django REST Framework</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-12-13">13 Dec 2016</time>
+            <time class="post-date" datetime="2016-08-19">19 Aug 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,85 +124,85 @@
 
         <section class="post-content">
             
-            <p>Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is being ingested is nearly searchable within &lt; 1 second.</p>
+            <h2 id="objective">Objective:</h2>
+<p>We want to setup an Python 3 environment on our machine to start developing in Python 3! Once we set up Python and all the packages necessary for Django development – we want to set up our first Django Framework REST Application.</p>
 
-<h2 id="basic-concepts">Basic Concepts</h2>
+<h3 id="install-xcode-and-homebrew-">Install Xcode and Homebrew :</h3>
 
-<p>You can learn more about Elasticsearch and it’s basic concepts at their <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html">docs</a></p>
+<h4 id="xcode">XCode</h4>
 
-<h5 id="cluster">Cluster</h5>
-<p>The cluster concept in ES is that you can have a bunch of nodes (or servers) that hold all your data together.</p>
+<p>We first need to install XCode or using Homebrew to install Python3 will throw an error.</p>
 
-<h5 id="node">Node</h5>
-<p>A node is a single elasticsearch server (or service) that is running holding a collection of indexes and data regarding each index.</p>
+<p>First, we must go into whatever terminal application that we use and paste this line into the command:</p>
 
-<h5 id="index">Index</h5>
-<p>An index is thought of as a “database” in relational terms. It is a higher level concept that can be thought of as similar characteristics for the document data.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install
+</code></pre>
+</div>
 
-<h5 id="type">Type</h5>
-<p>Types can be thought of as “tables” in relational terms. It is a more definied catagorization of data for each document stored in ES.
-One way to think about it is you have a higher level index of “User Data” and you can have “Order Data”, “Comment Data”, etc.</p>
+<h4 id="homebrew">Homebrew</h4>
 
-<h5 id="document">Document</h5>
-<p>These are the lowest level catagorization of document data in ES. Think of these as “rows” in a relational mindset.  You can have attributes in each document that describe the data’s features.</p>
+<p>Homebrew is a package manager for OS X – this is a very powerful tool to install, update, list and many more options for packages that we will use as developers. “Homebrew installs all the things Apple didn’t get.”</p>
 
-<h5 id="shardingreplication">Sharding/Replication</h5>
-<p>We can do multiple sharding instances on indexes if we are storing huge amount of document data in them. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_shards_amp_replicas">Sharding</a></p>
+<div class="highlighter-rouge"><pre class="highlight"><code>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+</code></pre>
+</div>
 
-<h2 id="resources">Resources</h2>
+<p>To make sure our brew installations will be used over some of the OS X stock binaries we need as a line in our .bash_profile file. Open or create the file ~/.bash_profile and paste this line into it.</p>
 
-<h3 id="elasticsearch">Elasticsearch</h3>
-<ul>
-  <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Quick Reference</a></li>
-</ul>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
+</code></pre>
+</div>
 
-<h3 id="elasticseach-language-specific">Elasticseach (language specific)</h3>
-<ul>
-  <li><a href="http://elasticsearch-dsl.readthedocs.io/en/latest/">elasticsearch-dsl</a></li>
-  <li><a href="http://elasticsearch-py.readthedocs.io/en/master/">elasticsearch-py</a></li>
-  <li><a href="https://www.elastic.co/products/elasticsearch">elasticsearch</a></li>
-  <li><a href="https://olivere.github.io/elastic/">elastic</a></li>
-  <li><a href="https://godoc.org/gopkg.in/olivere/elastic.v3">more elastic</a></li>
-</ul>
+<h3 id="install-python-3-">Install Python 3 :</h3>
 
-<h3 id="external-backend-frameworks">External Backend Frameworks</h3>
-<ul>
-  <li><a href="http://flask.pocoo.org/">flask</a></li>
-  <li><a href="http://flask-restful-cn.readthedocs.io/en/0.3.5/">flask-restful</a></li>
-  <li><a href="https://gin-gonic.github.io/gin/">gin</a></li>
-</ul>
+<p>Onto Python installation…</p>
 
-<h3 id="small-examples">Small Examples</h3>
-<ul>
-  <li><a href="https://github.com/jtaylor32/elasticsearch-restful-api">rest-api</a></li>
-  <li><a href="https://github.com/jtaylor32/elasticsearch-bulk-ingestion">bulk-ingestion</a></li>
-</ul>
+<p>Once you have Homebrew installed and ready to be used we can do a simple command line call like this to install Python3</p>
 
-<h3 id="web-scrapers">Web Scrapers</h3>
-<ul>
-  <li><a href="http://nutch.apache.org/">nutch</a></li>
-  <li><a href="https://scrapy.org/">scrapy</a></li>
-  <li><a href="https://github.com/yhat/scrape">scrape</a></li>
-</ul>
+<div class="highlighter-rouge"><pre class="highlight"><code>brew install python3
+</code></pre>
+</div>
 
-<h3 id="blogsbooks">Blogs/Books</h3>
-<ul>
-  <li><a href="http://docs.python-guide.org/en/latest/scenarios/scrape/">python-scraping</a></li>
-  <li><a href="http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/">more-python-scraping</a></li>
-  <li><a href="https://schier.co/blog/2015/04/26/a-simple-web-scraper-in-go.html">go-scraping</a></li>
-  <li><a href="http://shop.oreilly.com/product/0636920034391.do">Web Scraping with Python</a></li>
-  <li><a href="https://qbox.io/blog/scraping-the-web-with-nutch-for-elasticsearch">Scraping with Nutch</a></li>
-</ul>
+<p>…and voilà! Do a simple</p>
 
-<h3 id="other-es-articles">Other ES Articles</h3>
-<ul>
-  <li><a href="http://goinbigdata.com/working-with-elasticsearch-in-go/">es-in-go</a></li>
-  <li><a href="http://126kr.com/article/5c4jgpiwtwp">testing-go-es</a></li>
-  <li><a href="https://msftstack.wordpress.com/2016/02/18/making-a-book-search-engine-in-python-and-elasticsearch/">python-with-es</a></li>
-  <li>more to come…</li>
-</ul>
+<div class="highlighter-rouge"><pre class="highlight"><code>python3 --version
+</code></pre>
+</div>
 
-<p>continued…</p>
+<p>and you should have the most recent version of Python3. This comes with a bunch of libraries – <em>pip3</em> (a package manager), <em>Setuptools</em> (a project packaging tool), and <em>pyvenv</em> (a virtual environment tool). These three tools are very powerful and there are others out there that can replace these. Although, with that being said – I would recommend starting with these three for starting out.</p>
+
+<p>Note: I personally use <em>virtualenv</em> which is another virtual environment tool like <em>pyvenv</em>.</p>
+
+<h3 id="creating-our-django-rest-framework-project-">Creating Our Django-Rest-Framework Project :</h3>
+
+<p>After we setup our Python3 and validate our verion is up to date - we will start our Django-Rest-Framework project. So to start out we must create a virtual environment to work out of so we must make a directory and inside of that empty directory we will do a :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>virtualenv env
+</code></pre>
+</div>
+
+<p>..this will install our environment to a specific version of Python we want to it to be in. You can checkout the docs for <em>virtualenv</em> to see more options. After we do the environment installs we will create out our project. So we need to install django, djangorestframework, pgycopg2 (for PostgreSQL). You can interchange any database packages based on whatever backend you want the ORM to be talking to. To do these installs we must use <em>pip</em>.</p>
+
+<p>First activate your ‘env’ by :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">source </span>env/bin/activate
+</code></pre>
+</div>
+
+<p>Then do a :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>pip install django djangorestframework psycopg2
+</code></pre>
+</div>
+
+<p>After that we need to start out project so we do a :</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>django-admin.py startproject project_name
+</code></pre>
+</div>
+
+<p>Based on these instructions you will have Xcode, Homebrew, Python3, and a python environment with the start of a fantastic RESTful framework. Stay tuned for more posts about Django-Rest-Framework tricks and tutorials.</p>
+
 
 
         </section>
@@ -234,15 +234,15 @@ One way to think about it is you have a higher level index of “User Data” an
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Elasticsearch Info/Resources&amp;url=https://jt.codes/Elasticsearch"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Setting Up Python 3 and Django REST Framework&amp;url=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Elasticsearch"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Elasticsearch"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -261,22 +261,8 @@ One way to think about it is you have a higher level index of “User Data” an
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story no-cover" href="/Creating-A-RESTful-API-w-Elasticsearch">
-            <section class="post">
-                <h2>Creating A RESTful API w/ Elasticsearch</h2>
-                <p>#### (In Progress) ### Objective: We want to establish a way to query _**Elasticsearch**_ through...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev no-cover" href="/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7">
-            <section class="post">
-                <h2>Creating Master Slave Replication in MySQL on CentOS 7</h2>
-                <p>Master Server Edit the my.cnf $ sudo vi /etc/my.cnf server-id = 1 binlog_do_db = testdatabase...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>

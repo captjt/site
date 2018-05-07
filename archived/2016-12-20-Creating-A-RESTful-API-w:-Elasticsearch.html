@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Creating Master Slave Replication in MySQL on CentOS 7</title>
+    <title>Creating A RESTful API w/ Elasticsearch</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Creating Master Slave Replication in MySQL on CentOS 7</h1>
+            <h1 class="post-title">Creating A RESTful API w/ Elasticsearch</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-09-30">30 Sep 2016</time>
+            <time class="post-date" datetime="2016-12-20">20 Dec 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,117 +124,64 @@
 
         <section class="post-content">
             
-            <h3 id="master-server">Master Server</h3>
+            <h4 id="in-progress">(In Progress)</h4>
 
-<p>Edit the my.cnf</p>
+<h3 id="objective">Objective:</h3>
+<p>We want to establish a way to query <em><strong>Elasticsearch</strong></em> through a RESTful API’s endpoints.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo vi /etc/my.cnf
+<h3 id="pre-requirements">Pre-Requirements</h3>
+
+<ul>
+  <li>Python 3+
+    <ul>
+      <li>Knowledge of virtual environments, dependency management with <strong>PIP</strong></li>
+    </ul>
+  </li>
+  <li>Elasticsearch 2.X
+    <ul>
+      <li>Install Elasticseach on Centos 7 –&gt; <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-centos-7">es-on-centos-7</a></li>
+      <li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="wsgi-application-flask">WSGI Application (Flask)</h3>
+
+<p>We are going to be using the micro-framework, <em>flask</em>, in this tutorial.  We will use the <em>elasticsearch-dsl-py</em> package that elastic created to interact with elasticsearch at a more high level abstraction.</p>
+
+<h4 id="project-structure">Project Structure</h4>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>.
+├── app/
+│   ├── index.md
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── resources/
+│   │   │   ├── __init__.py
+│   │   │   ├── search.py
+│   │   ├── search_config/
+│   │   │   ├── __init__.py
+│   ├── __init__.py
+│   ├── config.py
+│   ├── extensions.py
+│   ├── helpers.py
+├── env/
+├── requirements/
+│   ├── development.txt
+│   ├── production.txt
+├── tests/
+│   ├── unit/
+│   │   ├── test_*.py
+│   ├── __init__.py
+│   ├── conftest.py
+├── manage.py
+├── requirements.txt
+├── runtime.txt
+├── setup.cfg
 </code></pre>
 </div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>server-id = 1
-binlog_do_db = testdatabase
-relay-log = mysql-relay-bin
-relay-log-index = mysql-relay-bin.index
-log_bin = mysql-bin.log
-</code></pre>
-</div>
-
-<p>Restart mysqld</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl restart mysqld
-</code></pre>
-</div>
-
-<p>In mysql</p>
-
-<p><code class="highlighter-rouge">mysql -u root -p</code></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>-- create a database to replicate
-&gt; CREATE DATABASE testdatabase;
-&gt; USE testdatabase;
--- create a table in testdatabase
-&gt; CREATE TABLE Users (name varchar(30), age INT);
--- insert data
-&gt; INSERT INTO testdatabase.Users Values ('Test Name', 1);
-&gt; INSERT INTO testdatabase.Users Values ('Test Name', 2);
-
---
-&gt; GRANT REPLICATION SLAVE ON *.* TO 'slaveuser'@'%' IDENTIFIED BY 'PASSWORD'
-&gt; FLUSH PRIVILEGES;
-&gt; FLUSH TABLES WITH READ LOCK;
-&gt; SHOW MASTER STATUS;
-
-+------------------+----------+--------------+------------------+-------------------+
-| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |
-+------------------+----------+--------------+------------------+-------------------+
-| mysql-bin.000001 |     101 | testdatabase |                  |                   |
-+------------------+----------+--------------+------------------+-------------------+
-1 row in set (0.00 sec)
-</code></pre>
-</div>
-
-<p>Make sure the ‘PASSWORD’ is <strong>secure</strong></p>
-
-<p>Do a backup to transfer to the slave server</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mysqldump -u root -p --master-data testdatabase &gt; /home/centos/database.sql
-</code></pre>
-</div>
-
-<p>Move it to the slave server</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>rsync -Waq -e ssh /home/centos/database.sql centos@IPADDRESS:/home/centos/
-</code></pre>
-</div>
-
-<p>IPADDRESS is the slave IP</p>
-
-<h3 id="on-slave-server">On Slave Server</h3>
-
-<p>Update the my.cnf file</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo vi /etc/my.cnf
-</code></pre>
-</div>
-
-<p>Add this to the file</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>server-id = 2
-</code></pre>
-</div>
-
-<p>Restart mysqld.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo systemctl restart mysqld
-</code></pre>
-</div>
-
-<p>Import the database</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mysql -u root -p testdatabase &lt; /home/centos/database.sql
-</code></pre>
-</div>
-
-<p>Note. you must have the database ‘testdatabase’ created.</p>
-
-<p>In mysql shell(<code class="highlighter-rouge">mysql -u root -p</code>)</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>mysql&gt; STOP SLAVE;
-mysql&gt; CHANGE MASTER TO
-  -&gt;  MASTER_HOST='host-name',
-  -&gt;  MASTER_USER='slaveuser',
-  -&gt;  MASTER_PASSWORD='PASSWORD',
-  -&gt;  MASTER_LOG_FILE='log file from the MASTER STATUS',
-  -&gt;  MASTER_LOG_POS=(postion from MASTER STATUS);
-mysql&gt; START SLAVE;
-mysql&gt; SHOW SLAVE STATUS;
-</code></pre>
-</div>
-
-<p>After this to test it insert some data in the master database and select * from both to check consistency.</p>
-
-<p>Cheers!</p>
+<p>To be continued…</p>
 
 
         </section>
@@ -266,15 +213,15 @@ mysql&gt; SHOW SLAVE STATUS;
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Creating Master Slave Replication in MySQL on CentOS 7&amp;url=https://jt.codes/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Creating A RESTful API w/ Elasticsearch&amp;url=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Creating-Master-Slave-replication-in-MySQL-56-on-CentOS-7"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -293,22 +240,8 @@ mysql&gt; SHOW SLAVE STATUS;
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story no-cover" href="/Elasticsearch">
-            <section class="post">
-                <h2>Elasticsearch Info/Resources</h2>
-                <p>Elasticsearch is a "NRT" (Near Real Time) search platform which means the data that is...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev no-cover" href="/Installing-MySQL-56-on-CentOS-7">
-            <section class="post">
-                <h2>Installing MySQL 5.6 on CentOS 7</h2>
-                <p>Download the MySQL Yum Repository $ sudo yum install http://dev.mysql.com/get/mysql57-community-release-el7-9.noarch.rpm We don’t want MySQL version...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>
