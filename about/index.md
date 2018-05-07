@@ -8,34 +8,30 @@ logo: 'assets/images/logo.png'
 current: about
 ---
 
-I love tinkering and creating new software. I am a polyglot engineer at heart -- best tool for the job mindset. I am strong on all ends of the development and operations spectrum. My everyday job gives me the strengths to work on all ends of the stack. I work with/develop microserviecs and cloud native software every single day. I develop in modern stack methodologies with a mind in advancement in learning new languages and open source frameworks. I strive for solving unique problems with efficient and effective solutions. I love every part of the development stack and come from a CS background with double concentrations of Software Engineering and Databases.
+I'm Jordan, a software engineer in the Washington, D.C. area. I focus on
+developing and maintaining distributed systems in Go and NodeJS. I've come to
+enjoy studing, developing and architecting distributed systems. I strive for
+solving unique problems with efficient and effective solutions.
 
-While it might seem I enjoy to code with all the time I have. I do love to workout, watch baseball -- I used to play Division I @ [Radford University](http://www.radfordathletics.com/index.aspx?path=baseball)) -- and I always enjoy spending time with my lovely girlfriend and our child with paws, Izzy.
+I am lucky enough to develop backend systems, while maintaining platform
+operations and uptime for an augmented reality platform, [Skylight](https://upskill.io/skylight/skylight-overview/).
 
-If you want to reach out to me about anything regarding software development or how amazing the St. Louis Cardinals are please shoot me an email or you can find me on Twitter [@jt_0021](http://www.twitter.com/jt_0021).
+Outside of software and coding I love to workout, watch baseball, and enjoy
+spending time with my lovely girlfriend and our child with paws, Izzy. Fun fact:
+I used to play Division I @ [Radford University](http://www.radfordathletics.com/index.aspx?path=baseball).
 
-### Interests
+If you want to reach out to me about anything regarding software, DevOps,
+or how amazing the St. Louis Cardinals are you can find me on Twitter
+[@jt_0021](http://www.twitter.com/jt_0021).
 
-- **Full Stack Development**
-    - Languages: **Go**, Python, NodeJS, PHP
+### Some of My Interests
 
-- **Databases**
-    - Graph Databases: *Neo4j*
-    - NoSQL: *MongoDB, Elasticsearch, Redis*
-    - Relational: *PostgreSQL, MySQL*
-
-- **DevOps**
-    - Microservices Design
-    - Scalable Architectures
-    - 12 Factor Applications
-
-- **DevOps Technologies**
-    - *Kubernetes*
-    - *Docker*
-    - *Linkerd* (Service Mesh)
-    - *Istio* (Service Mesh)
-    - *Prometheus* (Metrics)
-    - *Zipkin* (Tracing)
-
-- Open Source Community & Software
-- CI/CD & Automation
+- Distributed Systems
+- Languages: **Go**, NodeJS, Python, PHP
+- Databases: *PostgreSQL, MongoDB, Redis*
+- RabbitMQ (AMQP 0.9.1 & MQTT)
+- NATS
+- Kubernetes
+- Docker
+- HashiCorp Suite (Terraform, Packer, Vault)
+- OpenTracing
