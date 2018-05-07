@@ -1,6 +1,3 @@
-# Jykell configuration
-#markdown: redcarpet
-#highlighter: pygments
 markdown: kramdown
 highlighter: rouge
 paginate: 5
@@ -15,7 +12,7 @@ author: 'Jordan Taylor'
 # edit 'categories' in the front matter of every post to match this username
 nickname: jt
 bio: 'Software Engineer. DC. Radford Baseball Alum.'
-location: 'Viringia, USA'
+location: 'Virginia, USA'
 url: 'https://jt.codes/'
 image: 'assets/images/kube-gopher.png'
 
@@ -26,26 +23,13 @@ disqus:
 baseurl: /
 
 # Permalinks
-permalink: /:title
+permalink: /:title/
 # permalink: /author/:username
 # permalink: /tag/:tag
-
 
 # gems and other configs
 gems: [jekyll-paginate]
 exclude: [vendor]
-
-# Additional settings available on the front-matter
-# Site logo in the index.html (as in demo.ghost.io)
-# Author's page cover in _layouts/author.html
-# The same for page.html and tag.html layouts
-# Post's page cover as a per-post basis _posts/...
-# Disqus comments as a per-post basis
-# ...
-
-
-# Settings for builing master branch with travis-ci
-# with jekyll-travis
 
 # Settings for deploy rake task
 # Username and repo of Github repo, e.g.
