@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Recursively Combine .csv files in PHP</title>
+    <title>Python & VS Code</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="post-template nav-closed">
+<body class="home-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Recursively Combine .csv files in PHP</h1>
+            <h1 class="post-title">Python & VS Code</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-07-25">25 Jul 2016</time>
+            <time class="post-date" datetime="2017-01-18">18 Jan 2017</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>,
+                       <a href='/tag/technologies'>Technologies</a>
                        
                 
                 
@@ -124,116 +124,86 @@
 
         <section class="post-content">
             
-            <h2 id="overview-of-the-problem">Overview of the Problem</h2>
-<p>Recently I have been trying to figure out a way to run a <em>PHP</em> script that will take two .csv files full of data and determine where they are the same and combine the two into a new .csv to then import my data as one file.</p>
+            <h3 id="working-with-vs-code">Working With VS Code</h3>
 
-<p>The main reasoning behind the overall problem is that I have two sources of data that I am ingesting. Each source of data has one similar data field throughout so it can be thought of as a ‘foreign key’ type of deal. With all of that being said I wanted to start with a small tutorial of how I broken the problem down and the code implementing the process!</p>
+<p>There are a lot of IDE/Editors out there for Python and I keep getting asked from colleages about how I setup my environment locally. Instead of trying to chain emails, slack/rocketchat each other with long conversations this article will help solve some problems.</p>
 
-<h3 id="implementing-the-recursive-merge">Implementing the recursive merge</h3>
-<p>First we need to decide how to attack our two arrays. I thought about it and being the person that loves to try and recursively do things to keep my code cleaner. I decided to implement this small function that took another rendition of the <a href="http://php.net/manual/en/function.array-merge-recursive.php">array_merge_recursive</a> function that PHP implements that I believe is more than I think this application needs.</p>
+<p>VS Code is a fantastic editor that I have been using full-time for about 6 months now (converted from Sublime). I have also used PyCharm and Atom with Python projects and I do think they are viable options as well, but I always end up back with VS Code no matter how hard I try to force myself out of it. I think the flexibility I have with VS Code to develop all types of applications in one place is where I fell in love. I use it for Go, Python, PHP, JavaScript and Scala projects so far.</p>
 
-<p>If you look at the comments I made in the code it helps explain the actions much better.</p>
+<p>On to the setup…</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
- * merge_array function to take two array and recursively check in there are keys in two arrays that are the same
- *    this will output an array that will only contain the combined array data
- * @param  array $array1 first array of data
- * @param  array $array2 second array of data
- * @return array         returns array of data combined from the two inputted arrays
- */
-function combine_arrays(array <span class="err">&amp;</span> $array1, array <span class="err">&amp;</span> $array2) {
-    $temp = $array1; # set our temporary array
+<h3 id="setup">Setup</h3>
 
-    # loop through the second array
-    foreach ($array2 as $key =&gt; <span class="err">&amp;</span> $value) {
-        # check if the value in position $key of the second array is an array type
-        #   and if the temporary array we set $temp at the same $key is not null
-        #   and if the value of $temp is an array
-        if (is_array($value) <span class="err">&amp;&amp;</span> isset($temp[$key]) <span class="err">&amp;&amp;</span> is_array($temp[$key])) {
-            # set the temporary array at $key to be a recursive call to combine_arrays
-            $temp[$key] = combine_arrays($temp[$key], $value);
-        }
-        # check if the $key is a number
-        elseif (is_numeric($key)) {
-            # check if value in $array2[$key] is not in the temporary array ($temp)
-            if (!in_array($value, $temp))
-                # if the value is not in the array then set the value in $temp
-                $temp[] = $value;
-        }
-        else
-            # else set $temp[$key] to the $value from $array2[$key]
-            $temp[$key] = $value;
-    }
+<p>The biggest thing I try and promote with Python and projects are <strong>virtual environments</strong>. They provide developers the flexibility to have many different Python versions specific to an application. Another promotion I have for Python is <strong>Python 3 – use it</strong>… don’t stray from it. I don’t advocate for people to develop anything in <strong>legacy</strong> Python (2.7). Python 2.7 is so slow that Google even compiles their Python 2.7 code to Go to improve performance <a href="https://github.com/google/grumpy">grumpy</a>. Python 3 fixes a ton of the performance problems that come up in 2.7 – use Python 3!</p>
 
-    # return our temporary array
-    return $temp;
-}
+<p>When you are first setting up your Python project setup your virtualenv with a tool like <strong>pyvenv</strong> … in your trusty <em>Terminal</em></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c"># "env" will be the directory that your local dependencies will be install under`</span>
+<span class="gp">$ </span>pyvenv env
+<span class="c"># this will activate your virtualenv`</span>
+<span class="gp">$ </span><span class="nb">source </span>env/bin/activate
+<span class="c"># You should see (env) at the beginning of the line in your terminal session now.</span>
 </code></pre>
 </div>
 
-<p>After looking at the code the function will return a combined array that checked for same values from one array to another. This is a way to accomplish the final outcome because sometimes you would want to create a script just to create a prepared statement to insert and then another to update the data on that alike column between the csv files.</p>
+<p>It’s best practice to have all of your dependencies stored in a file named <code class="highlighter-rouge">requirements.txt</code> at the root of your project’s structure. Here is a sample <em>requirements.txt</em> file with production dependencies I have for a small flask application. Yours obviously will have different dependencies depending on the Python packages you need for you application.</p>
 
-<p>Anyways onto the next step we need to retrieve our data!</p>
+<p><em>requirements.txt</em></p>
 
-<h3 id="retrieving-csv-data-for-our-arrays">Retrieving .csv data for our arrays</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code># Everything needed in production
 
-<p>Here a simple template function for retrieving .csv data from files you have locally.</p>
+wheel
 
-<div class="highlighter-rouge"><pre class="highlight"><code>/**
- * get_csv function to take in a filename (String) and a delimiter (String) and output an array value for the file location
- * @param  string $filename file location to fetch the data from
- * @param  string $delim    changes the delimiter that the csv is formatted in
- * @return array            this will return an array of string data that the read csv contains
- */
-function get_csv($filename, $delim = ","){
+# Flask
+Flask
+Flask-RESTful
+blinker
 
-    $row = 0;
-    $dump = array();
+# Database
+Flask-SQLAlchemy
+psycopg2
+GeoAlchemy2
 
-    $f = fopen ($filename,"r");
-    $size = filesize($filename)+1;
-    while ($data = fgetcsv($f, $size, $delim)) {
-        $data = str_replace(array("\n", "\t", "\r"), '', $data);
-        $data = str_replace("'", "''", $data);
-        $dump[$row] = $data;
-        $row++;
-    }
-    fclose ($f);
+# Migrations
+Flask-Migrate
 
-    return $dump;
-}
+# Deployment
+gunicorn
+gevent
+
+# Utils
+simplejson
 </code></pre>
 </div>
 
-<p>This function will get a specific file that you have passed in and you can manipulate the <em>delimiter</em> depending on how your .csv is formatted. This will fetch each ‘row’ in the file and create a new node in the array that will be returned after it has gotten all the data.</p>
+<p>To install all these dependencies we just do a simple <code class="highlighter-rouge">pip install -r requirements.txt</code> <strong>BUT</strong> we also need to make sure we have our project’s virtual environment activated before we do the installation.</p>
 
-<p>This is all great - sure - but now what’s the big thing that we should do to handle different types and make sure it’s formatted correctly for our database importing.</p>
+<p>Your dependencies will be install in that <strong>env</strong> directory and we can locate them if we want to just by looking through the <code class="highlighter-rouge">env/lib/python3.x/site-packages</code> directory. On to the VS Code integration ==» WOO.</p>
 
-<p>I am using <em>PostgreSQL</em> for this application and I know from experience that you must use double single quotes to escape single quotes and other small things that are needed for my data set that I am importing. You can use a simple <em>PHP</em> function called <code class="highlighter-rouge">str_replace()</code> to replace characters with other specific characters you want.</p>
+<h3 id="vs-code">VS Code</h3>
 
-<p><strong>BUT…</strong></p>
+<p>The first thing you will need to install is a extension called <a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.python">Python</a>. You can install it with the extension panel on the left side navigation (last button on the bottom). And search for Python – it’s the most downloaded extension when you search for Python. You can read through the docs on that extension to do more custom things but here are the main settings you will need to paste in your <strong>Workplace Settings/User Settings</strong> under your <strong>Preferences</strong>.</p>
 
-<p>We need to get our data still.. Two simple calls - here we go</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code># get the two csvs into arrays
-$array1 = get_csv("/your/file/location");
-$array2 = get_csv("/your/file/location");
+<pre><code class="language-JavaScript">// Python specific
+"python.pythonPath": "${workspaceRoot}/env/bin/python3.6",
+"python.autoComplete.extraPaths": [
+    "${workspaceRoot}/env/lib/python3.6/site-packages"
+],
+"python.devOptions": [
+    "DEBUG"
+],
+"python.linting.pylintEnabled": true,
+"python.linting.flake8Enabled": false,
+"python.linting.pylintArgs": "pylint --load-plugins pylint-flask",
+"python.formatting.provider": "autopep8",
+"python.unitTest.unittestEnabled": false,
+"python.unitTest.pyTestEnabled": false,
+"python.unitTest.nosetestsEnabled": false,
 </code></pre>
-</div>
 
-<p>Now all we have to do is some small function calls with our two arrays we fetched. After we get back our combined array we will then write to a new file where we want our output to go.</p>
+<p>Paste that into your <strong>settings.json</strong> file that will come up when you select <strong>User Settings</strong> or <strong>Workplace Settings</strong>. The <strong>KEY</strong> to those settings is the “python.pythonPath” and “python.autoComplete.extraPaths” you have to point that to the <em>Path</em> you have to your local virtual environment folders. Also! I will recommend you keep project settings specific to your <strong>Workplace Settings</strong> because you might have many different Python versions when going from project to project and keeping the <strong>User Settings</strong> might break the paths.</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code># merge the two array's fetched from the csv's and outputs merged array to a new csv
-$file = fopen('/write/to/this/location', 'w');
-$finalArray = combine_arrays($array1, $array2);
-foreach ($finalArray as $key =&gt; $value) {
-    fputcsv($file, $finalArray[$key], ",", '"');
-}
-fclose($file);
-</code></pre>
-</div>
-
-<p>With all that being said this is a very small and simple way to handle the problem that arises when we are trying to ‘combine’ or ‘merge’ .csv files that we are pulling into our applications. I know there are other ways to do it and I must say there probably is a better way to do this – but here is a working explaination of my functionality.</p>
+<p>There are some custom settings like the linting/testings you can do inside of the editor as well. I tend to stick with my terminal to run external things like that but you can play around with it – this should give you the basic VS Code environment for developing with Python.</p>
 
 
         </section>
@@ -256,7 +226,7 @@ fclose($file);
                     <p> Software Engineer. DC. Radford Baseball Alum.</p>
                 
                 <div class="author-meta">
-                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-location icon-location"> Virginia, USA</span> 
                     <span class="author-link icon-link"><a href="https://jt.codes/"> jt.codes</a></span> 
                 </div>
             </section>
@@ -265,15 +235,15 @@ fclose($file);
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Recursively Combine .csv files in PHP&amp;url=https://jt.codes/archived2016-7-25-Recursively-Combine-csv-files-in-PHP"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Python & VS Code&amp;url=https://jt.codes/Settings-Up-Python-Environment-VS-Code"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-7-25-Recursively-Combine-csv-files-in-PHP"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Settings-Up-Python-Environment-VS-Code"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-7-25-Recursively-Combine-csv-files-in-PHP"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Settings-Up-Python-Environment-VS-Code"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -292,8 +262,22 @@ fclose($file);
 
     <!-- [[! next_post ]] -->
     
+        <a class="read-next-story " style="background-image: url(/assets/images/encryption.jpg)" href="/Serving-Jenkins-with-TLS-and-Caddy">
+            <section class="post">
+                <h2>Serving Jenkins with TLS-Encryption Using Caddy</h2>
+                <p>## What is Caddy? Caddy, or as others may know Caddyserver, is a web server...</p>
+            </section>
+        </a>
+    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
+    
+        <a class="read-next-story prev " style="background-image: url(/assets/images/galaxy.jpg)" href="/Twenty-Sixteen">
+            <section class="post">
+                <h2>Twenty-Sixteen</h2>
+                <p>2016 in Review Twenty-sixteen was definitely a year to remember. I constantly look back thinking...</p>
+            </section>
+        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>

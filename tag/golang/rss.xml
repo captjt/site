@@ -13,10 +13,10 @@
    
 	<item>
 	  <title>Hacking Kubernetes</title>
-	  <link>//Hacking-Kubernetes</link>
+	  <link>//Hacking-Kubernetes/</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-08-12T05:00:00+00:00</pubDate>
-	  <guid>//Hacking-Kubernetes</guid>
+	  <guid>//Hacking-Kubernetes/</guid>
 	  <description><![CDATA[
 	     <h2 id="what-is-kubernetes">What is Kubernetes?</h2>
 
@@ -397,10 +397,10 @@
 
 	<item>
 	  <title>Deep Dive: Go Interfaces Part I</title>
-	  <link>//Deep-Dive-Go-Interfaces-Part-1</link>
+	  <link>//Deep-Dive-Go-Interfaces-Part-1/</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-05-07T05:00:00+00:00</pubDate>
-	  <guid>//Deep-Dive-Go-Interfaces-Part-1</guid>
+	  <guid>//Deep-Dive-Go-Interfaces-Part-1/</guid>
 	  <description><![CDATA[
 	     <h2 id="interfaces-basics">Interfaces Basics</h2>
 
@@ -524,10 +524,10 @@
 
 	<item>
 	  <title>Go: Testing Approaches</title>
-	  <link>//Go-Testing-Approaches</link>
+	  <link>//Go-Testing-Approaches/</link>
 	  <author>Jordan Taylor</author>
 	  <pubDate>2017-03-31T05:00:00+00:00</pubDate>
-	  <guid>//Go-Testing-Approaches</guid>
+	  <guid>//Go-Testing-Approaches/</guid>
 	  <description><![CDATA[
 	     <h2 id="software-testing-basics">Software Testing Basics</h2>
 

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Setting Up Python 3 and Django REST Framework</title>
+    <title>Retrieving HTML from parsed XML in PHP</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -106,10 +106,10 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Setting Up Python 3 and Django REST Framework</h1>
+            <h1 class="post-title">Retrieving HTML from parsed XML in PHP</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2016-08-19">19 Aug 2016</time>
+            <time class="post-date" datetime="2016-07-25">25 Jul 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
@@ -125,84 +125,67 @@
         <section class="post-content">
             
             <h2 id="objective">Objective:</h2>
-<p>We want to setup an Python 3 environment on our machine to start developing in Python 3! Once we set up Python and all the packages necessary for Django development – we want to set up our first Django Framework REST Application.</p>
+<p>We want to take in nested HTML within an XML file and parse out tags and content within the tags to do “something” with.</p>
 
-<h3 id="install-xcode-and-homebrew-">Install Xcode and Homebrew :</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>require "../vendor/autoload.php";
+use PHPHtmlParser\Dom;
 
-<h4 id="xcode">XCode</h4>
+    function recurseXML($xml,$parent="") {
+       $child_count = 0;
+       foreach($xml as $key=&gt;$value) {
+          $child_count++;
+          if($this-&gt;recurseXML($value,$parent.".".$key) == 0) {
+             print($parent . "." . (string)$key . " = " . (string)$value . "<span class="nt">&lt;BR&gt;</span>\n");
+          }
+       }
+       return $child_count;
+    }
 
-<p>We first need to install XCode or using Homebrew to install Python3 will throw an error.</p>
+    function getNode($xml) {
+        $output = array();
+        $i = 0;
+        $result = $xml-&gt;xpath('/go/to/a/path');
+        while(list( , $node) = each($result)) {
+            $output[$i] = (string)$node;
+            $i++;
+        }
+        return $output;
+    }
 
-<p>First, we must go into whatever terminal application that we use and paste this line into the command:</p>
+    function parseXml() {
+        $xmlFilename = '/your/filename.xml';
+        $xml = simplexml_load_file($xmlFilename);
+		$node = getNode($xml);
 
-<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install
+    	$num = 0; # this is the selector of the nested html tag
+
+        foreach ($node as $key =&gt; $n) {
+            $dom = new Dom;
+            $n = html_entity_decode($node[$key], ENT_COMPAT);
+            $dom-&gt;loadStr($n, []);
+            $test = $dom-&gt;outerHtml;
+            $contents = $dom-&gt;find('html_tag_name')[$num]; # html_tag_name can be anything like 'table'
+
+            foreach ($contents as $content) {
+                # do something with the html
+                $html = $content-&gt;innerHtml;
+                $output[$key]['name_this_whatever'] = $html; # the name can be anything you want as your key
+            }
+        }
+
+        $file = fopen('../where/you/want/to/write.csv', 'w');
+        fputcsv($file, array('name_this_whatever'));
+
+        foreach ($output as $out) {
+            fputcsv($file, $out);
+        }
+
+        fclose($file);
+    }
+
+    parseXml();
 </code></pre>
 </div>
-
-<h4 id="homebrew">Homebrew</h4>
-
-<p>Homebrew is a package manager for OS X – this is a very powerful tool to install, update, list and many more options for packages that we will use as developers. “Homebrew installs all the things Apple didn’t get.”</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
-</code></pre>
-</div>
-
-<p>To make sure our brew installations will be used over some of the OS X stock binaries we need as a line in our .bash_profile file. Open or create the file ~/.bash_profile and paste this line into it.</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/bin:<span class="nv">$PATH</span>
-</code></pre>
-</div>
-
-<h3 id="install-python-3-">Install Python 3 :</h3>
-
-<p>Onto Python installation…</p>
-
-<p>Once you have Homebrew installed and ready to be used we can do a simple command line call like this to install Python3</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>brew install python3
-</code></pre>
-</div>
-
-<p>…and voilà! Do a simple</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>python3 --version
-</code></pre>
-</div>
-
-<p>and you should have the most recent version of Python3. This comes with a bunch of libraries – <em>pip3</em> (a package manager), <em>Setuptools</em> (a project packaging tool), and <em>pyvenv</em> (a virtual environment tool). These three tools are very powerful and there are others out there that can replace these. Although, with that being said – I would recommend starting with these three for starting out.</p>
-
-<p>Note: I personally use <em>virtualenv</em> which is another virtual environment tool like <em>pyvenv</em>.</p>
-
-<h3 id="creating-our-django-rest-framework-project-">Creating Our Django-Rest-Framework Project :</h3>
-
-<p>After we setup our Python3 and validate our verion is up to date - we will start our Django-Rest-Framework project. So to start out we must create a virtual environment to work out of so we must make a directory and inside of that empty directory we will do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>virtualenv env
-</code></pre>
-</div>
-
-<p>..this will install our environment to a specific version of Python we want to it to be in. You can checkout the docs for <em>virtualenv</em> to see more options. After we do the environment installs we will create out our project. So we need to install django, djangorestframework, pgycopg2 (for PostgreSQL). You can interchange any database packages based on whatever backend you want the ORM to be talking to. To do these installs we must use <em>pip</em>.</p>
-
-<p>First activate your ‘env’ by :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="nb">source </span>env/bin/activate
-</code></pre>
-</div>
-
-<p>Then do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>pip install django djangorestframework psycopg2
-</code></pre>
-</div>
-
-<p>After that we need to start out project so we do a :</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>django-admin.py startproject project_name
-</code></pre>
-</div>
-
-<p>Based on these instructions you will have Xcode, Homebrew, Python3, and a python environment with the start of a fantastic RESTful framework. Stay tuned for more posts about Django-Rest-Framework tricks and tutorials.</p>
-
 
 
         </section>
@@ -225,7 +208,7 @@
                     <p> Software Engineer. DC. Radford Baseball Alum.</p>
                 
                 <div class="author-meta">
-                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-location icon-location"> Virginia, USA</span> 
                     <span class="author-link icon-link"><a href="https://jt.codes/"> jt.codes</a></span> 
                 </div>
             </section>
@@ -234,15 +217,15 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Setting Up Python 3 and Django REST Framework&amp;url=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Retrieving HTML from parsed XML in PHP&amp;url=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-08-19-Setting-Up-Python-3-and-Django-REST-Framework"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-07-25-Retrieving-HTML-from-parsed-XML-in-PHP"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>

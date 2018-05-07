@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Elasticsearch At A Glance</title>
+    <title>Elasticsearch Info/Resources</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -92,8 +92,8 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/lighthouse.jpg) ">
-    <nav class="main-nav  overlay  clearfix">
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
             <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Elasticsearch At A Glance</h1>
+            <h1 class="post-title">Elasticsearch Info/Resources</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2017-02-14">14 Feb 2017</time>
+            <time class="post-date" datetime="2016-12-13">13 Dec 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,39 +124,85 @@
 
         <section class="post-content">
             
-            <h2 id="why-elasticsearch">Why Elasticsearch?</h2>
+            <p>Elasticsearch is a “NRT” (Near Real Time) search platform which means the data that is being ingested is nearly searchable within &lt; 1 second.</p>
 
-<p>Elasticsearch has some major upsides to it when using it on as a developer.  It takes almost four minutes to stand up on a CentOS server and even quicker on my development machine (Mac OSX with Homebrew). Regardless whether or not you are using it in those environments it is still very quick and easy to do an install with configurations. Configurations are made EASY. Elasticsearch will, based on your settings, do automatic cluster replication on indexes you create. You can tell it that you want five, ten, three, whatever of how many replication shards you want it to make. This will increase the productivity you have along with performance and fault tolerance of the storage layer. You will not need to worry about diving in and setting up major in-depth configurations when it really is meant to be abstracted out for you - that helps developers work on other aspects of the applications running on Elasticsearch. Having the fault tolerance of having many shards replicated to however many nodes you have inside of your cluster per index is huge. This might seem scary at first when it does this for you out of the box, but when you dive into the real stuff and see what it’s doing - it’s quite nice.</p>
+<h2 id="basic-concepts">Basic Concepts</h2>
 
-<p>JSON everything. Web development and applications have been revolutionized by RESTful and JSON type of manipulation of data. Majority of people either know REST of have used it one way or another. Elasticsearch is catering to the modern technologies. Because JSON is such a huge and easy way to store data many developers love interacting with it. All of the queries, responses, mappings, anything is done with Elasticsearch is through JSON! (HUGE simplicity for people to hit the ground running)</p>
+<p>You can learn more about Elasticsearch and it’s basic concepts at their <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html">docs</a></p>
 
-<p>I cannot think of anything that has been difficult learning how to interact or use Elasticsearch. The community is massive around it and honestly cannot see anything wrong with moving towards it.</p>
+<h5 id="cluster">Cluster</h5>
+<p>The cluster concept in ES is that you can have a bunch of nodes (or servers) that hold all your data together.</p>
 
-<p>Here are some excerpts from elastic.co (official company behind ES) and others regarding the technology…</p>
+<h5 id="node">Node</h5>
+<p>A node is a single elasticsearch server (or service) that is running holding a collection of indexes and data regarding each index.</p>
 
-<p>“Elasticsearch provides the ability to subdivide your index into multiple pieces called shards. When you create an index, you can simply define the number of shards that you want. Each shard is in itself a fully-functional and independent “index” that can be hosted on any node in the cluster.”  – Elasticsearch official docs</p>
+<h5 id="index">Index</h5>
+<p>An index is thought of as a “database” in relational terms. It is a higher level concept that can be thought of as similar characteristics for the document data.</p>
 
-<h3 id="sharding-concepts-">Sharding concepts …</h3>
+<h5 id="type">Type</h5>
+<p>Types can be thought of as “tables” in relational terms. It is a more definied catagorization of data for each document stored in ES.
+One way to think about it is you have a higher level index of “User Data” and you can have “Order Data”, “Comment Data”, etc.</p>
 
-<p>It allows you to horizontally split/scale your content volume
-It allows you to distribute and parallelize operations across shards (potentially on multiple nodes) thus increasing performance/throughput</p>
+<h5 id="document">Document</h5>
+<p>These are the lowest level catagorization of document data in ES. Think of these as “rows” in a relational mindset.  You can have attributes in each document that describe the data’s features.</p>
 
-<h3 id="replication-concepts-">Replication concepts …</h3>
+<h5 id="shardingreplication">Sharding/Replication</h5>
+<p>We can do multiple sharding instances on indexes if we are storing huge amount of document data in them. <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/_basic_concepts.html#_shards_amp_replicas">Sharding</a></p>
 
-<p>It provides high availability in case a shard/node fails. For this reason, it is important to note that a replica shard is never allocated on the same node as the original/primary shard that it was copied from.
-It allows you to scale out your search volume/throughput since searches can be executed on all replicas in parallel.</p>
+<h2 id="resources">Resources</h2>
 
-<h3 id="use-cases----real-companies-using-es">Use Cases – Real Companies Using ES!</h3>
+<h3 id="elasticsearch">Elasticsearch</h3>
+<ul>
+  <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Quick Reference</a></li>
+</ul>
 
-<p>Ebay – <a href="https://www.elastic.co/videos/ebay-and-elasticsearch-this-is-not-small-data">this-is-not-small-data</a></p>
+<h3 id="elasticseach-language-specific">Elasticseach (language specific)</h3>
+<ul>
+  <li><a href="http://elasticsearch-dsl.readthedocs.io/en/latest/">elasticsearch-dsl</a></li>
+  <li><a href="http://elasticsearch-py.readthedocs.io/en/master/">elasticsearch-py</a></li>
+  <li><a href="https://www.elastic.co/products/elasticsearch">elasticsearch</a></li>
+  <li><a href="https://olivere.github.io/elastic/">elastic</a></li>
+  <li><a href="https://godoc.org/gopkg.in/olivere/elastic.v3">more elastic</a></li>
+</ul>
 
-<p>Goldman Sachs – <a href="https://www.elastic.co/elasticon/conf/2016/sf/how-the-elastic-stack-changed-goldman-sachs">stack-changed-goldman-sachs</a></p>
+<h3 id="external-backend-frameworks">External Backend Frameworks</h3>
+<ul>
+  <li><a href="http://flask.pocoo.org/">flask</a></li>
+  <li><a href="http://flask-restful-cn.readthedocs.io/en/0.3.5/">flask-restful</a></li>
+  <li><a href="https://gin-gonic.github.io/gin/">gin</a></li>
+</ul>
 
-<p>Netflix – <a href="https://www.elastic.co/elasticon/conf/2016/sf/dude-where-are-my-messages-message-analytics-at-netflix">message-analytics-at-netflix</a></p>
+<h3 id="small-examples">Small Examples</h3>
+<ul>
+  <li><a href="https://github.com/jtaylor32/elasticsearch-restful-api">rest-api</a></li>
+  <li><a href="https://github.com/jtaylor32/elasticsearch-bulk-ingestion">bulk-ingestion</a></li>
+</ul>
 
-<p>Facebook – <a href="https://www.elastic.co/elasticon/2015/sf/from-hackathon-to-production-elasticsearch-facebook">hackathon-to-production-facebook</a></p>
+<h3 id="web-scrapers">Web Scrapers</h3>
+<ul>
+  <li><a href="http://nutch.apache.org/">nutch</a></li>
+  <li><a href="https://scrapy.org/">scrapy</a></li>
+  <li><a href="https://github.com/yhat/scrape">scrape</a></li>
+</ul>
 
-<p>Many more <a href="https://www.elastic.co/use-cases">here</a> and what has driven companies to Elasticsearch (many of which transitioned from Solr)</p>
+<h3 id="blogsbooks">Blogs/Books</h3>
+<ul>
+  <li><a href="http://docs.python-guide.org/en/latest/scenarios/scrape/">python-scraping</a></li>
+  <li><a href="http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/">more-python-scraping</a></li>
+  <li><a href="https://schier.co/blog/2015/04/26/a-simple-web-scraper-in-go.html">go-scraping</a></li>
+  <li><a href="http://shop.oreilly.com/product/0636920034391.do">Web Scraping with Python</a></li>
+  <li><a href="https://qbox.io/blog/scraping-the-web-with-nutch-for-elasticsearch">Scraping with Nutch</a></li>
+</ul>
+
+<h3 id="other-es-articles">Other ES Articles</h3>
+<ul>
+  <li><a href="http://goinbigdata.com/working-with-elasticsearch-in-go/">es-in-go</a></li>
+  <li><a href="http://126kr.com/article/5c4jgpiwtwp">testing-go-es</a></li>
+  <li><a href="https://msftstack.wordpress.com/2016/02/18/making-a-book-search-engine-in-python-and-elasticsearch/">python-with-es</a></li>
+  <li>more to come…</li>
+</ul>
+
+<p>continued…</p>
 
 
         </section>
@@ -179,7 +225,7 @@ It allows you to scale out your search volume/throughput since searches can be e
                     <p> Software Engineer. DC. Radford Baseball Alum.</p>
                 
                 <div class="author-meta">
-                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-location icon-location"> Virginia, USA</span> 
                     <span class="author-link icon-link"><a href="https://jt.codes/"> jt.codes</a></span> 
                 </div>
             </section>
@@ -188,15 +234,15 @@ It allows you to scale out your search volume/throughput since searches can be e
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Elasticsearch At A Glance&amp;url=https://jt.codes/Elasticsearch-At-A-Glance"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Elasticsearch Info/Resources&amp;url=https://jt.codes/archived2016-12-13-Elasticsearch"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Elasticsearch-At-A-Glance"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-12-13-Elasticsearch"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Elasticsearch-At-A-Glance"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-12-13-Elasticsearch"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -215,22 +261,8 @@ It allows you to scale out your search volume/throughput since searches can be e
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story " style="background-image: url(/assets/images/future-technologies.jpg)" href="/Migration-to-Microservices">
-            <section class="post">
-                <h2>Introduction on Migrating to Microservices</h2>
-                <p>## Why Microservices? This is an obvious question raised when applications or companies move to...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev " style="background-image: url(/assets/images/pipelines.jpg)" href="/Jenkins-2.0-Pipeline-NodeJS">
-            <section class="post">
-                <h2>Jenkins 2.0 - Pipelines with NodeJS</h2>
-                <p>Future of Jenkins: The Jenkinsfile The future of Jenkins and CI/CD is having “Pipelines” as...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>

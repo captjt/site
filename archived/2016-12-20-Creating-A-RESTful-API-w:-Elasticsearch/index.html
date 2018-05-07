@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- [[! Page Meta ]] -->
-    <title>Introduction on Migrating to Microservices</title>
+    <title>Creating A RESTful API w/ Elasticsearch</title>
     <meta name="description" content="Ushering In Growth - My development story begins here." />
 
     <meta name="HandheldFriendly" content="True" />
@@ -60,7 +60,7 @@
 
 
 </head>
-<body class="home-template nav-closed">
+<body class="post-template nav-closed">
 
     <div class="nav">
     <h3 class="nav-title">Menu</h3>
@@ -92,8 +92,8 @@
 <!-- Everything inside the #post tags pulls data from the post -->
 <!-- #post -->
 
-<header class="main-header post-head " style="background-image: url(/assets/images/future-technologies.jpg) ">
-    <nav class="main-nav  overlay  clearfix">
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
         <a class="blog-logo" href="/"><img src="/assets/images/logo.png" alt="Blog Logo" /></a>
         
             <a class="menu-button icon-menu" href="#"><span class="word">Menu</span></a>
@@ -106,16 +106,16 @@
     <article class="post tag-content tag-technologies">
 
         <header class="post-header">
-            <h1 class="post-title">Introduction on Migrating to Microservices</h1>
+            <h1 class="post-title">Creating A RESTful API w/ Elasticsearch</h1>
             <section class="post-meta">
             <!-- <a href='/'>Jordan Taylor</a> -->
-            <time class="post-date" datetime="2017-03-09">09 Mar 2017</time>
+            <time class="post-date" datetime="2016-12-20">20 Dec 2016</time>
                 <!-- [[tags prefix=" on "]] -->
                  
                 on 
                 
                     
-                       <a href='/tag/technologies'>Technologies</a>
+                       <a href='/tag/technologies'>Technologies</a>,
                        
                 
                 
@@ -124,62 +124,64 @@
 
         <section class="post-content">
             
-            <h2 id="why-microservices">Why Microservices?</h2>
+            <h4 id="in-progress">(In Progress)</h4>
 
-<p>This is an obvious question raised when applications or companies move to a microservices approach. There is a massive use case for the migration to microservices. The perfect time is you are at a scale or a place in your application’s life cycle where you cannot iterate fast enough on top of your monolithic application. There are so many more resources out there on when or why to switch to this architecture it’s not really worth “beating a dead horse” on the subject.</p>
+<h3 id="objective">Objective:</h3>
+<p>We want to establish a way to query <em><strong>Elasticsearch</strong></em> through a RESTful API’s endpoints.</p>
 
-<h4 id="technologies-to-migrate-with">Technologies to Migrate With?</h4>
-
-<p>You might be wondering where to start and what approach to take – if you have the luxury to migrate and refactor everything without a time constraint you’re lucky! Majority of us don’t have that luxury and really don’t have the full buy in from our management or superiors to even “fix” our already working application. Invest in your products and invest in the future of your products is all I can say. This means containers and efficiency. Containers are here.. and here to stay. When I say that majority of companies or teams are just dabbling in containers and what to do with <strong>Docker or Rkt</strong> (“Rocket” – a CoreOS product) it’s understandable but <strong>invest</strong> in modern technologies. Containers are a pivotal foundation for the future of applications. Containers decouple applications from operating systems, which means that users can have a clean and minimal Linux operating system and run everything else in one or more isolated container. Invest in yourselves and your application’s future start getting up to speed with containers it is so simple to spin up applications with these to proof them for teams/management. The ease of use to manage and bundle up applications is a major selling point!</p>
-
-<h4 id="after-approval">After Approval</h4>
-
-<p>Uh-oh… Now what right? You need a team to fully focus and sell out on these technologies. Regardless of the learning curve you will probably face when moving to containers and orchestration tools you will make it through it! The best things in life aren’t always the easiest things to come by – but a team focused on the future of the application and in turn the company’s future success.</p>
-
-<p><img src="./../assets/images/small-team.jpg" alt="team" class="img-responsive" /></p>
-
-<p>If you are a small team pick a uniformed language to start with that everyone is comfortable developing in. A key feature you will need to take into account is how easy is it to run on Linux. I am an advocate for Go but also love NodeJS and Python. Do what’s best for you team and make sure you know that microservices don’t lock you into one single language it helps at an initial migration having a single or a couple uniform languages for developers to agree on.</p>
-
-<h4 id="container-orchestration">Container Orchestration</h4>
-
-<p>The biggest decision you will make after the initial migration movement is how in the world will you manage all of these containerized services.</p>
-
-<blockquote>
-  <p>You might think that containers will solve all problems. Managing containers manually is simply out of the question. When it comes to microservices, containers are roughly 5% of the problem. Container management or orchestration is the last 95%.</p>
-</blockquote>
-
-<p>Invest in some time in researching which tool or tools fit your application’s use cases. Here are a list of some of the major self-hosted orchestration tools – if you want something like an already hosted service of these things <em>Google, Mesosphere, Rancher</em> and others support enterprise platforms for these kinds of things already.</p>
-
-<p>Self-Hosted</p>
+<h3 id="pre-requirements">Pre-Requirements</h3>
 
 <ul>
-  <li><a href="https://kubernetes.io/">Kubernetes</a>
+  <li>Python 3+
     <ul>
-      <li>Came out of Google – built based on Google’s “Borg” project</li>
-      <li>Backed and supported by majority of the leading tech companies like</li>
+      <li>Knowledge of virtual environments, dependency management with <strong>PIP</strong></li>
     </ul>
   </li>
-  <li><a href="https://dcos.io/">DC/OS</a>
+  <li>Elasticsearch 2.X
     <ul>
-      <li>Product built around Apache Mesos</li>
-      <li>Blog <a href="https://mesosphere.com/blog/2016/04/19/open-source-dcos/">post</a> on the release of DC/OS</li>
-      <li>Backed and supported by companies like Microsoft, Accenture, and others</li>
-    </ul>
-  </li>
-  <li><a href="https://docs.docker.com/engine/swarm/">Docker Swarm</a>
-    <ul>
-      <li>Not as widely used in the community</li>
+      <li>Install Elasticseach on Centos 7 –&gt; <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-centos-7">es-on-centos-7</a></li>
+      <li><a href="https://www.elastic.co/products/elasticsearch">Elasticsearch</a></li>
     </ul>
   </li>
 </ul>
 
-<p>There might be other options out there but a big thing to note when migrating to a microservice architecture is the communities. Kubernetes has been the biggest player in this space and is backed by <strong>A LOT</strong> of companies using these technologies. Many companies using Kubernetes support the tool by giving back to the open sourced code as well.</p>
+<h3 id="wsgi-application-flask">WSGI Application (Flask)</h3>
 
-<h4 id="service-interactions">Service Interactions</h4>
+<p>We are going to be using the micro-framework, <em>flask</em>, in this tutorial.  We will use the <em>elasticsearch-dsl-py</em> package that elastic created to interact with elasticsearch at a more high level abstraction.</p>
 
-<p>More architecture decisions you will have to make are how your services will interact and managing an API gateway into your services. There are major complexities that come with microservices interacting with each other and how to monitor what is going on – but there are tools out there to solve this. Later on I will talk about tooling decisions you will have to make when managing <strong>service discovery, tracing, monitoring, transporting, circuit breakers</strong> and other things.</p>
+<h4 id="project-structure">Project Structure</h4>
 
-<p>Don’t feel overwhelmed when making the leap of migrating architectures it’s an <strong>investment</strong>.</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>.
+├── app/
+│   ├── index.md
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── resources/
+│   │   │   ├── __init__.py
+│   │   │   ├── search.py
+│   │   ├── search_config/
+│   │   │   ├── __init__.py
+│   ├── __init__.py
+│   ├── config.py
+│   ├── extensions.py
+│   ├── helpers.py
+├── env/
+├── requirements/
+│   ├── development.txt
+│   ├── production.txt
+├── tests/
+│   ├── unit/
+│   │   ├── test_*.py
+│   ├── __init__.py
+│   ├── conftest.py
+├── manage.py
+├── requirements.txt
+├── runtime.txt
+├── setup.cfg
+</code></pre>
+</div>
+
+<p>To be continued…</p>
 
 
         </section>
@@ -202,7 +204,7 @@
                     <p> Software Engineer. DC. Radford Baseball Alum.</p>
                 
                 <div class="author-meta">
-                    <span class="author-location icon-location"> Viringia, USA</span> 
+                    <span class="author-location icon-location"> Virginia, USA</span> 
                     <span class="author-link icon-link"><a href="https://jt.codes/"> jt.codes</a></span> 
                 </div>
             </section>
@@ -211,15 +213,15 @@
 
             <section class="share">
                 <h4>Share this post</h4>
-                <a class="icon-twitter" href="http://twitter.com/share?text=Introduction on Migrating to Microservices&amp;url=https://jt.codes/Migration-to-Microservices"
+                <a class="icon-twitter" href="http://twitter.com/share?text=Creating A RESTful API w/ Elasticsearch&amp;url=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                     <span class="hidden">Twitter</span>
                 </a>
-                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/Migration-to-Microservices"
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
                     <span class="hidden">Facebook</span>
                 </a>
-                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/Migration-to-Microservices"
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=https://jt.codes/archived2016-12-20-Creating-A-RESTful-API-w:-Elasticsearch"
                    onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;">
                     <span class="hidden">Google+</span>
                 </a>
@@ -238,22 +240,8 @@
 
     <!-- [[! next_post ]] -->
     
-        <a class="read-next-story " style="background-image: url(/assets/images/chile-thunderstorm.jpg)" href="/Kubernetes-Complexities-Simplified-Pt-1">
-            <section class="post">
-                <h2>Kubernetes: Complexities Simplified Pt. 1</h2>
-                <p>## Why Are Microservices Hard? Conceptually when moving to microservices it will solve a lot...</p>
-            </section>
-        </a>
-    
     <!-- [[! /next_post ]] -->
     <!-- [[! prev_post ]] -->
-    
-        <a class="read-next-story prev " style="background-image: url(/assets/images/lighthouse.jpg)" href="/Elasticsearch-At-A-Glance">
-            <section class="post">
-                <h2>Elasticsearch At A Glance</h2>
-                <p>Why Elasticsearch? Elasticsearch has some major upsides to it when using it on as a...</p>
-            </section>
-        </a>
     
     <!-- [[! /prev_post ]] -->
 </aside>
