@@ -10,7 +10,7 @@ current: about
 
 I'm Jordan, a software engineer in the Washington, D.C. area. I focus on
 developing and maintaining distributed systems in Go and NodeJS. I've come to
-enjoy studing, developing and architecting distributed systems. I strive for
+enjoy studying, developing and architecting distributed systems. I strive for
 solving unique problems with efficient and effective solutions.
 
 I am lucky enough to develop backend systems, while maintaining platform
